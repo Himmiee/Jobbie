@@ -187,23 +187,17 @@ const HomeComponent = () => {
           </div>
         </div>
       </div>
-      <div className="mx-6 sm:mx-24 my-6  h-fit">
+      <div className="mx-6 sm:mx-24 my-14  h-[550px]">
         <h3 className="text-center font-1000 my-8  sm:my-4 font-bold  bg-gradient-to-r from-teal-700 bg-clip-text text-transparent to-blue-950  sm:text-[32px]">
           What people say about us
         </h3>
 
         <div className="">
-          {acc.map((item: QuestionsMenu, id: number) => {
-            return (
-              <div>
-                <AccordionComponent data={item} key={id} id={id} />
-              </div>
-            );
-          })}
+          <AccordionComponent />
         </div>
       </div>
       <div>
-        <FooterComponent/>
+        <FooterComponent />
       </div>
     </section>
   );

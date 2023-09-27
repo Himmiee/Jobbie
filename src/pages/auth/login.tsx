@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
 import ButtonComponent from "../../components/button";
 
 const LoginComponent = () => {
   const [nav, setNav] = useState<boolean>(false);
+  const inputRef = useRef<any>(null);
+  const [eyeActive, setEyeActive] = useState<boolean>(false);
   useEffect(() => {
     setNav(false);
   }, []);
@@ -31,10 +34,24 @@ const LoginComponent = () => {
             <div className="flex justify-center my-2">
               <label htmlFor="" className="text-white">
                 <p className="text-[12px] my-1">Password:</p>
-                <input
-                  type="text"
-                  className="flex justify-center px-2 w-64 h-7 text-[12px] rounded-md sm:opacity-80 opacity-10 sm:bg-gray-600 border-gray-700 outline-none border-[1px]"
-                />
+                <div className="flex justify-between item-center px-2 w-64 h-7 text-[12px] rounded-md sm:opacity-80 opacity-10 sm:bg-gray-600 border-gray-700 outline-none border-[1px]">
+                  <input
+                    ref={inputRef}
+                    type="password"
+                    className="rounded-md  w-[230px] bg-transparent outline-none "
+                  />
+                  <div
+                    onClick={() => {
+                      inputRef.current.type === "password"
+                        ? (inputRef.current.type = "text")
+                        : (inputRef.current.type = "password");
+                      setEyeActive(!eyeActive);
+                    }}
+                    className="flex justify-center cursor-pointer items-center"
+                  >
+                    {eyeActive ? <BsEyeSlash /> : <BsEye />}
+                  </div>
+                </div>
               </label>
             </div>
           </div>

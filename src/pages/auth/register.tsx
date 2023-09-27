@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ButtonComponent from "../../components/button";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
 
 const RegisterComponent = () => {
   const [nav, setNav] = useState<boolean>(false);
+  const inputRef = useRef<any>(null);
+  const [eyeActive, setEyeActive] = useState<boolean>(false);
   useEffect(() => {
     setNav(false);
   }, []);
@@ -11,7 +14,7 @@ const RegisterComponent = () => {
       <div className="">
         <div className="w-72  rounded-2xl h-[340px] sm:bg-gray-800 bg-opacity-60 ">
           <div>
-          <p className="text-teal-700 italic font-sans flex justify-center font-bold pt-3">
+            <p className="text-teal-700 italic font-sans flex justify-center font-bold pt-3">
               Jobber
             </p>
             <h3 className="flex justify-center text-sm mt-2 text-white">
@@ -40,10 +43,24 @@ const RegisterComponent = () => {
             <div className="flex justify-center my-2">
               <label htmlFor="" className="text-white">
                 <p className="text-[12px] my-1">Password:</p>
-                <input
-                  type="text"
-                  className="flex justify-center w-64 px-2 h-7 text-[12px] rounded-md sm:opacity-80 opacity-10 sm:bg-gray-600 border-gray-700 outline-none border-[1px]"
-                />
+                <div className="flex justify-between item-center px-2 w-64 h-7 text-[12px] rounded-md sm:opacity-80 opacity-10 sm:bg-gray-600 border-gray-700 outline-none border-[1px]">
+                  <input
+                    ref={inputRef}
+                    type="password"
+                    className="rounded-md  w-[230px] bg-transparent outline-none "
+                  />
+                  <div
+                    onClick={() => {
+                      inputRef.current.type === "password"
+                        ? (inputRef.current.type = "text")
+                        : (inputRef.current.type = "password");
+                      setEyeActive(!eyeActive);
+                    }}
+                    className="flex justify-center cursor-pointer items-center"
+                  >
+                    {eyeActive ? <BsEyeSlash /> : <BsEye />}
+                  </div>
+                </div>
               </label>
             </div>
           </div>
