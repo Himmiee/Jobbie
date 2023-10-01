@@ -20,7 +20,7 @@ const HomeComponent = () => {
       </div>
       <div className="wrap mx-6 sm:mx-24 mt-14 flex justify-center">
         <div className="upper">
-          <div className="clip  justify-center flex  my-2">
+          <div className="clip  justify-center flex mt-10 mb-2">
             <p className="bg-gray-300 w-36  text-center rounded-full  text-[10px] text-gray-500">
               Your premium job space
             </p>

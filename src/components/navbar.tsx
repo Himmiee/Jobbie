@@ -12,7 +12,7 @@ const NavbarComponent = () => {
     "z-10  sm:z-0 flex justify-center  transition-all py-2 border-gray-200 border-b-[1px] bg-white sm:border-none sm:py-0  h-full border-gray-200 ";
   return (
     <section className="">
-      <nav className="z-10 sm:z-0 sm:flex items-center justify-between sm:my-3 h-14  border-gray-100 sm:border-none border-[1px]  sm:px-6 sm:mx-24">
+      <nav className="z-10 fixed  w-full sm:w-screen  top-0 sm:z-0 bg-white  sm:flex items-center justify-between sm:py-3 h-16  border-gray-100 sm:border-b-[1px] border-[1px]  sm:px-24">
         <div className="flex sm:hidden w-full px-6 mt-3 mb-2 transition-all text-teal-700  justify-between ">
           <div className="text-xl italic font-bold">Jobber</div>
           <div
