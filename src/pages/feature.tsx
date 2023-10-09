@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { IoMdFlame } from "react-icons/io";
+import { motion } from "framer-motion";
 import NavbarComponent from "../components/navbar";
 import FooterComponent from "../components/footer";
 import { BsCheckCircleFill } from "react-icons/bs";
@@ -17,10 +18,14 @@ const FeatureComponent = () => {
       <div className="sm:mx-28 mx-8 sm:flex justify-between mt-20 sm:mt-10 h-[450px] items-center">
         <div className="left sm:w-1/2">
           <div className="flex justify-center flex-col items-center sm:items-start">
-            <h1 className="lg:text-[48px] text-[38px] font-bold sm:text-[28px] bg-gradient-to-r from-teal-700 text-center sm:text-start text-transparent to-blue-950 bg-clip-text">
+            <motion.h1
+              initial={{ scale: 1 }}
+              whileHover={{ scale: 1.1 }}
+              className="lg:text-[48px] text-[32px] font-bold sm:text-[28px] bg-gradient-to-r from-teal-700 text-center sm:text-start text-transparent to-blue-950 bg-clip-text"
+            >
               A feature &&
               <br /> Know now and allat!{" "}
-            </h1>
+            </motion.h1>
             <p className="text-[10px] sm:text-[12px] text-center sm:text-start sm:my-3 my-2 sm:mr-3 lg:mr-32">
               Lorem ipsum dolor sitadipisicing elit. Aperiam cum eveniet ab
               loribus , debitis earumdoloribus unde officiis ex debitis earu!
@@ -31,12 +36,16 @@ const FeatureComponent = () => {
           </div>
         </div>
         <div className="sm:w-1/2 my-3 sm:my-0 flex justify-center sm:justify-end mb-3">
-          <div className="w-[80%] sm:w-[100%]  border-teal-700 border-2 p-3">
+          <motion.div
+            initial={{ scale: 1 }}
+            whileHover={{ scale: 1.1 }}
+            className="w-[80%] sm:w-[100%]  border-teal-700 border-2 p-3"
+          >
             <img src="jobber.png" className="" alt="" />
-          </div>
+          </motion.div>
         </div>
       </div>
-      <section className="my-12 rounded-[90px] bg-teal-50">
+      <motion.section  className="my-12 rounded-[90px] bg-teal-50">
         <h1 className="sm:text-3xl text-2xl font-bold flex justify-center pt-8 sm:font-medium bg-gradient-to-r from-teal-700 text-transparent to-blue-950 bg-clip-text">
           The features
         </h1>
@@ -109,9 +118,11 @@ const FeatureComponent = () => {
             />
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="sm:h-96 px-8 sm:px-28 ">
+      <motion.section initial={{ opacity: 0.5, scale : 0.5}}
+      whileInView={{ opacity: 1, scale : 1}}
+      transition={{duration: 0.1}} className="sm:h-96 px-8 sm:px-28 ">
         <h1 className="flex justify-center text-teal-700 font-medium text-lg sm:my-6">
           More on the products
         </h1>
@@ -157,8 +168,10 @@ const FeatureComponent = () => {
             </p>
           </div>
         </div>
-      </section>
-      <div><FooterComponent /></div>
+      </motion.section>
+      <div>
+        <FooterComponent />
+      </div>
     </section>
   );
 };

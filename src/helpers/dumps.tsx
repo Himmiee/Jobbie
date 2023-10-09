@@ -36,8 +36,13 @@ export const Questions = [
 export const FAQs = [
   {
     icon: <IoMdFlame />,
-    title: "Product Designer",
-    info: "Lorem, ipsum dolor sit  ducimus et cumque enim aliquid, sunt consequuntur numquam recusandae voluptatibus. Magnam quidem beatae nihil aliquam?",
+    title: "Designer",
+    info: "Job updates on product designers , web designers, graphic developers with tools like figma, adobe,sketch etc",
+  },
+  {
+    icon: <IoMdFlame />,
+    title: "Software Developer",
+    info: "Job updates on product developers , web developers,  with their various stacks and dev tools",
   },
   {
     icon: <IoMdFlame />,
@@ -46,37 +51,32 @@ export const FAQs = [
   },
   {
     icon: <IoMdFlame />,
-    title: "Product Designer",
-    info: "Lorem, ipsum dolor sit  ducimus et cumque enim aliquid, sunt consequuntur numquam recusandae voluptatibus. Magnam quidem beatae nihil aliquam?",
+    title: "Designer",
+    info: "Job updates on product designers , web designers, graphic developers with tools like figma, adobe,sketch etc",
   },
   {
     icon: <IoMdFlame />,
-    title: "Product Designer",
-    info: "Lorem, ipsum dolor sit  ducimus et cumque enim aliquid, sunt consequuntur numquam recusandae voluptatibus. Magnam quidem beatae nihil aliquam?",
+    title: "Software Developer",
+    info: "Job updates on product developers , web developers,  with their various stacks and dev tools to help them write scalable and maintainable codes.",
   },
   {
     icon: <IoMdFlame />,
-    title: "Product Designer",
-    info: "Lorem, ipsum dolor sit  ducimus et cumque enim aliquid, sunt consequuntur numquam recusandae voluptatibus. Magnam quidem beatae nihil aliquam?",
+    title: "Designer",
+    info: "Job updates on product designers , web designers, graphic developers with tools like figma, adobe,sketch etc",
   },
   {
     icon: <IoMdFlame />,
-    title: "Product Designer",
-    info: "Lorem, ipsum dolor sit  ducimus et cumque enim aliquid, sunt consequuntur numquam recusandae voluptatibus. Magnam quidem beatae nihil aliquam?",
+    title: "Software Developer",
+    info: "Job updates on product developers , web developers,  with their various stacks and dev tools to help them write scalable and maintainable codes.",
   },
   {
     icon: <IoMdFlame />,
-    title: "Product Designer",
-    info: "Lorem, ipsum dolor sit  ducimus et cumque enim aliquid, sunt consequuntur numquam recusandae voluptatibus. Magnam quidem beatae nihil aliquam?",
+    title: "Designer",
+    info: "Job updates on product designers , web designers, graphic developers with tools like figma, adobe,sketch etc",
   },
   {
     icon: <IoMdFlame />,
-    title: "Product Designer",
-    info: "Lorem, ipsum dolor sit  ducimus et cumque enim aliquid, sunt consequuntur numquam recusandae voluptatibus. Magnam quidem beatae nihil aliquam?",
-  },
-  {
-    icon: <IoMdFlame />,
-    title: "Product Designer",
-    info: "Lorem, ipsum dolor sit  ducimus et cumque enim aliquid, sunt consequuntur numquam recusandae voluptatibus. Magnam quidem beatae nihil aliquam?",
+    title: "Software Developer",
+    info: "Job updates on product developers , web developers,  with their various stacks and dev tools to help them write scalable and maintainable codes.",
   },
 ];

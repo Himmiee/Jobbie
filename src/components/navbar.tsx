@@ -5,7 +5,7 @@ import { IoReorderThreeSharp } from "react-icons/io5";
 import ButtonComponent from "./button";
 
 const NavbarComponent = () => {
-  const [open, setOpen] = useState<boolean>(true);
+  const [open, setOpen] = useState<boolean>(false);
   const actLink =
     "border-teal-700 font-bold bg-teal-700 text-white sm:bg-white flex justify-center sm:py-0 w-full sm:border-b-2 py-2 sm:h-6 sm:text-teal-700 transition-all";
   const norm =
