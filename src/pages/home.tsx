@@ -31,7 +31,7 @@ const HomeComponent = () => {
             <motion.h3
               initial={{ scale: 1 }}
               whileHover={{ scale: 1.1 }}
-              className="text-center font-1000 my-4 sm:my-0 font-bold  bg-gradient-to-r from-teal-700 bg-clip-text text-transparent to-blue-950  sm:text-[32px]"
+              className="text-center font-1000 my-4 sm:my-0 font-bold  bg-gradient-to-r from-teal-700 bg-clip-text text-transparent text-[20px] to-blue-950  sm:text-[32px]"
             >
               Come to learn , to seek , to know <br />
               Leave us to serve.

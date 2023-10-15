@@ -9,3 +9,6 @@ body {
 body::-webkit-scrollbar{
   display: none;
 }
+.tbl::-webkit-scrollbar{
+  display: none;
+}

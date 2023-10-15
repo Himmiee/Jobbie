@@ -15,14 +15,10 @@ const FeatureComponent = () => {
       <div>
         <NavbarComponent />
       </div>
-      <div className="sm:mx-28 mx-8 sm:flex justify-between mt-20 sm:mt-10 h-[450px] items-center">
+      <div className="sm:mx-28 mx-8 sm:flex justify-between mt-20 sm:mt-16 h-[450px] items-center">
         <div className="left sm:w-1/2">
           <div className="flex justify-center flex-col items-center sm:items-start">
-            <motion.h1
-              initial={{ scale: 1 }}
-              whileHover={{ scale: 1.1 }}
-              className="lg:text-[48px] text-[32px] font-bold sm:text-[28px] bg-gradient-to-r from-teal-700 text-center sm:text-start text-transparent to-blue-950 bg-clip-text"
-            >
+            <motion.h1 className="lg:text-[48px] text-[22px] font-bold sm:text-[28px] bg-gradient-to-r from-teal-700 text-center sm:text-start text-transparent to-blue-950 bg-clip-text">
               A feature &&
               <br /> Know now and allat!{" "}
             </motion.h1>
@@ -45,7 +41,7 @@ const FeatureComponent = () => {
           </motion.div>
         </div>
       </div>
-      <motion.section  className="my-12 rounded-[90px] bg-teal-50">
+      <motion.section className="my-12 rounded-[90px] bg-teal-50">
         <h1 className="sm:text-3xl text-2xl font-bold flex justify-center pt-8 sm:font-medium bg-gradient-to-r from-teal-700 text-transparent to-blue-950 bg-clip-text">
           The features
         </h1>
@@ -57,7 +53,7 @@ const FeatureComponent = () => {
             <div className="w-12 flex justify-center items-center h-12 my-1 rounded-full bg-teal-700">
               <BsCheckCircleFill size={20} className="text-white" />
             </div>
-            <p className="text-base font-bold text-teal-700">Righty</p>
+            <p className="text-base font-bold  my-2 text-teal-700">Righty</p>
             <p className="text-[10px] sm:text-start text-center text-gray-400">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit.
               Obcaecati hic, qui nostrum impedit sequi mol qui nostrum impedit
@@ -86,7 +82,7 @@ const FeatureComponent = () => {
             <div className="w-12 flex justify-center items-center h-12 my-1 rounded-full bg-teal-700">
               <BsCheckCircleFill size={20} className="text-white" />
             </div>
-            <p className="text-base font-bold text-teal-700">Righty</p>
+            <p className="text-base font-bold  my-2 text-teal-700">Righty</p>
             <p className="text-[10px] text-center sm:text-start text-gray-400">
               Lorem ipsum dolor, sit amet consectetur edit sequi mol qui nostrum
               impedit sequi mol enim saepe necessitatibus labore nihil ipsam
@@ -100,7 +96,7 @@ const FeatureComponent = () => {
             <div className="w-12 flex justify-center items-center h-12 my-1 rounded-full bg-teal-700">
               <BsCheckCircleFill size={20} className="text-white" />
             </div>
-            <p className="text-base font-bold text-teal-700">Righty</p>
+            <p className=" my-2 text-base font-bold text-teal-700">Righty</p>
             <p className="text-[10px] text-center sm:text-start text-gray-400">
               Lorem ipsum dolor, sit qui nostrum impedit sequi mol qui nostrum
               impedit sequi mol amet consectetur adipisicing elit. Obcaecati
@@ -120,9 +116,12 @@ const FeatureComponent = () => {
         </div>
       </motion.section>
 
-      <motion.section initial={{ opacity: 0.5, scale : 0.5}}
-      whileInView={{ opacity: 1, scale : 1}}
-      transition={{duration: 0.1}} className="sm:h-96 px-8 sm:px-28 ">
+      <motion.section
+        initial={{ opacity: 0.5, scale: 0.5 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.1 }}
+        className="sm:h-96 px-8 sm:px-28 "
+      >
         <h1 className="flex justify-center text-teal-700 font-medium text-lg sm:my-6">
           More on the products
         </h1>
