@@ -1,6 +1,16 @@
+import React, { ChangeEvent, useState } from "react";
 import { BsFilter } from "react-icons/bs";
+import { JobProto } from "../helpers/dumps";
 import { IoFlame } from "react-icons/io5";
-export const InputHeader = ({}) => {
+export const InputHeader = ({
+  handleChange,
+  filterItems,
+  setFilter,
+  data,
+  handleJob,
+}: any) => {
+  const [search, setSearch] = useState<string>("");
+  // const [data, setData] = useState(JobProto);
   return (
     <section>
       <div>
@@ -8,6 +18,7 @@ export const InputHeader = ({}) => {
           <p className="hidden sm:flex">All-Jobs.</p>
           <div className="flex gap-6">
             <input
+              onChange={handleChange}
               type="text"
               placeholder="search jobs here..."
               className="outline-none w-full lg:w-[650px] my-2 lg:my-0 h-8 text-gray-500 rounded-md font-light text-[13px] px-2 italic bg-gray-100 "
@@ -31,13 +42,29 @@ export const InputHeader = ({}) => {
         </div>
       </div>
       <div className="filters my-8 flex gap-4 overflow-x-auto sm:overflow-x-hidden tbl">
-        <p className="w-fit h-8 rounded-full text-[12px]  sm:text-[10px] lg:text-[12px] text-gray-600 border-gray-200 border-[1px] px-3 hover:bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]">
+        <p
+          onClick={() => {
+            setFilter(true);
+            filterItems(data);
+            console.log(data);
+          }}
+          className="w-fit h-8 rounded-full text-[12px]  sm:text-[10px] lg:text-[12px] text-gray-600 border-gray-200 border-[1px] px-3 hover:bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]"
+        >
           All(12)
         </p>
-        <p className="w-fit h-8 rounded-full text-[12px] sm:text-[10px] lg:text-[12px] text-gray-600 border-gray-200 border-[1px] px-3 hover:bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]">
+        <p
+          onClick={handleJob}
+          className="w-fit h-8 rounded-full text-[12px] sm:text-[10px] lg:text-[12px] text-gray-600 border-gray-200 border-[1px] px-3 hover:bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]"
+        >
           Tech(12)
         </p>
-        <p className="w-fit h-8 rounded-full text-[12px] sm:text-[10px] lg:text-[12px] text-gray-600 border-gray-200 border-[1px] px-3 hover:bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]">
+        <p
+          onClick={() => {
+            filterItems("Sof bearing");
+            console.log(data);
+          }}
+          className="w-fit h-8 rounded-full text-[12px] sm:text-[10px] lg:text-[12px] text-gray-600 border-gray-200 border-[1px] px-3 hover:bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]"
+        >
           Education(12)
         </p>
         <p className="w-fit h-8 rounded-full text-[12px] sm:text-[10px] lg:text-[12px] text-gray-600 border-gray-200 border-[1px] px-3 hover:bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]">

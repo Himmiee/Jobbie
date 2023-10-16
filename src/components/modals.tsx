@@ -20,47 +20,45 @@ export const PopupModal = () => {
 
 export type CardType = {
   data: JobType;
+  handleClick: any;
 };
 
-export const InfoModal = ({ data }: CardType) => {
+export const InfoModal = ({ data, handleClick }: CardType) => {
   const [bookmarkState, setBookmarkState] = useState<boolean>(false);
   const [popup, setPopup] = useState<boolean>(false);
 
   return (
-    <section
-      onClick={() => {
-        setPopup(false);
-      }}
-      className="fixed z-10  backdrop-blur-sm inset-0 flex bg-black bg-opacity-20 items-center h-screen justify-center p-3"
-    >
-      <div>
-        <div className="border-gray-100 border-[1px] bg-white cursor-pointer rounded-lg p-6 py-10 w-96 h-56">
-          <div className="flex gap-3 justify-between px-1 sm:px-0 ">
-            {" "}
-            <div className="flex gap-3">
-              <div className="bg-teal-700 text-teal-700 w-8 flex justify-center items-center h-8 rounded-full">
-                <p className="w-6 h-6 flex justify-center bg-teal-50 rounded-full">
+    <section className="fixed z-10  inset-0 sm:flex bg-black bg-opacity-20 items-center h-screen justify-center p-3">
+      <div
+        onClick={handleClick}
+        className="fixed z-10 cursor-pointer inset-0 "
+      ></div>
+      <div className="z-20">
+        <div className="border-gray-100 border-[1px] bg-white cursor-pointer rounded-t-lg fixed w-full left-0  bottom-0 sm:relative sm:rounded-lg   sm:w-[570px]  lg:w-[640px] h-[430px]">
+          <div>
+            <div className="w-full h-12 flex justify-between items-center border-gray-100 px-3 border-b-[1px]">
+              <div className="text-[12px] text-gray-300 italic font-medium">
+                Today / day
+              </div>
+              <div onClick={handleClick} className="cursor-pointer">
+                <BsX size={20} />
+              </div>
+            </div>
+          </div>
+          <div className="w-full h-96  sm:h-[381px] flex flex-col sm:flex-row">
+            <div className="sm:w-2/3  p-3 max-h-full rounded-md">
+              <div className="bg-teal-700 text-teal-700 w-14 flex justify-center items-center h-14 rounded-full">
+                <p className="w-12 h-12 flex justify-center bg-teal-50 text-3xl font-bold items-center rounded-full">
                   {data.name.charAt(0)}
                 </p>
               </div>
-              <div>
-                <p className="text-lg font-bold"> {data.company.name}</p>
-                <p className="text-[10px] text-gray-400">
-                  {" "}
-                  {data.name.slice(0, 18)}
-                  {/* {data.type} */}
-                </p>
-                <p className="text-[12px] font-bold text-teal-700">
-                  {" "}
-                  {data.contents.slice(23, 48)}
-                </p>
-                <p className="flex gap-2 items-center text-[14px] my-1">
-                  <BsMap />
-                  {data.locations.map((loc) => loc.name)}
-                </p>
-              </div>
             </div>
-            <div>
+            <div className="sm:w-1/3 p-3 max-h-full sm:rounded-br-md bg-gray-100">
+              d
+            </div>
+          </div>
+          {/* <div className="flex gap-3 justify-between px-1 sm:px-0 "> */}{" "}
+          {/* <div>
               <div
                 onClick={() => {
                   setBookmarkState(!bookmarkState);
@@ -70,7 +68,7 @@ export const InfoModal = ({ data }: CardType) => {
               >
                 {bookmarkState ? (
                   <div className="text-teal-700">
-                    <BsBookmarkFill size={20}/>
+                    <BsBookmarkFill size={20} />
                   </div>
                 ) : (
                   <div className="text-teal-700">
@@ -81,21 +79,20 @@ export const InfoModal = ({ data }: CardType) => {
               <p className="sm:hidden lg:flex text-[14px] mt-11">
                 {data.publication_date.slice(2, 10)}
               </p>
-            </div>
-          </div>
-
-          <div className="flex gap-4 sm:mx-10 justify-center sm:justify-start text-[12px] mt-4 my-2">
+            </div> */}
+          {/* </div> */}
+          {/* <div className="flex gap-4 sm:mx-10 justify-center sm:justify-start text-[12px] mt-4 my-2">
             <ButtonComponent
-              className="h-8 w-32  flex justify-center items-center hover:bg-teal-700 hover:text-white rounded-md text-teal-700 bg-teal-50 p-4"
+              className="h-8 w-32 font-bold  flex justify-center items-center hover:bg-teal-700 hover:text-white rounded-md text-teal-700 bg-teal-50 p-4"
               title="Apply"
               icon={null}
             />
             <ButtonComponent
-              className="h-8 w-32  flex hover:bg-gray-500 hover:text-white justify-center items-center rounded-md border-[1px] border-gray-300 text-gray-500 p-4"
+              className="h-8 w-32 font-bold flex hover:bg-gray-500 hover:text-white justify-center items-center rounded-md border-[1px] border-gray-300 text-gray-500 p-4"
               title="Visit"
               icon={null}
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

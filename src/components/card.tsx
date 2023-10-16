@@ -8,18 +8,24 @@ import { useAppDispatch } from "../store/hooks";
 export type CardType = {
   data: JobType;
   index: number;
+  setPopup: any;
 };
-export const CardComponent = ({ data, index }: CardType) => {
+export const CardComponent = ({ data, index, setPopup }: CardType) => {
   const [bookmarkState, setBookmarkState] = useState<boolean>(false);
-  const [popup, setPopup] = useState<boolean>(false);
+  // const [popup, setPopup] = useState<boolean>(false);
 
   return (
     <section>
-      <div className="border-gray-100 border-[1px]  cursor-pointer rounded-lg p-3">
+      <div className="border-gray-100 border-[1px]  cursor-pointer rounded-lg my-2 sm:my-0 p-3">
         <div className="flex gap-3 justify-between px-1 sm:px-0 " key={index}>
           {" "}
-          <div className="flex gap-3">
-            <div className="bg-teal-700 text-teal-700 w-8 flex justify-center items-center h-8 rounded-full">
+          <div
+            onClick={() => {
+              setPopup(true);
+            }}
+            className="flex gap-3  w-2/3"
+          >
+            <div className="bg-teal-700  text-teal-700 w-8 flex justify-center items-center h-8 rounded-full">
               <p className="w-6 h-6 flex justify-center bg-teal-50 rounded-full">
                 {data.name.charAt(0)}
               </p>
@@ -47,7 +53,7 @@ export const CardComponent = ({ data, index }: CardType) => {
                 setBookmarkState(!bookmarkState);
                 console.log(bookmarkState);
               }}
-              className="flex justify-end"
+              className="flex ml-auto w-fit h-fit justify-end"
             >
               {bookmarkState ? (
                 <div className="text-teal-700">
@@ -59,7 +65,12 @@ export const CardComponent = ({ data, index }: CardType) => {
                 </div>
               )}
             </div>
-            <p className="sm:hidden lg:flex text-[12px] mt-9">
+            <p
+              onClick={() => {
+                setPopup(true);
+              }}
+              className="sm:hidden  lg:flex text-[12px] mt-9"
+            >
               {data.publication_date.slice(2, 10)}
             </p>
           </div>

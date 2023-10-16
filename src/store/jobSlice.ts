@@ -40,7 +40,7 @@ export const fetchData = createAsyncThunk("job/fetchData", async () => {
 });
 
 export const  JobSlice = createSlice({
-  name: "jobSlice",
+  name: "job",
   initialState,
   reducers: {
   },
@@ -50,7 +50,7 @@ export const  JobSlice = createSlice({
   })
   builder.addCase(fetchData.fulfilled, (state: initialType, action: PayloadAction<[]>) => {
     state.loading = false;
-    state.data = state.data.concat(action.payload)
+    state.data = action.payload
     state.error = " "
   })
   builder.addCase(fetchData.rejected, (state: initialType, action : any) => {
