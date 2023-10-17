@@ -27,7 +27,7 @@ export const CardComponent = ({ data, index, setPopup }: CardType) => {
           >
             <div className="bg-teal-700  text-teal-700 w-8 flex justify-center items-center h-8 rounded-full">
               <p className="w-6 h-6 flex justify-center bg-teal-50 rounded-full">
-                {data.name.charAt(0)}
+                {data.company.name.charAt(0)}
               </p>
             </div>
             <div>

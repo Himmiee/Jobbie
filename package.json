@@ -13,6 +13,7 @@
     "@types/react-dom": "^18.2.7",
     "@types/react-redux": "^7.1.26",
     "axios": "^1.5.1",
+    "fie": "^4.1.6",
     "framer": "^2.4.1",
     "framer-motion": "^10.16.4",
     "react": "^18.2.0",

@@ -15,7 +15,7 @@ const FeatureComponent = () => {
       <div>
         <NavbarComponent />
       </div>
-      <div className="sm:mx-28 mx-8 sm:flex justify-between mt-20 sm:mt-16 h-[450px] items-center">
+      <div className="sm:mx-28 mx-8 sm:flex justify-between mt-24 sm:mt-16 h-[450px] items-center">
         <div className="left sm:w-1/2">
           <div className="flex justify-center flex-col items-center sm:items-start">
             <motion.h1 className="lg:text-[48px] text-[22px] font-bold sm:text-[28px] bg-gradient-to-r from-teal-700 text-center sm:text-start text-transparent to-blue-950 bg-clip-text">
@@ -31,17 +31,17 @@ const FeatureComponent = () => {
             </p>
           </div>
         </div>
-        <div className="sm:w-1/2 my-3 sm:my-0 flex justify-center sm:justify-end mb-3">
+        <div className="sm:w-1/2 my-3 sm:my-0 flex justify-center sm:justify-end mt-4 sm:mt-0 sm:mb-3">
           <motion.div
             initial={{ scale: 1 }}
             whileHover={{ scale: 1.1 }}
-            className="w-[80%] sm:w-[100%]  border-teal-700 border-2 p-3"
+            className="w-[100%] sm:w-[100%]  border-teal-700 border-2 p-3"
           >
             <img src="jobber.png" className="" alt="" />
           </motion.div>
         </div>
       </div>
-      <motion.section className="my-12 rounded-[90px] bg-teal-50">
+      <motion.section className="sm:my-12 rounded-[90px] bg-teal-50">
         <h1 className="sm:text-3xl text-2xl font-bold flex justify-center pt-8 sm:font-medium bg-gradient-to-r from-teal-700 text-transparent to-blue-950 bg-clip-text">
           The features
         </h1>

@@ -20,6 +20,7 @@ const JobComponent = () => {
   const job = useAppSelector((state) => state.job);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [postPerPage, setPostPerPage] = useState<number>(16);
+
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
   const currentPost = data.slice(firstPostIndex, lastPostIndex);
