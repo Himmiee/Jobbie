@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-type DateDifferenceProps = {
+type DateDifference = {
   givenDate: string;
 };
 
-const DateDifference: React.FC<DateDifferenceProps> = ({ givenDate }) => {
+const DateDifference = ({ givenDate }: DateDifference) => {
   const [daysAgo, setDaysAgo] = useState<string | null>(null);
 
   useEffect(() => {
