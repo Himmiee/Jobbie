@@ -116,28 +116,27 @@ const HomeComponent = () => {
         transition={{ duration: 0.1 }}
         className="mx-8 sm:mx-24 grid sm:grid-cols-3 mt-6"
       >
-        {data.filter((item: FAQ )=> {
-         return value === " "
-         ? item
-         : item.title.includes(value);
-        })
-        .map((item: FAQ, index: number) => {
-          return (
-            <div
-              className="m-2 sm:w-56 lg:w-80 border-slate-50 cursor-pointer  hover:border-teal-700 hover:border-[1px] border-[1px] rounded-xl p-5"
-              key={index}
-            >
-              <div className="w-10  flex justify-center items-center h-10 rounded-full  text-teal-700 bg-teal-50">
-                {item.icon}
+        {data
+          .filter((item: FAQ) => {
+            return value === " " ? item : item.title.includes(value);
+          })
+          .map((item: FAQ, index: number) => {
+            return (
+              <div
+                className="m-2 sm:w-56 lg:w-80 border-slate-50 cursor-pointer  hover:border-teal-700 hover:border-[1px] border-[1px] rounded-xl p-5"
+                key={index}
+              >
+                <div className="w-10  flex justify-center items-center h-10 rounded-full  text-teal-700 bg-teal-50">
+                  {item.icon}
+                </div>
+                <div className="flex items-center gap-2 cursor-pointer">
+                  <h1 className="font-medium text-sm my-2">{item.title}</h1>
+                  <BsArrowRight />
+                </div>
+                <p className="text-[11px] text-gray-200">{item.info}</p>
               </div>
-              <div className="flex items-center gap-2 cursor-pointer">
-                <h1 className="font-medium text-sm my-2">{item.title}</h1>
-                <BsArrowRight />
-              </div>
-              <p className="text-[11px] text-gray-200">{item.info}</p>
-            </div>
-          );
-        })}
+            );
+          })}
       </motion.div>
       <motion.div
         initial={{ opacity: 0.5, scale: 0.5 }}
@@ -146,7 +145,7 @@ const HomeComponent = () => {
         className="flex justify-center my-2"
       >
         <ButtonComponent
-          className="bg-teal-700 cursor-pointer flex items-center justify-center gap-2 hover:bg-teal-600 w-32  text-white h-8 p-1 text-[13px] rounded-full"
+          className="bg-teal-700 lg cursor-pointer flex items-center justify-center gap-2 hover:bg-teal-600 w-32  text-white h-8 p-1 text-[13px] rounded-full"
           title="Browse More"
           icon={<BsArrowRight />}
         />
@@ -155,7 +154,7 @@ const HomeComponent = () => {
         initial={{ opacity: 0.5, scale: 0.5 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.1 }}
-        className="wrap px-8 sm:px-[120px] py-5 mt-8 pb-14 sm:pb-0 bg-teal-50 sm:h-[600px]"
+        className="wrap px-8 sm:px-[102px] py-5 mt-8 pb-14 sm:pb-0 bg-teal-50 sm:h-[600px]"
       >
         {" "}
         <div className="sm:flex sm:justify-between my-4 items-center ">
@@ -181,10 +180,10 @@ const HomeComponent = () => {
             />
           </div>
         </div>
-        <div className="grid sm:grid-cols-3  w-full gap-10  lg:gap-[105px]">
-          <div className=" sm:w-48 lg:w-80">
-            <div className="w-full h-56 rounded-xl bg-gradient-to-b from-teal-200 to-teal-50 text-teal-200">
-            <img src="roll.png" alt="file" />
+        <div className="flex flex-col sm:flex-row gap-2 justify-between">
+          <div className=" sm:w-48  my-2  lg:w-80">
+            <div className="w-full h-56 sm:h-44 lg:h-56 rounded-xl bg-gradient-to-b from-teal-200 to-teal-50 text-teal-200">
+              <img src="roll.png" alt="file" />
             </div>
             <div className=" bg-gradient-to-t from-white to-slate-50 w-full p-4 rounded-b-xl">
               <h1 className="text-base mt-2 mb-1">One Step.</h1>
@@ -194,9 +193,9 @@ const HomeComponent = () => {
               </p>
             </div>
           </div>
-          <div className="sm:w-48 lg:w-80 ml-2 ">
-            <div className="w-full h-56  rounded-xl bg-gradient-to-b from-teal-200 to-teal-50 text-teal-200">
-            <img src="file.png" alt="file" />
+          <div className="sm:w-48  my-2  lg:w-80 ">
+            <div className="w-full h-56 sm:h-44 lg:h-56  rounded-xl bg-gradient-to-b from-teal-200 to-teal-50 text-teal-200">
+              <img src="file.png" alt="file" />
             </div>
             <div className=" bg-gradient-to-t from-white to-slate-50 w-full p-4 rounded-b-xl">
               <h1 className="text-base mt-2 mb-1">Two Step.</h1>
@@ -206,9 +205,9 @@ const HomeComponent = () => {
               </p>
             </div>
           </div>
-          <div className="sm:w-48 lg:w-80">
-            <div className="w-full h-56 rounded-xl bg-gradient-to-b from-teal-200 to-teal-50 text-teal-200">
-            <img src="ball.png" alt="file" />
+          <div className="sm:w-48  my-2  lg:w-80">
+            <div className="w-full h-56 sm:h-44 lg:h-56 rounded-xl bg-gradient-to-b from-teal-200 to-teal-50 text-teal-200">
+              <img src="ball.png" alt="file" />
             </div>
             <div className=" bg-gradient-to-t from-white to-slate-50 w-full p-4 rounded-b-xl">
               <h1 className="text-base mt-2 mb-1">Three Step.</h1>

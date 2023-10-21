@@ -7,24 +7,24 @@ import { fetchData } from "../store/jobSlice";
 import { JobType, RefType } from "../helpers/dumps";
 import PGComponent from "../components/pagination";
 import { PopupModal } from "../components/modals";
+import FilterComponent from "../components/filter";
 import { InfoModal } from "../components/modals";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import FooterComponent from "../components/footer";
 
 const JobComponent = () => {
-  const [data, setData] = useState(JobProto);
   const [content, setContent] = useState<any>([]);
   const [popup, setPopup] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
   const [filter, setFilter] = useState<boolean>(false);
-  const job = useAppSelector((state) => state.job);
+  const job = useAppSelector((state: any) => state.job.data);
+  const [data, setData] = useState<JobType[]>(job);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [postPerPage, setPostPerPage] = useState<number>(16);
-
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
   const currentPost = data.slice(firstPostIndex, lastPostIndex);
-  const category = data.map((item) => item.categories.map((cat) => cat.name));
 
   const filterItems = (cart: any) => {
     console.log(data);
@@ -39,7 +39,8 @@ const JobComponent = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchData());
-    // console.log(job);
+    setData(job);
+    // console.log(data);
   }, [filter]);
 
   const updateContent = (info: any) => {
@@ -68,28 +69,35 @@ const JobComponent = () => {
         )}
         <div className=""> {/* <PopupModal /> */}</div>
         <InputHeader
-          filterItems={filterItems}
           data={data}
-          handleJob={() => {
-            filterItems("Software Engineering");
-          }}
           setFilter={setFilter}
           handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             e.preventDefault();
             setSearch(e.target.value);
-            console.log(search);
           }}
         />
+        <div className="filters my-8 overflow-y-hidden flex gap-4 overflow-x-auto tbl">
+          <FilterComponent
+            setData={setData}
+            filterItems={filterItems}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            data={data}
+            // handleChange={() => {
+            //   console.log(selectedCategory);
+            // }}
+          />
+        </div>
 
-        <div className="h-[450px] sm:h-[500px] overflow-y-auto tbl sm:overflow-y-hidden">
+        <div className="h-[450px] sm:h-[500px] overflow-y-auto tbl">
           <div className="">
             {search ? (
-              <div className="grid overflow-scroll  tbl sm:grid-cols-3 lg:grid-cols-4 gap-4">
+              <div className="grid  sm:grid-cols-3  lg:grid-cols-4 gap-4">
                 {data
-                  .filter((item) => {
+                  ?.filter((item) => {
                     return search === " " ? item : item.name.includes(search);
                   })
-                  .map((item, index) => {
+                  ?.map((item, index) => {
                     // console.log("df", item.name);
                     return (
                       <div
@@ -110,7 +118,7 @@ const JobComponent = () => {
               </div>
             ) : (
               <div className="grid overflow-scroll  tbl sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                {currentPost.map((item, index) => {
+                {currentPost?.map((item: any, index: number) => {
                   // console.log("df", item.name);
                   return (
                     <div
@@ -136,7 +144,7 @@ const JobComponent = () => {
 
       <div className="mx-8 sm:mx-24">
         <PGComponent
-          totalPosts={data.length}
+          totalPosts={data?.length}
           postPerPage={postPerPage}
           setCurrentPage={setCurrentPage}
         />

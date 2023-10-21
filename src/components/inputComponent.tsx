@@ -1,16 +1,19 @@
 import React, { ChangeEvent, useState } from "react";
 import { BsFilter } from "react-icons/bs";
-import { JobProto } from "../helpers/dumps";
+import { JobProto, JobType } from "../helpers/dumps";
 import { IoFlame } from "react-icons/io5";
+import FilterComponent from "./filter";
 export const InputHeader = ({
   handleChange,
   filterItems,
   setFilter,
   data,
   handleJob,
+  selectedCategory,
+  setSelectedCategory,
 }: any) => {
   const [search, setSearch] = useState<string>("");
-  // const [data, setData] = useState(JobProto);
+
   return (
     <section>
       <div>
@@ -40,42 +43,6 @@ export const InputHeader = ({
             </p>
           </div>
         </div>
-      </div>
-      <div className="filters my-8 flex gap-4 overflow-x-auto sm:overflow-x-hidden tbl">
-        <p
-          onClick={() => {
-            setFilter(true);
-            filterItems(data);
-            console.log(data);
-          }}
-          className="w-fit h-8 rounded-full text-[12px]  sm:text-[10px] lg:text-[12px] text-gray-600 border-gray-200 border-[1px] px-3 hover:bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]"
-        >
-          All(12)
-        </p>
-        <p
-          onClick={handleJob}
-          className="w-fit h-8 rounded-full text-[12px] sm:text-[10px] lg:text-[12px] text-gray-600 border-gray-200 border-[1px] px-3 hover:bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]"
-        >
-          Tech(12)
-        </p>
-        <p
-          onClick={() => {
-            filterItems("Sof bearing");
-            console.log(data);
-          }}
-          className="w-fit h-8 rounded-full text-[12px] sm:text-[10px] lg:text-[12px] text-gray-600 border-gray-200 border-[1px] px-3 hover:bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]"
-        >
-          Education(12)
-        </p>
-        <p className="w-fit h-8 rounded-full text-[12px] sm:text-[10px] lg:text-[12px] text-gray-600 border-gray-200 border-[1px] px-3 hover:bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]">
-          Science(12)
-        </p>
-        <p className="w-fit h-8 rounded-full text-[12px] sm:text-[10px] lg:text-[12px] text-gray-600 border-gray-200 border-[1px] px-3 hover:bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]">
-          Realtor(12)
-        </p>
-        <p className="w-fit h-8 rounded-full text-[12px] sm:text-[10px] lg:text-[12px] text-gray-600 border-gray-200 border-[1px] px-3 hover:bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]">
-          Engineering(12)
-        </p>
       </div>
     </section>
   );

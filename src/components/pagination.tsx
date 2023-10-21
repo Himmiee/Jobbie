@@ -5,7 +5,7 @@ const PGComponent = ({ totalPosts, postPerPage, setCurrentPage }: any) => {
     Pages.push(i);
   }
   return (
-    <div className="gap-[2px] sm:gap-2 my-2 flex justify-center">
+    <div className="gap-[4px] sm:gap-2 my-2 flex justify-center">
       {Pages.map((page, index) => {
         return (
           <button

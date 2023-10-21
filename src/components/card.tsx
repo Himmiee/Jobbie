@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import { BsMap, BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import ButtonComponent from "./button";
 import { frame, useMotionValue, useTransform, useAnimation } from "framer";
-import { JobProto, JobType } from "../helpers/dumps";
-import { useAppDispatch } from "../store/hooks";
+import { JobProto, JobType, BookmarkTemp } from "../helpers/dumps";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+
+import {
+  addBookmark,
+  removeBookmark,
+  selectBookmarks,
+} from "../store/bookmarkSlice";
 
 export type CardType = {
   data: JobType;
@@ -12,18 +18,42 @@ export type CardType = {
 };
 export const CardComponent = ({ data, index, setPopup }: CardType) => {
   const [bookmarkState, setBookmarkState] = useState<boolean>(false);
-  // const [popup, setPopup] = useState<boolean>(false);
+  const bookmarks = useAppSelector(selectBookmarks);
+  const dispatch = useAppDispatch();
+
+  const isBookmarked = bookmarks.some(
+    (bookmark: any) => bookmark.id === data.id
+  );
+  const getBookmarks = bookmarks.map((bookmark: any) => {
+    if (isBookmarked) {
+      return bookmark.name;
+    } else {
+      return " ";
+    }
+  });
+
+  const handleRemoveClick = () => {
+    dispatch(removeBookmark(data.id));
+    console.log(bookmarks);
+  };
+
+  const handleAddBookmark = () => {
+    if (!isBookmarked) {
+      dispatch(addBookmark(data));
+      console.log(bookmarks);
+    }
+  };
 
   return (
     <section>
-      <div className="border-gray-100 border-[1px]  cursor-pointer rounded-lg my-2 sm:my-0 p-3">
-        <div className="flex gap-3 justify-between px-1 sm:px-0 " key={index}>
+      <div className="border-gray-100 border-[1px] sm:h-[120px]  grid items-center lg:h-fit cursor-pointer rounded-lg my-2 sm:my-0 p-3">
+        <div className="flex  gap-3 justify-between px-1 sm:px-0 " key={index}>
           {" "}
           <div
             onClick={() => {
               setPopup(true);
             }}
-            className="flex gap-3  w-2/3"
+            className="flex gap-3  w-3/3"
           >
             <div className="bg-teal-700  text-teal-700 w-8 flex justify-center items-center h-8 rounded-full">
               <p className="w-6 h-6 flex justify-center bg-teal-50 rounded-full">
@@ -39,9 +69,9 @@ export const CardComponent = ({ data, index, setPopup }: CardType) => {
               </p>
               <p className="text-[8px] font-bold text-teal-700">
                 {" "}
-                {data.contents.slice(23, 48)}
+                {data.contents.slice(4, 24)}
               </p>
-              <p className="flex gap-2 items-center text-[12px] my-1">
+              <p className="flex gap-2 items-center text-[12px] sm:text-[11px] lg:text-[12px] my-1">
                 <BsMap />
                 {data.locations.map((loc) => loc.name)}
               </p>
@@ -51,16 +81,15 @@ export const CardComponent = ({ data, index, setPopup }: CardType) => {
             <div
               onClick={() => {
                 setBookmarkState(!bookmarkState);
-                console.log(bookmarkState);
               }}
               className="flex ml-auto w-fit h-fit justify-end"
             >
               {bookmarkState ? (
-                <div className="text-teal-700">
+                <div onClick={handleAddBookmark} className="text-teal-700">
                   <BsBookmarkFill />
                 </div>
               ) : (
-                <div className="text-teal-700">
+                <div onClick={handleRemoveClick} className="text-teal-700">
                   <BsBookmark />
                 </div>
               )}

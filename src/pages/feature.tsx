@@ -15,7 +15,7 @@ const FeatureComponent = () => {
       <div>
         <NavbarComponent />
       </div>
-      <div className="sm:mx-28 mx-8 sm:flex justify-between mt-24 sm:mt-16 h-[450px] items-center">
+      <div className="sm:mx-28 tbl mx-8 sm:flex justify-between mt-24 sm:mt-16 h-[450px] items-center">
         <div className="left sm:w-1/2">
           <div className="flex justify-center flex-col items-center sm:items-start">
             <motion.h1 className="lg:text-[48px] text-[22px] font-bold sm:text-[28px] bg-gradient-to-r from-teal-700 text-center sm:text-start text-transparent to-blue-950 bg-clip-text">
@@ -42,14 +42,24 @@ const FeatureComponent = () => {
         </div>
       </div>
       <motion.section className="sm:my-12 rounded-[90px] bg-teal-50">
-        <h1 className="sm:text-3xl text-2xl font-bold flex justify-center pt-8 sm:font-medium bg-gradient-to-r from-teal-700 text-transparent to-blue-950 bg-clip-text">
+        <motion.h1
+          initial={{ opacity: 0.5, scale: 0.5 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.1 }}
+          className="sm:text-3xl text-2xl font-bold flex justify-center pt-8 sm:font-medium bg-gradient-to-r from-teal-700 text-transparent to-blue-950 bg-clip-text"
+        >
           The features
-        </h1>
+        </motion.h1>
         <p className="flex justify-center mt-2 mb-6 text-[11px] sm:text-[12px] text-gray-400">
           A short list of dem features, what we do do, wahalurddddddd
         </p>
         <div className="w-full grid item-center place-content-center gap-24 py-8 sm:grid-cols-2">
-          <div className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start justify-center flex-col items-center sm:items-start  sm:mx-28 ">
+          <motion.div
+            initial={{ opacity: 0.5, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.2 }}
+            className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start justify-center flex-col items-center sm:items-start  sm:mx-28 "
+          >
             <div className="w-12 flex justify-center items-center h-12 my-1 rounded-full bg-teal-700">
               <BsCheckCircleFill size={20} className="text-white" />
             </div>
@@ -62,15 +72,19 @@ const FeatureComponent = () => {
               nostrum impedit sequi mol enim saepe necessitatibus labore nihil
               ipsam earum dicta assumenda, qui nostrum impedit sequi mol
             </p>
-          </div>
-          <div className="lg:w-2/2 sm:w-1/2 mx-8 sm:mx-28 flex justify-center">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0.5, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.2 }}
+            className="lg:w-2/2 sm:w-1/2 mx-8 sm:mx-28 flex justify-center"
+          >
             <img
               src="fm.png"
               className="rounded-full w-80 sm:w-[400px] h-56"
               alt="image"
             />
-          </div>
-
+          </motion.div>
           <div className="lg:w-2/2 sm:w-1/2 mx-8 sm:mx-28 flex justify-center">
             <img
               src="home.png"
@@ -78,7 +92,12 @@ const FeatureComponent = () => {
               alt="image"
             />
           </div>
-          <div className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start justify-center flex-col items-center sm:items-start  sm:mx-28 ">
+          <motion.div
+            initial={{ opacity: 0.5, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.2 }}
+            className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start justify-center flex-col items-center sm:items-start  sm:mx-28 "
+          >
             <div className="w-12 flex justify-center items-center h-12 my-1 rounded-full bg-teal-700">
               <BsCheckCircleFill size={20} className="text-white" />
             </div>
@@ -91,8 +110,13 @@ const FeatureComponent = () => {
               impedit sequi mol enim saepe necessitatibus labore nihil ipsam
               earum dicta assumenda, qui nostrum impedit sequi mol
             </p>
-          </div>
-          <div className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start justify-center flex-col items-center sm:items-start  sm:mx-28 ">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0.5, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.2 }}
+            className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start justify-center flex-col items-center sm:items-start  sm:mx-28 "
+          >
             <div className="w-12 flex justify-center items-center h-12 my-1 rounded-full bg-teal-700">
               <BsCheckCircleFill size={20} className="text-white" />
             </div>
@@ -105,14 +129,19 @@ const FeatureComponent = () => {
               assumenda, qui nostrum impedit sequi mol us labore nihil ipsam
               earum dicta assumenda, qui nostrum impedit sequi mol
             </p>
-          </div>
-          <div className="lg:w-2/2 sm:w-1/2 mx-8 sm:mx-28 flex justify-center">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0.5, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.2 }}
+            className="lg:w-2/2 sm:w-1/2 mx-8 sm:mx-28 flex justify-center"
+          >
             <img
               src="type.png"
               className="rounded-full  w-80 sm:w-[400px] h-56"
               alt="image"
             />
-          </div>
+          </motion.div>
         </div>
       </motion.section>
 
@@ -122,7 +151,7 @@ const FeatureComponent = () => {
         transition={{ duration: 0.1 }}
         className="sm:h-96 px-8 sm:px-28 "
       >
-        <h1 className="flex justify-center text-teal-700 font-medium text-lg sm:my-6">
+        <h1 className="flex justify-center text-teal-700  text-lg font-bold my-6">
           More on the products
         </h1>
         <div className="sm:flex justify-between gap-3 ">

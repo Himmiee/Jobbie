@@ -35,13 +35,13 @@ export const Questions = [
 ];
 
 export const Filter = [
-  {name: "All"},
-  {name: "Tech"},
-  {name: "Education"},
-  {name: "Science"},
-  {name: "Realtor"},
-  {name: "Engineering"}
-]
+  { name: "All" },
+  { name: "Tech" },
+  { name: "Education" },
+  { name: "Science" },
+  { name: "Realtor" },
+  { name: "Engineering" },
+];
 
 export const FAQs = [
   {
@@ -104,11 +104,11 @@ export type LevelType = {
 export type RefType = {
   landing_page: string;
 };
-export type CompanyType = { 
-  id: number
-  short_name:string
-  name: string
-}
+export type CompanyType = {
+  id: number;
+  short_name: string;
+  name: string;
+};
 
 export type JobType = {
   contents: string;
@@ -123,7 +123,7 @@ export type JobType = {
   levels: LevelType[];
   tags: any;
   refs: RefType;
-  company: CompanyType
+  company: CompanyType;
 };
 
 export const JobProto = [
@@ -143,7 +143,7 @@ export const JobProto = [
     ],
     categories: [
       {
-        name: "Software Engineering",
+        name: "Real Engineering",
       },
     ],
     levels: [
@@ -179,7 +179,7 @@ export const JobProto = [
     ],
     categories: [
       {
-        name: "Software Engineering",
+        name: " Tech",
       },
     ],
     levels: [
@@ -215,7 +215,7 @@ export const JobProto = [
     ],
     categories: [
       {
-        name: "Software Engineering",
+        name: "Education",
       },
     ],
     levels: [
@@ -345,17 +345,50 @@ export const JobProto = [
   },
 ];
 
-
 type filterType = {
-  name: string
-}
+  name: string;
+};
 
-export const FilterTags : filterType[]  = [
-   {name: "All"},
-   {name: "Tech"},
-   {name: "Education"},
-   {name: "Science"},
-   {name: "Realtor"},
-   {name: "Engineering"}
+export const FilterTags: filterType[] = [
+  { name: "All" },
+  { name: "Tech" },
+  { name: "Education" },
+  { name: "Science" },
+  { name: "Realtor" },
+  { name: "Engineering" },
+];
 
-]
+export const BookmarkTemp = {
+  contents: "",
+  name: "",
+  type: "",
+  publication_date: "",
+  short_name: "",
+  model_type: "",
+  id: 0,
+  locations: [
+    {
+      name: "",
+    },
+  ],
+  categories: [
+    {
+      name: "",
+    },
+  ],
+  levels: [
+    {
+      name: "",
+      short_name: "",
+    },
+  ],
+  tags: [],
+  refs: {
+    landing_page: "",
+  },
+  company: {
+    id: 0,
+    short_name: "",
+    name: "",
+  },
+};

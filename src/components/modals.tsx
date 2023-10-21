@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { BsX } from "react-icons/bs";
+import { BookmarkComponent } from "./bookmark";
 import { BsMap, BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import ButtonComponent from "./button";
 import ReadMore from "./readmore";
-import { JobType } from "../helpers/dumps";
+import { JobProto, JobType } from "../helpers/dumps";
 import DateDifference from "./date";
 
 export const PopupModal = () => {
@@ -26,8 +27,10 @@ export type CardType = {
 
 export const InfoModal = ({ data, handleClick }: CardType) => {
   const [bookmarkState, setBookmarkState] = useState<boolean>(false);
+  const [bookmarkInfo, setBookmarkInfo] = useState<JobType[]>(JobProto);
   const [popup, setPopup] = useState<boolean>(false);
   const currentDate = new Date();
+
 
   return (
     <section className="fixed z-10 backdrop-blur-sm inset-0 sm:flex bg-black bg-opacity-20 items-center h-screen justify-center p-3">
@@ -189,17 +192,18 @@ export const InfoModal = ({ data, handleClick }: CardType) => {
                     <p className="text-[10px] italic text-gray-400">
                       {data.publication_date.slice(0, 10)}
                     </p>
-                    <p className="text-[10px] italic text-gray-400">
+                    <div className="text-[10px] italic text-gray-400">
                       <DateDifference
                         givenDate={data.publication_date.slice(0, 10)}
                       />
-                    </p>
+                    </div>
                   </div>
                 </div>
               </div>
               <div className=" w-full h-full px-3 p-2 text-[14px] ">
                 <div>
                   <p className="text-[12px] my-2 font-bold">Bookmarks:-</p>
+                  <div>{/* <BookmarkComponent data={}/> */}</div>
                 </div>
               </div>
             </div>
