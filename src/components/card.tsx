@@ -1,5 +1,11 @@
-import React, { useState } from "react";
-import { BsMap, BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import React, { useState, useEffect } from "react";
+import {
+  BsMap,
+  BsBookmark,
+  BsBookmarkFill,
+  BsArrowLeft,
+  BsArrowRight,
+} from "react-icons/bs";
 import ButtonComponent from "./button";
 import { frame, useMotionValue, useTransform, useAnimation } from "framer";
 import { JobProto, JobType, BookmarkTemp } from "../helpers/dumps";
@@ -15,8 +21,14 @@ export type CardType = {
   data: JobType;
   index: number;
   setPopup: any;
+  filterCompany: any;
 };
-export const CardComponent = ({ data, index, setPopup }: CardType) => {
+export const CardComponent = ({
+  data,
+  index,
+  setPopup,
+  filterCompany,
+}: CardType) => {
   const [bookmarkState, setBookmarkState] = useState<boolean>(false);
   const bookmarks = useAppSelector(selectBookmarks);
   const dispatch = useAppDispatch();
@@ -31,6 +43,8 @@ export const CardComponent = ({ data, index, setPopup }: CardType) => {
       return " ";
     }
   });
+
+
 
   const handleRemoveClick = () => {
     dispatch(removeBookmark(data.id));
@@ -73,7 +87,7 @@ export const CardComponent = ({ data, index, setPopup }: CardType) => {
               </p>
               <p className="flex gap-2 items-center text-[12px] sm:text-[11px] lg:text-[12px] my-1">
                 <BsMap />
-                {data.locations.map((loc) => loc.name)}
+                {data.locations.map((loc) => loc.name.slice(0, 16))}
               </p>
             </div>
           </div>
@@ -98,9 +112,9 @@ export const CardComponent = ({ data, index, setPopup }: CardType) => {
               onClick={() => {
                 setPopup(true);
               }}
-              className="sm:hidden  lg:flex text-[12px] mt-9"
+              className="sm:hidden border-gray-600 border-[1px] h-4 w-14 hover:border-teal-700 flex justify-center items-center rounded-md hover:bg-teal-700 hover:text-white   lg:flex text-[10px] mt-9"
             >
-              {data.publication_date.slice(2, 10)}
+              View Job
             </p>
           </div>
         </div>

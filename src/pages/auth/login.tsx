@@ -1,11 +1,25 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import ButtonComponent from "../../components/button";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { setEmail, setPassword } from "../../store/loginslice";
 
 const LoginComponent = () => {
   const [nav, setNav] = useState<boolean>(false);
   const inputRef = useRef<any>(null);
   const [eyeActive, setEyeActive] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+  const { email, password } = useAppSelector((state) => state.login);
+  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setEmail(e.target.value));
+  };
+  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setPassword(e.target.value));
+  };
+  const handleLogin = () => {
+    console.log(email);
+  };
+
   useEffect(() => {
     setNav(false);
   }, []);
@@ -30,6 +44,8 @@ const LoginComponent = () => {
                 <p className="text-[12px] my-1">Username:</p>
                 <input
                   type="text"
+                  value={email}
+                  onChange={handleEmail}
                   className="flex justify-center px-2 w-64 h-7 text-[12px] rounded-md sm:opacity-80 text-white bg-white bg-opacity-10 sm:bg-gray-600 border-gray-700 outline-none sm:border-[1px]"
                 />
               </label>
@@ -40,6 +56,8 @@ const LoginComponent = () => {
                 <div className="flex justify-between item-center px-2 w-64 h-7 text-[12px] rounded-md sm:opacity-80 bg-opacity-10 bg-white sm:bg-gray-600 border-gray-700 outline-none sm:border-[1px]">
                   <input
                     ref={inputRef}
+                    value={password}
+                    onChange={handlePassword}
                     type="password"
                     className="rounded-md  w-[230px] bg-transparent outline-none "
                   />
@@ -64,6 +82,7 @@ const LoginComponent = () => {
           </div>
           <div>
             <ButtonComponent
+              onClick={handleLogin}
               className="bg-teal-700 text-sm w-64 h-7 my-2 cursor-pointer hover:bg-teal-900 flex justify-center items-center text-white rounded-lg "
               title="SignIn"
               icon={null}

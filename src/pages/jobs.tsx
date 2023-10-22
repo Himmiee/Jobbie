@@ -17,18 +17,20 @@ const JobComponent = () => {
   const [popup, setPopup] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
   const [filter, setFilter] = useState<boolean>(false);
-  const job = useAppSelector((state: any) => state.job.data);
-  const [data, setData] = useState<JobType[]>(job);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [postPerPage, setPostPerPage] = useState<number>(16);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
+  const [result, setResult] = useState([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const job = useAppSelector((state: any) => state.job.data);
+  const [data, setData] = useState<JobType[]>(job);
   const currentPost = data.slice(firstPostIndex, lastPostIndex);
 
   const filterItems = (cart: any) => {
     console.log(data);
-    const newItems = JobProto.filter((updated) => {
+    const newItems = job.filter((updated: JobType) => {
       return updated.categories.map((itm) => itm.name) === cart;
     });
 
@@ -36,12 +38,21 @@ const JobComponent = () => {
     console.log(newItems);
     console.log(cart);
   };
+  const filterCompany = (companyName: string) => {
+    const newItems = job.filter(
+      (item: JobType) => item.company.name === companyName
+    );
+    setResult(newItems);
+  };
+
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(fetchData());
-    setData(job);
-    // console.log(data);
-  }, [filter]);
+    // setIsLoading(true);
+    dispatch(fetchData()).then(() => {
+      setData(job);
+      setIsLoading(false);
+    });
+  }, [filter, dispatch]);
 
   const updateContent = (info: any) => {
     setContent([info]);
@@ -60,8 +71,13 @@ const JobComponent = () => {
               return (
                 <InfoModal
                   data={info}
+                  setData={setData}
                   key={index}
-                  handleClick={() => setPopup(false)}
+                  handleClick={() => {
+                    setPopup(false);
+                  }}
+                  filterCompany={filterCompany}
+                  result={result}
                 />
               );
             })}
@@ -83,22 +99,33 @@ const JobComponent = () => {
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
             data={data}
-            // handleChange={() => {
-            //   console.log(selectedCategory);
-            // }}
           />
         </div>
 
         <div className="h-[450px] sm:h-[500px] overflow-y-auto tbl">
           <div className="">
+            {!data.length ? (
+              <div className="h-fit item-center w-full">
+                {" "}
+                <img
+                  src="nothing.png"
+                  className="w-[40%] justify-center m-auto"
+                  alt=""
+                />
+                <div className="flex justify-center text-teal-700 m-auto">
+                  Nothing here yet...
+                </div>{" "}
+              </div>
+            ) : (
+              ""
+            )}
             {search ? (
-              <div className="grid  sm:grid-cols-3  lg:grid-cols-4 gap-4">
+              <div className="grid sm:grid-cols-3  lg:grid-cols-4 gap-4">
                 {data
                   ?.filter((item) => {
                     return search === " " ? item : item.name.includes(search);
                   })
                   ?.map((item, index) => {
-                    // console.log("df", item.name);
                     return (
                       <div
                         key={index}
@@ -111,31 +138,29 @@ const JobComponent = () => {
                           data={item}
                           setPopup={setPopup}
                           index={index}
+                          filterCompany={filterCompany}
                         />
                       </div>
                     );
                   })}
               </div>
             ) : (
-              <div className="grid overflow-scroll  tbl sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                {currentPost?.map((item: any, index: number) => {
-                  // console.log("df", item.name);
-                  return (
-                    <div
-                      key={index}
-                      onClick={() => {
-                        updateContent(item);
-                        // setPopup(true);
-                      }}
-                    >
-                      <CardComponent
-                        data={item}
-                        setPopup={setPopup}
-                        index={index}
-                      />
-                    </div>
-                  );
-                })}
+              <div className="grid overflow-scroll tbl sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                {currentPost?.map((item: any, index: number) => (
+                  <div
+                    key={index}
+                    onClick={() => {
+                      updateContent(item);
+                    }}
+                  >
+                    <CardComponent
+                      data={item}
+                      setPopup={setPopup}
+                      index={index}
+                      filterCompany={filterCompany}
+                    />
+                  </div>
+                ))}
               </div>
             )}
           </div>
@@ -148,9 +173,6 @@ const JobComponent = () => {
           postPerPage={postPerPage}
           setCurrentPage={setCurrentPage}
         />
-      </div>
-      <div>
-        <FooterComponent />
       </div>
     </section>
   );

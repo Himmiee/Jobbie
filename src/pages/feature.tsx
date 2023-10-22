@@ -41,7 +41,7 @@ const FeatureComponent = () => {
           </motion.div>
         </div>
       </div>
-      <motion.section className="sm:my-12 rounded-[90px] bg-teal-50">
+      <motion.section className="sm:my-12 relative rounded-[90px] bg-teal-50">
         <motion.h1
           initial={{ opacity: 0.5, scale: 0.5 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -50,98 +50,89 @@ const FeatureComponent = () => {
         >
           The features
         </motion.h1>
-        <p className="flex justify-center mt-2 mb-6 text-[11px] sm:text-[12px] text-gray-400">
-          A short list of dem features, what we do do, wahalurddddddd
+        <p className="flex justify-center mt-2 mb-6 text-center text-[11px] sm:text-[12px] text-gray-400">
+          A short list of dem features, what we do do, wahalurddddddd Lorem
+          ipsum dolor sit, amet consectetur adipisicing elit.
         </p>
-        <div className="w-full grid item-center place-content-center gap-24 py-8 sm:grid-cols-2">
+        <div className="grid sm:grid-cols-2  place-content-center">
           <motion.div
             initial={{ opacity: 0.5, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.2 }}
-            className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start justify-center flex-col items-center sm:items-start  sm:mx-28 "
+            className=" sm:flex justify-center item-center hidden"
           >
-            <div className="w-12 flex justify-center items-center h-12 my-1 rounded-full bg-teal-700">
-              <BsCheckCircleFill size={20} className="text-white" />
+            {" "}
+            <div className="absolute w-96 mt-28 lg:mt-0  lg:w-[510px] rounded-full lg:bg-white  flex justify-center items-center  h-fit">
+              <img src="./teal.png" className="w-[100%]" alt="" />
             </div>
-            <p className="text-base font-bold  my-2 text-teal-700">Righty</p>
-            <p className="text-[10px] sm:text-start text-center text-gray-400">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Obcaecati hic, qui nostrum impedit sequi mol qui nostrum impedit
-              sequi mol enim saepe necessitatibus labore nihil ipsam earum dicta
-              assumenda, qui nostrum impedit sequi mol edit sequi mol qui
-              nostrum impedit sequi mol enim saepe necessitatibus labore nihil
-              ipsam earum dicta assumenda, qui nostrum impedit sequi mol
-            </p>
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0.5, scale: 0.5 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.2 }}
-            className="lg:w-2/2 sm:w-1/2 mx-8 sm:mx-28 flex justify-center"
-          >
-            <img
-              src="fm.png"
-              className="rounded-full w-80 sm:w-[400px] h-56"
-              alt="image"
-            />
-          </motion.div>
-          <div className="lg:w-2/2 sm:w-1/2 mx-8 sm:mx-28 flex justify-center">
-            <img
-              src="home.png"
-              className="rounded-full w-80 sm:w-[500px] h-56"
-              alt="image"
-            />
+          <div className="gap-6  grid item-start  place-content-start  py-8 sm:grid-cols-2">
+            <motion.div
+              initial={{ opacity: 0.5, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.2 }}
+              className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start justify-center flex-col items-center sm:items-start   "
+            >
+              <div className="w-12 flex justify-center items-center h-12 my-1 rounded-full bg-teal-700">
+                <BsCheckCircleFill size={20} className="text-white" />
+              </div>
+              <p className="text-base font-bold  my-2 text-teal-700">Righty</p>
+              <p className="text-[10px] sm:text-start text-center text-gray-400">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Obcaecati hic, qui nostrum impedit sequi mol qui nostrum impedit
+                sequi mol enim saepe necessitatibus labore nihil ipsam earum
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0.5, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.2 }}
+              className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start justify-center flex-col items-center sm:items-start   "
+            >
+              <div className="w-12 flex justify-center items-center h-12 my-1 rounded-full bg-teal-700">
+                <BsCheckCircleFill size={20} className="text-white" />
+              </div>
+              <p className="text-base font-bold  my-2 text-teal-700">Righty</p>
+              <p className="text-[10px] text-center sm:text-start text-gray-400">
+                Lorem ipsum dolor, sit amet consectetur edit sequi mol qui
+                nostrum impedit sequi mol enim saepe necessitatibus labore nihil
+                ipsam earum dicta assumenda, qui nostrum impedit sequi mol
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0.5, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.2 }}
+              className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start justify-center flex-col items-center sm:items-start   "
+            >
+              <div className="w-12 flex justify-center items-center h-12 my-1 rounded-full bg-teal-700">
+                <BsCheckCircleFill size={20} className="text-white" />
+              </div>
+              <p className=" my-2 text-base font-bold text-teal-700">Righty</p>
+              <p className="text-[10px] text-center sm:text-start text-gray-400">
+                Lorem ipsum dolor, sit qui nostrum impedit sequi mol qui nostrum
+                impedit sequi mol amet consectetur adipisicing elit. Obcaecati
+                hic, enim saepe necessitatib edit sequi mol qui nostrum impedit
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0.5, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.2 }}
+              className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start justify-center flex-col items-center sm:items-start   "
+            >
+              <div className="w-12 flex justify-center items-center h-12 my-1 rounded-full bg-teal-700">
+                <BsCheckCircleFill size={20} className="text-white" />
+              </div>
+              <p className=" my-2 text-base font-bold text-teal-700">Righty</p>
+              <p className="text-[10px] text-center sm:text-start text-gray-400">
+                Lorem ipsum dolor, sit qui nostrum impedit sequi mol qui nostrum
+                impedit sequi mol amet consectetur adipisicing elit. Obcaecati
+                hic, enim saepe necessitatib edit sequi mol qui nostrum impedit
+              </p>
+            </motion.div>
           </div>
-          <motion.div
-            initial={{ opacity: 0.5, scale: 0.5 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.2 }}
-            className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start justify-center flex-col items-center sm:items-start  sm:mx-28 "
-          >
-            <div className="w-12 flex justify-center items-center h-12 my-1 rounded-full bg-teal-700">
-              <BsCheckCircleFill size={20} className="text-white" />
-            </div>
-            <p className="text-base font-bold  my-2 text-teal-700">Righty</p>
-            <p className="text-[10px] text-center sm:text-start text-gray-400">
-              Lorem ipsum dolor, sit amet consectetur edit sequi mol qui nostrum
-              impedit sequi mol enim saepe necessitatibus labore nihil ipsam
-              earum dicta assumenda, qui nostrum impedit sequi mol adipisicing
-              elit. Obcaecati hic, qui nostrum impedit sequi mol qui nostrum
-              impedit sequi mol enim saepe necessitatibus labore nihil ipsam
-              earum dicta assumenda, qui nostrum impedit sequi mol
-            </p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0.5, scale: 0.5 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.2 }}
-            className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start justify-center flex-col items-center sm:items-start  sm:mx-28 "
-          >
-            <div className="w-12 flex justify-center items-center h-12 my-1 rounded-full bg-teal-700">
-              <BsCheckCircleFill size={20} className="text-white" />
-            </div>
-            <p className=" my-2 text-base font-bold text-teal-700">Righty</p>
-            <p className="text-[10px] text-center sm:text-start text-gray-400">
-              Lorem ipsum dolor, sit qui nostrum impedit sequi mol qui nostrum
-              impedit sequi mol amet consectetur adipisicing elit. Obcaecati
-              hic, enim saepe necessitatib edit sequi mol qui nostrum impedit
-              sequi mol enim saepe necessitatibus labore nihil ipsam earum dicta
-              assumenda, qui nostrum impedit sequi mol us labore nihil ipsam
-              earum dicta assumenda, qui nostrum impedit sequi mol
-            </p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0.5, scale: 0.5 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.2 }}
-            className="lg:w-2/2 sm:w-1/2 mx-8 sm:mx-28 flex justify-center"
-          >
-            <img
-              src="type.png"
-              className="rounded-full  w-80 sm:w-[400px] h-56"
-              alt="image"
-            />
-          </motion.div>
         </div>
       </motion.section>
 

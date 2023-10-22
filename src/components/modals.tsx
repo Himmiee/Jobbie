@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BsX } from "react-icons/bs";
 import { BookmarkComponent } from "./bookmark";
 import { BsMap, BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import ButtonComponent from "./button";
 import ReadMore from "./readmore";
-import { JobProto, JobType } from "../helpers/dumps";
+import { useAppSelector } from "../store/hooks";
+import { CategoryType, JobProto, JobType } from "../helpers/dumps";
 import DateDifference from "./date";
 
 export const PopupModal = () => {
@@ -23,15 +24,22 @@ export const PopupModal = () => {
 export type CardType = {
   data: JobType;
   handleClick: any;
+  setData: any;
+  filterCompany: any;
+  result: any;
 };
 
-export const InfoModal = ({ data, handleClick }: CardType) => {
-  const [bookmarkState, setBookmarkState] = useState<boolean>(false);
-  const [bookmarkInfo, setBookmarkInfo] = useState<JobType[]>(JobProto);
-  const [popup, setPopup] = useState<boolean>(false);
+export const InfoModal = ({
+  data,
+  handleClick,
+  setData,
+  filterCompany,
+  result,
+}: CardType) => {
   const currentDate = new Date();
-
-
+  useEffect(() => {
+    filterCompany(data.company.name);
+  }, []);
   return (
     <section className="fixed z-10 backdrop-blur-sm inset-0 sm:flex bg-black bg-opacity-20 items-center h-screen justify-center p-3">
       <div
@@ -81,11 +89,13 @@ export const InfoModal = ({ data, handleClick }: CardType) => {
                    text-teal-50  bg-teal-700 p-4"
                   title="Apply"
                   icon={null}
+                  onClick={null}
                 />
                 <ButtonComponent
                   className="h-8 sm:h-6 w-40 sm:w-36 text-[12px] font-bold flex hover:bg-gray-500 hover:text-white justify-center items-center rounded-md border-[1px] border-gray-300 text-gray-500 p-4"
                   title="Visit"
                   icon={null}
+                  onClick={null}
                 />
               </div>
               <div className="mt-4 mb-2">
@@ -94,34 +104,40 @@ export const InfoModal = ({ data, handleClick }: CardType) => {
                     Other Jobs from {data.company.name}...
                   </h3>
                 </div>
-                <div className="w-full h-48 sm:h-[320px]  overflow-y-auto tbl">
-                  <div className="w-full lg:h-11 h-11 sm:h-fit text-[9.5px] sm:text-[10px] my-1 p-2 rounded-md item-center flex justify-between border-gray-200 border-[1px]">
-                    <div>
-                      <p className="">{data.name}</p>
-                      <p className="italic text-[8px] text-gray-300">
-                        {data.categories.map((info) => info.name)}
-                      </p>
-                    </div>
-                    <div className="flex gap-2  justify-center sm:justify-start text-[12px] my-2">
-                      <ButtonComponent
-                        className="h-6 w-16 text-[10px] font-bold  flex justify-center items-center hover:bg-gray-700 hover:text-white rounded-md text-white bg-black p-2"
-                        title="Apply"
-                        icon={null}
-                      />
-                      <ButtonComponent
-                        className="h-6 w-16 text-[10px] font-bold flex hover:bg-gray-500 hover:text-white justify-center items-center rounded-md border-[1px] border-gray-300 text-gray-500 p-2"
-                        title="Visit"
-                        icon={null}
-                      />
-                    </div>
-                  </div>
+                <div className="w-full h-48 sm:h-[300px]  overflow-y-auto tbl">
+                  {result.map((data: any) => {
+                    return (
+                      <div className="w-full lg:h-14 h-11 sm:h-fit text-[9.5px] sm:text-[10px] my-1 p-2 rounded-md item-center flex justify-between border-gray-200 border-[1px]">
+                        <div className="flex flex-col justify-center">
+                          <p className="">{data.name}</p>
+                          <p className="italic text-[8px] text-gray-300">
+                            {data.categories.map((info: any) => info.name)}
+                          </p>
+                        </div>
+                        <div className="flex gap-2  justify-center sm:justify-start text-[12px] my-2">
+                          <ButtonComponent
+                            onClick={null}
+                            className="h-6 w-16 text-[10px] font-bold  flex justify-center items-center hover:bg-gray-700 hover:text-white rounded-md text-white bg-black p-2"
+                            title="Apply"
+                            icon={null}
+                          />
+                          <ButtonComponent
+                            onClick={null}
+                            className="h-6 w-16 text-[10px] font-bold flex hover:bg-gray-500 hover:text-white justify-center items-center rounded-md border-[1px] border-gray-300 text-gray-500 p-2"
+                            title="Visit"
+                            icon={null}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
               <p className="text-[12px] italic text-gray-300">@jobber-2023</p>
             </div>
 
             <div className="sm:w-1/3 max-h-fit sm:rounded-br-md bg-gray-100">
-              <div className=" w-full p-2 px-3 h-24  text-[14px] border-gray-200 border-b-[1px]">
+              <div className=" w-full p-2 px-3 h-[100px]  text-[14px] border-gray-200 border-b-[1px]">
                 <div className="flex gap-1">
                   <div className="bg-black text-black w-8 flex justify-center items-center h-8 rounded-full">
                     <p className="w-6 h-6 flex justify-center italic bg-teal-50 text-[12px] font-bold items-center rounded-full">
@@ -140,7 +156,7 @@ export const InfoModal = ({ data, handleClick }: CardType) => {
                     <p className="text-[10px] italic text-gray-400">
                       @you-name
                     </p>
-                    <p className="text-[10px] italic text-gray-400">
+                    <p className="text-[10px]  italic text-gray-400">
                       @company-{data.company.name}
                     </p>
                   </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { JobProto } from "../helpers/dumps";
+import { JobProto, JobType } from "../helpers/dumps";
 import { useAppSelector } from "../store/hooks";
 
 const FilterComponent = ({
@@ -7,9 +7,7 @@ const FilterComponent = ({
   selectedCategory,
   setSelectedCategory,
   setData,
-  filterItems,
-}: //   handleChange,
-any) => {
+}: any) => {
   const job = useAppSelector((state: any) => state.job.data);
   const [def, setDef] = useState(job);
   const [active, setActive] = useState<string | null>("");
@@ -17,15 +15,14 @@ any) => {
     .map((item: any) => item.categories.map((cat: any) => cat.name))
     .flat();
 
-  const uniqueCategories = getUniqueCategories(categories);
-  const categoryCounts = getDistinctCategoryCounts(data);
-
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
     filterContents(category);
   };
 
-  function getDistinctCategoryCounts(data: any[]): { [key: string]: number } {
+  const getDistinctCategoryCounts = (
+    data: JobType[]
+  ): { [key: string]: number } => {
     const categoryCounts: { [key: string]: number } = {};
 
     data.forEach((item) => {
@@ -36,12 +33,14 @@ any) => {
     });
 
     return categoryCounts;
-  }
-  function getUniqueCategories(categories: string[]): string[] {
+  };
+  const getUniqueCategories = (categories: string[]): string[] => {
     return categories.filter(
       (category, index) => categories.indexOf(category) === index
     );
-  }
+  };
+  const uniqueCategories = getUniqueCategories(categories);
+  const categoryCounts = getDistinctCategoryCounts(data);
 
   const filterContents = (category: string) => {
     const filteredData = data.filter((item: any) =>
@@ -49,6 +48,8 @@ any) => {
     );
     setData(filteredData);
   };
+
+
   return (
     <div className="filter-component flex gap-2 ">
       <p
