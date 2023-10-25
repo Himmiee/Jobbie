@@ -27,6 +27,7 @@ export type CardType = {
   setData: any;
   filterCompany: any;
   result: any;
+  index: number;
 };
 
 export const InfoModal = ({
@@ -35,6 +36,7 @@ export const InfoModal = ({
   setData,
   filterCompany,
   result,
+  index,
 }: CardType) => {
   const currentDate = new Date();
   useEffect(() => {
@@ -46,7 +48,7 @@ export const InfoModal = ({
         onClick={handleClick}
         className=" absolute z-4 cursor-pointer inset-0 "
       ></div>
-      <div className="z-20">
+      <div key={index} className="z-20">
         <div className="border-gray-100 border-[1px] bg-white cursor-pointer rounded-t-lg fixed w-full left-0  bottom-0 sm:relative sm:rounded-lg   sm:w-[570px]  lg:w-[640px] h-[400px] overflow-y-auto tbl sm:overflow-hidden sm:h-fit">
           <div>
             <div className="w-full h-12 flex justify-between items-center border-gray-100 px-3 border-b-[1px]">
@@ -83,7 +85,7 @@ export const InfoModal = ({
                   <span className="text-gray-200 text-[6px]">...</span>
                 </div>
               </div>
-              <div className="flex gap-4  sm:justify-start text-[12px] my-2">
+              <div className="flex gap-4 w-full justify-between sm:justify-start text-[12px] my-2">
                 <ButtonComponent
                   className="h-8 sm:h-6 w-40 sm:w-36 text-[12px] font-bold  flex justify-center items-center hover:bg-teal-600 sm:hover:bg-teal-700 hover:text-white rounded-md sm:bg-teal-50 sm:text-teal-700 border-teal-700 border-[1px]
                    text-teal-50  bg-teal-700 p-4"

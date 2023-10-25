@@ -46,47 +46,47 @@ export const Filter = [
 export const FAQs = [
   {
     icon: <IoMdFlame />,
-    title: "Designer",
+    title: "Healthcare",
     info: "Job updates on product designers , web designers, graphic developers with tools like figma, adobe,sketch etc",
   },
   {
     icon: <IoMdFlame />,
-    title: "Software Developer",
+    title: "Business Operations",
     info: "Job updates on product developers , web developers,  with their various stacks and dev tools",
   },
   {
     icon: <IoMdFlame />,
-    title: "Product Designer",
+    title: "Software Engineering",
     info: "Lorem, ipsum dolor sit  ducimus et cumque enim aliquid, sunt consequuntur numquam recusandae voluptatibus. Magnam quidem beatae nihil aliquam?",
   },
   {
     icon: <IoMdFlame />,
-    title: "Designer",
+    title: "Farming and Outdoors",
     info: "Job updates on product designers , web designers, graphic developers with tools like figma, adobe,sketch etc",
   },
   {
     icon: <IoMdFlame />,
-    title: "Software Developer",
+    title: "Project Management",
     info: "Job updates on product developers , web developers,  with their various stacks and dev tools to help them write scalable and maintainable codes.",
   },
   {
     icon: <IoMdFlame />,
-    title: "Designer",
+    title: "Retail",
     info: "Job updates on product designers , web designers, graphic developers with tools like figma, adobe,sketch etc",
   },
   {
     icon: <IoMdFlame />,
-    title: "Software Developer",
+    title: "Customer Service",
     info: "Job updates on product developers , web developers,  with their various stacks and dev tools to help them write scalable and maintainable codes.",
   },
   {
     icon: <IoMdFlame />,
-    title: "Designer",
+    title: "Human Resources and Recruitment",
     info: "Job updates on product designers , web designers, graphic developers with tools like figma, adobe,sketch etc",
   },
   {
     icon: <IoMdFlame />,
-    title: "Software Developer",
+    title: "Software Engineer",
     info: "Job updates on product developers , web developers,  with their various stacks and dev tools to help them write scalable and maintainable codes.",
   },
 ];

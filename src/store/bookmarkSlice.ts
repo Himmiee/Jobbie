@@ -1,27 +1,32 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from './store';
-import { JobType } from '../helpers/dumps';
-
-
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "./store";
+import { JobType } from "../helpers/dumps";
 
 type BookmarkState = {
   bookmarks: JobType[];
-}
+  bookmarkStatus: boolean;
+};
 
 const initialState: BookmarkState = {
   bookmarks: [],
+  bookmarkStatus: false,
 };
 
 const bookmarkSlice = createSlice({
-  name: 'bookmarks',
+  name: "bookmarks",
   initialState,
   reducers: {
     addBookmark: (state, action: PayloadAction<JobType>) => {
-      state.bookmarks = [...state.bookmarks, action.payload]
-      // state.bookmarks.push(action.payload);
+      if (!state.bookmarks.find((item) => item.id === action.payload.id)) {
+        state.bookmarks.push(action.payload);
+        state.bookmarkStatus = true
+      }
     },
+
     removeBookmark: (state, action: PayloadAction<number>) => {
-      state.bookmarks = state.bookmarks.filter((bookmark) => bookmark.id !== action.payload);
+      const index = action.payload;
+      state.bookmarks.splice(index, 1);
+      state.bookmarkStatus = false
     },
   },
 });

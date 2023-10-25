@@ -30,7 +30,7 @@ const NavbarComponent = () => {
           } flex flex-col sm:flex-row sm:gap-6 font-medium text-gray-400 text-[13px] sm:text-[15px] cursor-pointer`}
         >
           <NavLink
-            to={"/"}
+            to={"/home"}
             className={({ isActive }) => {
               return isActive ? actLink : norm;
             }}
@@ -58,7 +58,7 @@ const NavbarComponent = () => {
           </NavLink>
         </ul>
         <div className="z-10  sm:z-0 flex flex-col  sm:flex-row  sm:gap-4 cursor-pointer">
-          <Link to={"/login"}>
+          <Link to={"/"}>
             <ButtonComponent
               onClick={null}
               className="bg-teal-600 z-10 sm:z-0 sm:bg-white py-2 sm:py-0 text-white border-gray-300 sm:border-[1px] sm:h-8   sm:hover:bg-teal-700 sm:hover:text-white w-full sm:w-20 flex justify-center items-center sm:text-gray-400 p-1 text-[13px] sm:text-[13px] sm:rounded-full"

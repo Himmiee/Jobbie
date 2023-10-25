@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 type RegisterType = {
   isAuthenticated: boolean;
   loading: boolean;
-  user: string | null;
+  user: any | null;
   name: string ;
   email: string ;
   password: string ;
@@ -28,7 +28,7 @@ const registerSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    registrationSuccess: (state, action: PayloadAction<string>) => {
+    registrationSuccess: (state, action: PayloadAction<any>) => {
       state.isAuthenticated = true;
       state.user = action.payload;
       state.loading = false;

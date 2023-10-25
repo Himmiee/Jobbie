@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 type LoginType = {
   isAuthenticated: boolean;
   loading: boolean;
-  user: string | null;
+  user: any | null;
   email: string;
   password: string;
   error: string | null;
@@ -26,7 +26,7 @@ const loginSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    loginSuccess: (state, action: PayloadAction<string>) => {
+    loginSuccess: (state, action: PayloadAction<any>) => {
       state.isAuthenticated = true;
       state.user = action.payload;
       state.loading = false;

@@ -2,7 +2,17 @@ import React, { useState, useEffect, useRef } from "react";
 import ButtonComponent from "../../components/button";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
-import { setEmail, setPassword, setName } from "../../store/registerslice";
+import {
+  setEmail,
+  setPassword,
+  setName,
+  registrationStart,
+  registrationFailure,
+  registrationSuccess,
+} from "../../store/registerslice";
+import { auth } from "../../firebase";
+import { Link } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const RegisterComponent = () => {
   const [nav, setNav] = useState<boolean>(false);
@@ -19,8 +29,19 @@ const RegisterComponent = () => {
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setEmail(e.target.value));
   };
-  const handleRegister = () => {
-    console.log(name, email);
+  const handleRegister = async () => {
+    dispatch(registrationStart());
+    try {
+      const userInfo = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userInfo.user;
+      dispatch(registrationSuccess(user));
+    } catch (error: any) {
+      dispatch(registrationFailure(error.message));
+    }
   };
   useEffect(() => {
     setNav(false);
@@ -90,9 +111,17 @@ const RegisterComponent = () => {
               </label>
             </div>
           </div>
-          <div className="flex mx-[18px] my-1 items-center justify-start gap-2">
-            <input type="checkbox" className="cursor-pointer" name="" id="" />
-            <p className="text-[12px] text-white font-thin ">Remember Me</p>
+          <div className="flex mx-[18px] my-1 items-center justify-between  gap-2">
+            <div className="flex gap-2">
+              {" "}
+              <input type="checkbox" className="cursor-pointer" name="" id="" />
+              <p className="text-[12px] text-white font-thin ">Remember Me</p>
+            </div>
+            <div>
+              <Link to={"/"}>
+                <p className=" italic text-[10px]">SignIn?</p>
+              </Link>
+            </div>
           </div>
           <div>
             <ButtonComponent

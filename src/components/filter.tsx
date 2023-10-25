@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { JobProto, JobType } from "../helpers/dumps";
-import { useAppSelector } from "../store/hooks";
+import { useAppSelector, useAppDispatch } from "../store/hooks";
+import { getData } from "../store/jobSlice";
 
 const FilterComponent = ({
   data,
   selectedCategory,
   setSelectedCategory,
   setData,
+  defaultData,
 }: any) => {
   const job = useAppSelector((state: any) => state.job.data);
   const [def, setDef] = useState(job);
+  const [dispatchState, setDispatchState] = useState<boolean>(false);
   const [active, setActive] = useState<string | null>("");
-  const categories = data
+  const dispatch = useAppDispatch();
+  const categories = job
     .map((item: any) => item.categories.map((cat: any) => cat.name))
     .flat();
 
@@ -20,12 +24,15 @@ const FilterComponent = ({
     filterContents(category);
   };
 
+  useEffect(() => {
+    setDef(job);
+  }, []);
   const getDistinctCategoryCounts = (
     data: JobType[]
   ): { [key: string]: number } => {
     const categoryCounts: { [key: string]: number } = {};
 
-    data.forEach((item) => {
+    job.forEach((item: any) => {
       item.categories.forEach((cat: any) => {
         const categoryName = cat.name;
         categoryCounts[categoryName] = (categoryCounts[categoryName] || 0) + 1;
@@ -40,26 +47,31 @@ const FilterComponent = ({
     );
   };
   const uniqueCategories = getUniqueCategories(categories);
-  const categoryCounts = getDistinctCategoryCounts(data);
+  const categoryCounts = getDistinctCategoryCounts(job);
 
   const filterContents = (category: string) => {
-    const filteredData = data.filter((item: any) =>
+    const filteredData = job.filter((item: any) =>
       item.categories.some((cat: any) => cat.name === category)
     );
-    setData(filteredData);
+
+    dispatch(getData(filteredData));
   };
 
+  const handleGetData = () => {
+    // if (!dispatchState) {
+      dispatch(getData(defaultData));
+      // setDispatchState(true);
+    // }
+    setActive("all");
+  };
 
   return (
-    <div className="filter-component flex gap-2 ">
+    <div className="filter-component flex gap-2 w-full ">
       <p
         className="w-fit h-8 rounded-full text-[12px] sm:text-[10px] lg:text-[12px] focus:active:bg-blue-800 text-gray-600 border-gray-200 border-[1px] px-3 hover:bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]"
-        onClick={() => {
-          setData(def);
-          setActive("all");
-        }}
+        onClick={handleGetData}
       >
-        All({def.length})
+        All({defaultData?.length})
       </p>
       {uniqueCategories.map((category: any, index: number) => (
         <p
@@ -70,11 +82,11 @@ const FilterComponent = ({
           }}
           className={
             active === category
-              ? "w-48 flex justify-center items-center sm:w-48 h-8 rounded-full text-[12px] focus:active:bg-teal-700 sm:text-[10px] lg:text-[12px] text-white border-gray-200 border-[1px] px-3 bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]"
-              : "w-48 flex justify-center sm:w-48 h-8 rounded-full text-[12px] focus:active:bg-teal-700 sm:text-[10px] lg:text-[12px] text-gray-600 border-gray-200 border-[1px] px-3 hover:bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]"
+              ? "w-48 flex justify-center items-center sm:max-w-full h-8 rounded-full text-[12px] focus:active:bg-teal-700 sm:text-[10px] lg:text-[12px] text-white border-gray-200 border-[1px] px-3 bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]"
+              : "w-48 flex justify-center sm:max-w-full h-8 rounded-full text-[12px] focus:active:bg-teal-700 sm:text-[10px] lg:text-[12px] text-gray-600 border-gray-200 border-[1px] px-3 hover:bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]"
           }
         >
-          {category} ({categoryCounts[category]})
+          {category.slice(0,22)} ({categoryCounts[category]})
         </p>
       ))}
     </div>

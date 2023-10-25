@@ -2,7 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import ButtonComponent from "../../components/button";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { setEmail, setPassword } from "../../store/loginslice";
+import {
+  loginStart,
+  setEmail,
+  setPassword,
+  loginFailure,
+  loginSuccess,
+} from "../../store/loginslice";
+import { auth } from "../../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { Link } from "react-router-dom";
 
 const LoginComponent = () => {
   const [nav, setNav] = useState<boolean>(false);
@@ -16,8 +25,15 @@ const LoginComponent = () => {
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setPassword(e.target.value));
   };
-  const handleLogin = () => {
-    console.log(email);
+  const handleLogin = async () => {
+    dispatch(loginStart());
+    try {
+      const userInfo = await signInWithEmailAndPassword(auth, email, password);
+      const user = userInfo.user;
+      dispatch(loginSuccess(user));
+    } catch (error: any) {
+      dispatch(loginFailure(error.message));
+    }
   };
 
   useEffect(() => {
@@ -76,10 +92,20 @@ const LoginComponent = () => {
               </label>
             </div>
           </div>
-          <div className="flex mx-[18px] my-1 items-center justify-start gap-2">
-            <input type="checkbox" className="cursor-pointer" name="" id="" />
-            <p className="text-[12px] text-white font-thin ">Remember Me</p>
+          <div className="flex mx-[18px] my-1 items-center justify-between  gap-2">
+            <div className="flex gap-2">
+              {" "}
+              <input type="checkbox" className="cursor-pointer" name="" id="" />
+              <p className="text-[12px] text-white font-thin ">Remember Me</p>
+            </div>
+            <div>
+              {" "}
+              <Link to={"/register"}>
+                <p className=" italic text-[10px]">SignUp?</p>
+              </Link>
+            </div>
           </div>
+
           <div>
             <ButtonComponent
               onClick={handleLogin}

@@ -29,38 +29,33 @@ export const CardComponent = ({
   setPopup,
   filterCompany,
 }: CardType) => {
-  const [bookmarkState, setBookmarkState] = useState<boolean>(false);
   const bookmarks = useAppSelector(selectBookmarks);
   const dispatch = useAppDispatch();
 
   const isBookmarked = bookmarks.some(
     (bookmark: any) => bookmark.id === data.id
   );
-  const getBookmarks = bookmarks.map((bookmark: any) => {
-    if (isBookmarked) {
-      return bookmark.name;
-    } else {
-      return " ";
-    }
-  });
+  const [bookmarkState, setBookmarkState] = useState<boolean>(false);
 
-
-
-  const handleRemoveClick = () => {
-    dispatch(removeBookmark(data.id));
-    console.log(bookmarks);
+  const handleRemoveClick = (index: number) => {
+    return dispatch(removeBookmark(index));
   };
 
   const handleAddBookmark = () => {
-    if (!isBookmarked) {
-      dispatch(addBookmark(data));
-      console.log(bookmarks);
+    return dispatch(addBookmark(data));
+  };
+
+  const handleBookmarkToggle = () => {
+    if (isBookmarked) {
+      handleRemoveClick(index);
+    } else {
+      handleAddBookmark();
     }
   };
 
   return (
     <section>
-      <div className="border-gray-100 border-[1px] sm:h-[120px]  grid items-center lg:h-fit cursor-pointer rounded-lg my-2 sm:my-0 p-3">
+      <div className="border-gray-100 border-[1px] sm:h-[120px]  grid items-center lg:h-fit cursor-pointer rounded-lg  sm:my-0 p-4">
         <div className="flex  gap-3 justify-between px-1 sm:px-0 " key={index}>
           {" "}
           <div
@@ -75,7 +70,7 @@ export const CardComponent = ({
               </p>
             </div>
             <div>
-              <p className="text-sm font-bold"> {data.company.name}</p>
+              <p className="text-sm lg:text- font-bold"> {data.company.name}</p>
               <p className="text-[10px] text-gray-400">
                 {" "}
                 {data.name.slice(0, 18)}
@@ -93,17 +88,18 @@ export const CardComponent = ({
           </div>
           <div>
             <div
-              onClick={() => {
-                setBookmarkState(!bookmarkState);
-              }}
+              onClick={handleBookmarkToggle}
               className="flex ml-auto w-fit h-fit justify-end"
             >
-              {bookmarkState ? (
+              {isBookmarked ? (
                 <div onClick={handleAddBookmark} className="text-teal-700">
                   <BsBookmarkFill />
                 </div>
               ) : (
-                <div onClick={handleRemoveClick} className="text-teal-700">
+                <div
+                  onClick={() => handleRemoveClick(index)}
+                  className="text-teal-700"
+                >
                   <BsBookmark />
                 </div>
               )}

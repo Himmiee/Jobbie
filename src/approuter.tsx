@@ -11,10 +11,10 @@ const AppRouter = () => {
   return (
     <section>
       <Routes>
-        <Route path="/" element={<HomeComponent />} />
+        <Route path="/home" element={<HomeComponent />} />
         <Route path="/job" element={<JobComponent />} />
         <Route path="/feature" element={<FeatureComponent />} />
-        <Route path="/login" element={<LoginComponent />} />
+        <Route path="/" element={<LoginComponent />} />
         <Route path="/register" element={<RegisterComponent />} />
         <Route path="/bookmark" element={<BkMark />} />
       </Routes>

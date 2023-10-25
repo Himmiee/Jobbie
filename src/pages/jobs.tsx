@@ -4,13 +4,15 @@ import { InputHeader } from "../components/inputComponent";
 import { CardComponent } from "../components/card";
 import { JobProto } from "../helpers/dumps";
 import { fetchData } from "../store/jobSlice";
-import { JobType, RefType } from "../helpers/dumps";
+import { JobType } from "../helpers/dumps";
 import PGComponent from "../components/pagination";
 import { PopupModal } from "../components/modals";
 import FilterComponent from "../components/filter";
+import LoadingComponent from "../components/loader";
 import { InfoModal } from "../components/modals";
+import { getData } from "../store/jobSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import FooterComponent from "../components/footer";
+import { setInitialData } from "../store/initialDataSlice";
 
 const JobComponent = () => {
   const [content, setContent] = useState<any>([]);
@@ -19,25 +21,23 @@ const JobComponent = () => {
   const [filter, setFilter] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [postPerPage, setPostPerPage] = useState<number>(16);
+  const [dispatchState, setDispatchState] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
-  const [result, setResult] = useState([]);
+  const [result, setResult] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const job = useAppSelector((state: any) => state.job.data);
+  const filteredData = useAppSelector((state) => state.job.filteredData);
+  const defaultData = useAppSelector((state) => state.initialData.data);
   const [data, setData] = useState<JobType[]>(job);
-  const currentPost = data.slice(firstPostIndex, lastPostIndex);
+  const currentPost = job.slice(firstPostIndex, lastPostIndex);
+  const dispatch = useAppDispatch();
 
-  const filterItems = (cart: any) => {
-    console.log(data);
-    const newItems = job.filter((updated: JobType) => {
-      return updated.categories.map((itm) => itm.name) === cart;
-    });
-
-    setData(newItems);
-    console.log(newItems);
-    console.log(cart);
+  const setInitialJobData = (data: JobType) => {
+    dispatch(setInitialData(data));
   };
+
   const filterCompany = (companyName: string) => {
     const newItems = job.filter(
       (item: JobType) => item.company.name === companyName
@@ -45,14 +45,22 @@ const JobComponent = () => {
     setResult(newItems);
   };
 
-  const dispatch = useAppDispatch();
+  const getJobs = async () => {
+    setIsLoading(true);
+    await dispatch(fetchData())
+      .then((response) => {
+        setInitialJobData(response.payload);
+
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  };
+
   useEffect(() => {
-    // setIsLoading(true);
-    dispatch(fetchData()).then(() => {
-      setData(job);
-      setIsLoading(false);
-    });
-  }, [filter, dispatch]);
+    getJobs();
+  }, []);
 
   const updateContent = (info: any) => {
     setContent([info]);
@@ -73,6 +81,7 @@ const JobComponent = () => {
                   data={info}
                   setData={setData}
                   key={index}
+                  index={index}
                   handleClick={() => {
                     setPopup(false);
                   }}
@@ -83,9 +92,9 @@ const JobComponent = () => {
             })}
           </div>
         )}
-        <div className=""> {/* <PopupModal /> */}</div>
+
         <InputHeader
-          data={data}
+          data={job}
           setFilter={setFilter}
           handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             e.preventDefault();
@@ -93,83 +102,84 @@ const JobComponent = () => {
           }}
         />
         <div className="filters my-8 overflow-y-hidden flex gap-4 overflow-x-auto tbl">
-          <FilterComponent
-            setData={setData}
-            filterItems={filterItems}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-            data={data}
-          />
+          <div>
+            {" "}
+            <FilterComponent
+              setData={setData}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              data={filteredData}
+              defaultData={defaultData}
+            />
+          </div>
         </div>
 
-        <div className="h-[450px] sm:h-[500px] overflow-y-auto tbl">
-          <div className="">
-            {!data.length ? (
-              <div className="h-fit item-center w-full">
-                {" "}
-                <img
-                  src="nothing.png"
-                  className="w-[40%] justify-center m-auto"
-                  alt=""
-                />
-                <div className="flex justify-center text-teal-700 m-auto">
-                  Nothing here yet...
-                </div>{" "}
+        <div className="h-[65vh] sm:h-full  overflow-y-auto tbl">
+          {search && !job.some((item: any) => item.name.includes(search)) ? (
+            <div className="h-fit my-6 justify-center item-center w-full">
+              <img
+                src="nothing.png"
+                className="w-[40%] justify-center m-auto"
+                alt=""
+              />
+              <div className="flex justify-center text-teal-700 m-auto">
+                Oops, No Results Found!
               </div>
-            ) : (
-              ""
-            )}
-            {search ? (
-              <div className="grid sm:grid-cols-3  lg:grid-cols-4 gap-4">
-                {data
-                  ?.filter((item) => {
-                    return search === " " ? item : item.name.includes(search);
-                  })
-                  ?.map((item, index) => {
-                    return (
-                      <div
-                        key={index}
-                        onClick={() => {
-                          updateContent(item);
-                          // setPopup(true);
-                        }}
-                      >
-                        <CardComponent
-                          data={item}
-                          setPopup={setPopup}
-                          index={index}
-                          filterCompany={filterCompany}
-                        />
-                      </div>
-                    );
-                  })}
-              </div>
-            ) : (
-              <div className="grid overflow-scroll tbl sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                {currentPost?.map((item: any, index: number) => (
-                  <div
-                    key={index}
-                    onClick={() => {
-                      updateContent(item);
-                    }}
-                  >
-                    <CardComponent
-                      data={item}
-                      setPopup={setPopup}
-                      index={index}
-                      filterCompany={filterCompany}
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className="">
+              {isLoading ? <LoadingComponent /> : ""}
+              {search ? (
+                <div className="grid  sm:grid-cols-3  lg:grid-cols-4 gap-4">
+                  {job
+                    ?.filter((item: any) => {
+                      return search === " " ? item : item.name.includes(search);
+                    })
+                    ?.map((item: any, index: number) => {
+                      return (
+                        <div
+                          key={index}
+                          onClick={() => {
+                            updateContent(item);
+                          }}
+                        >
+                          <CardComponent
+                            data={item}
+                            setPopup={setPopup}
+                            index={index}
+                            filterCompany={filterCompany}
+                          />
+                        </div>
+                      );
+                    })}
+                </div>
+              ) : (
+                <div className="grid overflow-y-scroll tbl sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {currentPost?.map((item: any, index: number) => (
+                    <div
+                      key={index}
+                      onClick={() => {
+                        updateContent(item);
+                      }}
+                    >
+                      <CardComponent
+                        data={item}
+                        setPopup={setPopup}
+                        index={index}
+                        filterCompany={filterCompany}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
-      <div className="mx-8 sm:mx-24">
+      <div className="  sm:h-16 fixed bottom-0 w-full flex justify-center sm:mt-6 ">
         <PGComponent
-          totalPosts={data?.length}
+          totalPosts={job?.length}
           postPerPage={postPerPage}
           setCurrentPage={setCurrentPage}
         />

@@ -15,7 +15,7 @@ const FeatureComponent = () => {
       <div>
         <NavbarComponent />
       </div>
-      <div className="sm:mx-28 tbl mx-8 sm:flex justify-between mt-24 sm:mt-16 h-[450px] items-center">
+      <div className="sm:mx-28 tbl  mx-8 sm:flex justify-between mt-24 sm:mt-16 h-[450px] items-center">
         <div className="left sm:w-1/2">
           <div className="flex justify-center flex-col items-center sm:items-start">
             <motion.h1 className="lg:text-[48px] text-[22px] font-bold sm:text-[28px] bg-gradient-to-r from-teal-700 text-center sm:text-start text-transparent to-blue-950 bg-clip-text">
@@ -50,7 +50,7 @@ const FeatureComponent = () => {
         >
           The features
         </motion.h1>
-        <p className="flex justify-center mt-2 mb-6 text-center text-[11px] sm:text-[12px] text-gray-400">
+        <p className="flex justify-center mt-2 mx-6 sm:mx-0 mb-6 text-center text-[11px] sm:text-[12px] text-gray-400">
           A short list of dem features, what we do do, wahalurddddddd Lorem
           ipsum dolor sit, amet consectetur adipisicing elit.
         </p>
@@ -146,7 +146,7 @@ const FeatureComponent = () => {
           More on the products
         </h1>
         <div className="sm:flex justify-between gap-3 ">
-          <div className="border-gray-100 border-[1px] my-2 sm:my-0 sm:w-48 w-full h-56 flex flex-col items-center justify-center">
+          <div className="border-gray-100 border-[1px] my-2 p-2 sm:my-0 sm:w-56 w-full h-56 flex flex-col items-center justify-center">
             <div className="w-12 h-12 bg-gray-100 rounded-full flex justify-center items-center">
               <IoMdFlame />
             </div>
@@ -156,7 +156,7 @@ const FeatureComponent = () => {
               officia, esse aliquid?
             </p>
           </div>
-          <div className="border-gray-100 border-[1px] my-2 sm:my-0 sm:w-48 w-full h-56 flex flex-col items-center justify-center">
+          <div className="border-gray-100 border-[1px] my-2 sm:my-0 p-2 sm:w-56 w-full h-56 flex flex-col items-center justify-center">
             <div className="w-12 h-12 bg-gray-100 rounded-full flex justify-center items-center">
               <IoMdFlame />
             </div>
@@ -166,7 +166,7 @@ const FeatureComponent = () => {
               officia, esse aliquid?
             </p>
           </div>
-          <div className="border-gray-100 border-[1px] my-2 sm:my-0 sm:w-48 w-full h-56 flex flex-col items-center justify-center">
+          <div className="border-gray-100 border-[1px] my-2 sm:my-0 p-2 sm:w-56 w-full h-56 flex flex-col items-center justify-center">
             <div className="w-12 h-12 bg-gray-100 rounded-full flex justify-center items-center">
               <IoMdFlame />
             </div>
@@ -176,7 +176,7 @@ const FeatureComponent = () => {
               officia, esse aliquid?
             </p>
           </div>
-          <div className="border-gray-100 border-[1px] my-2 sm:my-0 sm:w-48 w-full h-56 flex flex-col items-center justify-center">
+          <div className="border-gray-100 border-[1px] my-2 sm:my-0 sm:w-56 p-2 w-full h-56 flex flex-col items-center justify-center">
             <div className="w-12 h-12 bg-gray-100 rounded-full flex justify-center items-center">
               <IoMdFlame />
             </div>
