@@ -184,7 +184,7 @@ export const InfoModal = ({
             </div>
 
             <div className="sm:w-1/3 max-h-fit sm:rounded-br-md bg-gray-100">
-              <div className=" w-full p-2 px-3 h-[120px]  text-[14px] border-gray-200 border-b-[1px]">
+              <div className=" w-full p-2 px-3 h-[110px]  text-[14px] border-gray-200 border-b-[1px]">
                 <div className="flex gap-1">
                   <div className="bg-black text-black w-8 flex justify-center items-center h-8 rounded-full">
                     <p className="w-6 h-6 flex justify-center italic bg-teal-50 text-[12px] font-bold items-center rounded-full">
