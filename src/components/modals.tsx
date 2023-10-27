@@ -1,19 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { BsX } from "react-icons/bs";
 import { BookmarkComponent } from "./bookmark";
-import { BsMap, BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import {
+  BsMap,
+  BsBookmark,
+  BsBookmarkFill,
+  BsInfoCircle,
+} from "react-icons/bs";
 import ButtonComponent from "./button";
+import { auth } from "../firebase";
 import ReadMore from "./readmore";
+
 import { useAppSelector } from "../store/hooks";
 import { CategoryType, JobProto, JobType } from "../helpers/dumps";
 import DateDifference from "./date";
-
-export const PopupModal = () => {
+import { HoverTool } from "./hoverTool";
+type MessageType = {
+  info: string;
+  setCloseState: any;
+  closeState: any;
+};
+export const PopupModal = ({
+  info,
+  setCloseState,
+  closeState,
+}: MessageType) => {
+  useEffect(() => {
+    if (closeState) {
+      setTimeout(() => {
+        setCloseState(false);
+      }, 3000);
+    }
+  }, []);
   return (
     <section className="fixed z-10 inset-0 flex justify-end p-3">
-      <div className=" text-black bg-white w-[224px] h-10   border-teal-700 border-r-2 border-l-2 content-center flex justify-center text-sm rounded-md p-2 items-center gap-4">
-        <div className=" ">Popup works duhh</div>
-        <div className="cursor-pointer">
+      <div className=" text-black bg-teal-50 max-w-full h-10   border-teal-700 border-r-2 border-l-2 content-center flex justify-center text-sm rounded-md p-2 items-center gap-4">
+        <div className=" text-sm font-bold">{info}</div>
+        <div onClick={() => setCloseState(false)} className="cursor-pointer">
           <BsX size={24} />
         </div>
       </div>
@@ -42,6 +65,9 @@ export const InfoModal = ({
   useEffect(() => {
     filterCompany(data.company.name);
   }, []);
+  const userInfo = auth.currentUser?.email;
+  const authState = localStorage.getItem("is_authenticated");
+  const isAuthenticated = authState ? JSON.parse(authState) : false;
   return (
     <section className="fixed z-10 backdrop-blur-sm inset-0 sm:flex bg-black bg-opacity-20 items-center h-screen justify-center p-3">
       <div
@@ -86,24 +112,34 @@ export const InfoModal = ({
                 </div>
               </div>
               <div className="flex gap-4 w-full justify-between sm:justify-start text-[12px] my-2">
-                <ButtonComponent
-                  className="h-8 sm:h-6 w-40 sm:w-36 text-[12px] font-bold  flex justify-center items-center hover:bg-teal-600 sm:hover:bg-teal-700 hover:text-white rounded-md sm:bg-teal-50 sm:text-teal-700 border-teal-700 border-[1px]
+                {isAuthenticated ? (
+                  <a href={data.refs.landing_page} target="_blank">
+                    <ButtonComponent
+                      className="h-8 sm:h-6 w-80  text-[12px] font-bold  flex justify-center items-center hover:bg-teal-600 sm:hover:bg-teal-700 hover:text-white rounded-md sm:bg-teal-50 sm:text-teal-700 border-teal-700 border-[1px]
                    text-teal-50  bg-teal-700 p-4"
-                  title="Apply"
-                  icon={null}
-                  onClick={null}
-                />
-                <ButtonComponent
-                  className="h-8 sm:h-6 w-40 sm:w-36 text-[12px] font-bold flex hover:bg-gray-500 hover:text-white justify-center items-center rounded-md border-[1px] border-gray-300 text-gray-500 p-4"
-                  title="Visit"
-                  icon={null}
-                  onClick={null}
-                />
+                      title="Apply"
+                      icon={null}
+                      onClick={null}
+                    />
+                  </a>
+                ) : (
+                  <a href="#" className="flex gap-3 item-center">
+                    <ButtonComponent
+                      className="h-8 sm:h-6 w-80 text-[12px] font-bold flex justify-center items-center hover:bg-teal-600  rounded-md sm:bg-gray-100 sm:text-gray-600 border-gray-600 border-[1px]  p-4"
+                      title="Apply"
+                      icon={null}
+                      onClick={null}
+                    />
+                    <HoverTool text="Login to apply">
+                      <BsInfoCircle size={18} className="mt-2" />
+                    </HoverTool>
+                  </a>
+                )}
               </div>
               <div className="mt-4 mb-2">
                 <div className="">
                   <h3 className="text-[14px] my-2 bg-gradient-to-r from-teal-700 to-blue-950 bg-clip-text">
-                    Other Jobs from {data.company.name}...
+                    Jobs from {data.company.name}...
                   </h3>
                 </div>
                 <div className="w-full h-48 sm:h-[300px]  overflow-y-auto tbl">
@@ -116,19 +152,28 @@ export const InfoModal = ({
                             {data.categories.map((info: any) => info.name)}
                           </p>
                         </div>
-                        <div className="flex gap-2  justify-center sm:justify-start text-[12px] my-2">
-                          <ButtonComponent
-                            onClick={null}
-                            className="h-6 w-16 text-[10px] font-bold  flex justify-center items-center hover:bg-gray-700 hover:text-white rounded-md text-white bg-black p-2"
-                            title="Apply"
-                            icon={null}
-                          />
-                          <ButtonComponent
-                            onClick={null}
-                            className="h-6 w-16 text-[10px] font-bold flex hover:bg-gray-500 hover:text-white justify-center items-center rounded-md border-[1px] border-gray-300 text-gray-500 p-2"
-                            title="Visit"
-                            icon={null}
-                          />
+                        <div className="flex gap-2 items-center  justify-center sm:justify-start text-[12px] my-2">
+                          {isAuthenticated ? (
+                            <>
+                              {" "}
+                              <a href={data.refs.landing_page} target="_blank">
+                                <ButtonComponent
+                                  onClick={isAuthenticated ? null : null}
+                                  className="h-6 w-16 text-[10px] font-bold  flex justify-center items-center hover:bg-gray-700 hover:text-white rounded-md text-white bg-black p-2"
+                                  title="Apply"
+                                  icon={null}
+                                />
+                              </a>
+                              <a>
+                                <ButtonComponent
+                                  onClick={null}
+                                  className="h-6 w-16 text-[10px] font-bold flex   justify-center items-center rounded-md border-[1px] border-gray-300 text-gray-500 p-2"
+                                  title="Visit"
+                                  icon={null}
+                                />
+                              </a>
+                            </>
+                          ) : null}
                         </div>
                       </div>
                     );
@@ -139,11 +184,11 @@ export const InfoModal = ({
             </div>
 
             <div className="sm:w-1/3 max-h-fit sm:rounded-br-md bg-gray-100">
-              <div className=" w-full p-2 px-3 h-[100px]  text-[14px] border-gray-200 border-b-[1px]">
+              <div className=" w-full p-2 px-3 h-[120px]  text-[14px] border-gray-200 border-b-[1px]">
                 <div className="flex gap-1">
                   <div className="bg-black text-black w-8 flex justify-center items-center h-8 rounded-full">
                     <p className="w-6 h-6 flex justify-center italic bg-teal-50 text-[12px] font-bold items-center rounded-full">
-                      {data.company.name.charAt(0)}
+                      {isAuthenticated ? userInfo?.charAt(0) : "G"}
                     </p>
                   </div>
                   <div className="bg-black text-black w-8 flex justify-center items-center h-8 rounded-full">
@@ -156,7 +201,7 @@ export const InfoModal = ({
                   <p className="text-[12px] mt-2 mb-1 font-bold">People :-</p>
                   <div className="flex gap-2">
                     <p className="text-[10px] italic text-gray-400">
-                      @you-name
+                      @you-{isAuthenticated ? userInfo : "Guest"}
                     </p>
                     <p className="text-[10px]  italic text-gray-400">
                       @company-{data.company.name}
@@ -174,7 +219,7 @@ export const InfoModal = ({
                   </div>
                 </div>
               </div>
-              <div className=" w-full p-2 h-28 text-[14px] px-3 border-gray-200 border-b-[1px]">
+              <div className=" w-full p-2 h-32 text-[14px] px-3 border-gray-200 border-b-[1px]">
                 <div>
                   <p className="text-[12px] my-2 font-bold"> About :-</p>
                   <div className="flex gap-2 my-1">
@@ -220,36 +265,12 @@ export const InfoModal = ({
               </div>
               <div className=" w-full h-full px-3 p-2 text-[14px] ">
                 <div>
-                  <p className="text-[12px] my-2 font-bold">Bookmarks:-</p>
+                  {/* <p className="text-[12px] my-2 font-bold">Bookmarks:-</p> */}
                   <div>{/* <BookmarkComponent data={}/> */}</div>
                 </div>
               </div>
             </div>
           </div>
-          {/* <div className="flex gap-3 justify-between px-1 sm:px-0 "> */}{" "}
-          {/* <div>
-              <div
-                onClick={() => {
-                  setBookmarkState(!bookmarkState);
-                  console.log(bookmarkState);
-                }}
-                className="flex justify-end"
-              >
-                {bookmarkState ? (
-                  <div className="text-teal-700">
-                    <BsBookmarkFill size={20} />
-                  </div>
-                ) : (
-                  <div className="text-teal-700">
-                    <BsBookmark size={20} />
-                  </div>
-                )}
-              </div>
-              <p className="sm:hidden lg:flex text-[14px] mt-11">
-                {data.publication_date.slice(2, 10)}
-              </p>
-            </div> */}
-          {/* </div> */}
         </div>
       </div>
     </section>

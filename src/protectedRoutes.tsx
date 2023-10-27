@@ -2,9 +2,8 @@ import {  useAppSelector } from "./store/hooks";
 import { useLocation, Outlet, Navigate } from "react-router-dom";
 
 const ProtectedRoutes = () => {
-  const isAuthenticated = useAppSelector(
-    (state) => state.login.isAuthenticated
-  );
+  const auth = localStorage.getItem("is_authenticated");
+  const isAuthenticated = auth ? JSON.parse(auth) : false;
   const location = useLocation();
 
   return isAuthenticated ? (

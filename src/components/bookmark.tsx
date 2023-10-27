@@ -12,13 +12,14 @@ export const BookmarkComponent = () => {
   const [result, setResult] = useState<any>([]);
   const dispatch = useAppDispatch();
   const job = useAppSelector((state) => state.job.data);
+  const [bookmarkState, setBookmarkState] = useState<boolean>(false);
   const bookmarkedData = useAppSelector((state) => state.bookmarks.bookmarks);
-  const filterCompany = (companyName: string) => {
-    const newItems = job.filter(
-      (item: JobType) => item.company.name === companyName
-    );
-    setResult(newItems);
-  };
+  // const filterCompany = (companyName: string) => {
+  //   const newItems = job.filter(
+  //     (item: JobType) => item.company.name === companyName
+  //   );
+  //   setResult(newItems);
+  // };
 
   const updateContent = (info: any) => {
     setContent([info]);
@@ -50,7 +51,8 @@ export const BookmarkComponent = () => {
                 data={item}
                 setPopup={setPopup}
                 index={index}
-                filterCompany={filterCompany}
+                setBookmarkState={setBookmarkState}
+                // filterCompany={filterCompany}
               />
             </div>
           ))}

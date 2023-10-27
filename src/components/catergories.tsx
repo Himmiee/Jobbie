@@ -3,26 +3,24 @@ import { BsSearch, BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { Link } from "react-router-dom";
 import { getData } from "../store/jobSlice";
-import { FAQs, FAQ } from "../helpers/dumps";
+import { FAQs, FAQ, JobType } from "../helpers/dumps";
 import { motion } from "framer-motion";
 import ButtonComponent from "./button";
 
-export const CategoriesComponent = ({ info }: any) => {
+export const CategoriesComponent = () => {
   const [data, setData] = useState(FAQs);
   const [dispatchState, setDispatchState] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
   const [active, setActive] = useState<string | null>("");
   const dispatch = useAppDispatch();
-  const job = useAppSelector((state: any) => state.job.data);
+  const job = useAppSelector((state) => state.job.data);
 
   const filterContents = (category: string) => {
-    // if (!dispatchState) {
-    const filteredData = job.filter((item: any) =>
-      item.categories.some((cat: any) => cat.name === category)
+    const filteredData = job.filter((item: JobType) =>
+      item.categories.some((cat) => cat.name === category)
     );
-    // setDispatchState(true);
+
     return dispatch(getData(filteredData));
-    // }
   };
   return (
     <>

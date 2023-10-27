@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { BsArrowLeft, BsArrowRight, BsEye, BsEyeSlash } from "react-icons/bs";
 import ButtonComponent from "../../components/button";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
@@ -9,28 +9,42 @@ import {
   loginFailure,
   loginSuccess,
 } from "../../store/loginslice";
+import { PopupModal } from "../../components/modals";
 import { auth } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginComponent = () => {
   const [nav, setNav] = useState<boolean>(false);
   const inputRef = useRef<any>(null);
   const [eyeActive, setEyeActive] = useState<boolean>(false);
+  const [popupState, setPopupState] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const isAuthenticated = useAppSelector(
+    (state) => state.register.isAuthenticated
+  );
+  const popupMessage = useAppSelector((state) => state.register.popupMessage);
+  const isLoading = useAppSelector((state) => state.login.loading);
   const { email, password } = useAppSelector((state) => state.login);
+  const [loadOnce, setLoadOnce] = useState<boolean>(true);
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setEmail(e.target.value));
   };
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setPassword(e.target.value));
   };
-  const handleLogin = async () => {
+  const handleLogin = async (email: string, password: string) => {
     dispatch(loginStart());
     try {
       const userInfo = await signInWithEmailAndPassword(auth, email, password);
       const user = userInfo.user;
-      dispatch(loginSuccess(user));
+      dispatch(loginSuccess(user.providerData));
+      console.log(auth.currentUser?.email);
+      dispatch(setEmail(""));
+      dispatch(setPassword(""));
+      localStorage.setItem("is_authenticated", JSON.stringify(true));
+      navigate("/");
     } catch (error: any) {
       dispatch(loginFailure(error.message));
     }
@@ -38,9 +52,25 @@ const LoginComponent = () => {
 
   useEffect(() => {
     setNav(false);
+    // if (isAuthenticated && loadOnce) {
+    //   setLoadOnce(false);
+    //   setPopupState(true);
+    //   setTimeout(() => {
+    //     setPopupState(false);
+    //   }, 3000);
+    // }
   }, []);
   return (
     <section className="bg-gradient-to-t bg-opacity-70 from-teal-700 flex items-center justify-center flex-col to-blue-950 w-full h-[100vh]">
+      {popupState ? (
+        <PopupModal
+          setCloseState={setPopupState}
+          closeState={popupState}
+          info={popupMessage}
+        />
+      ) : (
+        ""
+      )}
       <h3 className="text-teal-700 hidden sm:flex italic absolute top-6 left-12 font-bold text-2xl">
         Jobber.
       </h3>
@@ -54,7 +84,7 @@ const LoginComponent = () => {
               User Login.
             </h3>
           </div>
-          <div className="w-full mt-3">
+          <form className="w-full mt-3">
             <div className="flex justify-center">
               <label htmlFor="" className="text-white">
                 <p className="text-[12px] my-1">Username:</p>
@@ -91,7 +121,7 @@ const LoginComponent = () => {
                 </div>
               </label>
             </div>
-          </div>
+          </form>
           <div className="flex mx-[18px] my-1 items-center justify-between  gap-2">
             <div className="flex gap-2">
               {" "}
@@ -108,11 +138,17 @@ const LoginComponent = () => {
 
           <div>
             <ButtonComponent
-              onClick={handleLogin}
+              onClick={() => {
+                handleLogin(email, password);
+              }}
               className="bg-teal-700 text-sm w-64 h-7 my-2 cursor-pointer hover:bg-teal-900 flex justify-center items-center text-white rounded-lg "
-              title="SignIn"
+              title={isLoading ? "Signing In..." : "SignIn"}
               icon={null}
             />
+          </div>
+          <div className="flex font-bold underline cursor-pointer text-[10px] justify-center items-center text-teal-700 gap-1">
+            <p onClick={() => navigate("/")}>Go Home </p>
+            {/* <p ><BsArrowRight /></p> */}
           </div>
         </div>
       </div>

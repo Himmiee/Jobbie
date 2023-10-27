@@ -4,9 +4,10 @@ type RegisterType = {
   isAuthenticated: boolean;
   loading: boolean;
   user: any | null;
-  name: string ;
-  email: string ;
-  password: string ;
+  name: string;
+  email: string;
+  popupMessage: string;
+  password: string;
   error: string | null;
 };
 
@@ -17,6 +18,7 @@ const initialState: RegisterType = {
   name: "",
   email: "",
   password: "",
+  popupMessage: "",
   error: null,
 };
 
@@ -30,14 +32,16 @@ const registerSlice = createSlice({
     },
     registrationSuccess: (state, action: PayloadAction<any>) => {
       state.isAuthenticated = true;
-      state.user = action.payload;
+      state.user = action.payload
       state.loading = false;
+      state.popupMessage = "Registration Successful";
       state.error = null;
     },
     registrationFailure: (state, action: PayloadAction<string>) => {
       state.isAuthenticated = false;
       state.user = null;
       state.loading = false;
+      state.popupMessage = action.payload;
       state.error = action.payload;
     },
     setName: (state, action: PayloadAction<string>) => {

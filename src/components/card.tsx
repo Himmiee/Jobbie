@@ -21,35 +21,54 @@ export type CardType = {
   data: JobType;
   index: number;
   setPopup: any;
-  filterCompany: any;
+  setBookmarkState: any;
+  // filterCompany: any;
 };
 export const CardComponent = ({
   data,
   index,
   setPopup,
-  filterCompany,
-}: CardType) => {
+  setBookmarkState,
+}: // filterCompany,
+CardType) => {
   const bookmarks = useAppSelector(selectBookmarks);
   const dispatch = useAppDispatch();
+  const [bkmPopup, setBkmPopup] = useState<boolean>(false);
 
   const isBookmarked = bookmarks.some(
     (bookmark: any) => bookmark.id === data.id
   );
-  const [bookmarkState, setBookmarkState] = useState<boolean>(false);
+  // const [bookmarkState, setBookmarkState] = useState<boolean>(false);
 
   const handleRemoveClick = (index: number) => {
-    return dispatch(removeBookmark(index));
+    try {
+      dispatch(removeBookmark(index));
+      setBookmarkState(true);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleAddBookmark = () => {
-    return dispatch(addBookmark(data));
+    try {
+      dispatch(addBookmark(data));
+      setBookmarkState(true);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleBookmarkToggle = () => {
-    if (isBookmarked) {
-      handleRemoveClick(index);
-    } else {
-      handleAddBookmark();
+    try {
+      if (isBookmarked) {
+        handleRemoveClick(index);
+        setBookmarkState(true);
+      } else {
+        handleAddBookmark();
+        setBookmarkState(true);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -70,7 +89,7 @@ export const CardComponent = ({
               </p>
             </div>
             <div>
-              <p className="text-sm lg:text- font-bold"> {data.company.name}</p>
+              <p className="text-sm lg:text- font-bold"> {data.company.name.slice(0,16)}</p>
               <p className="text-[10px] text-gray-400">
                 {" "}
                 {data.name.slice(0, 18)}

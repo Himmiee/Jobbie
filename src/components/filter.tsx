@@ -3,12 +3,19 @@ import { JobProto, JobType } from "../helpers/dumps";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { getData } from "../store/jobSlice";
 
+type FilterComponentType = {
+  data: JobType;
+  setSelectedCategory: (category: string) => void;
+  defaultData: string[];
+};
+
 const FilterComponent = ({
   data,
-  selectedCategory,
+  // selectedCategory,
   setSelectedCategory,
-  setData,
+  // setData,
   defaultData,
+  
 }: any) => {
   const job = useAppSelector((state: any) => state.job.data);
   const [def, setDef] = useState(job);
@@ -59,8 +66,8 @@ const FilterComponent = ({
 
   const handleGetData = () => {
     // if (!dispatchState) {
-      dispatch(getData(defaultData));
-      // setDispatchState(true);
+    dispatch(getData(defaultData));
+    // setDispatchState(true);
     // }
     setActive("all");
   };
@@ -71,7 +78,7 @@ const FilterComponent = ({
         className="w-fit h-8 rounded-full text-[12px] sm:text-[10px] lg:text-[12px] focus:active:bg-blue-800 text-gray-600 border-gray-200 border-[1px] px-3 hover:bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]"
         onClick={handleGetData}
       >
-        All({defaultData?.length})
+        All({defaultData?.length | 0})
       </p>
       {uniqueCategories.map((category: any, index: number) => (
         <p
@@ -86,7 +93,7 @@ const FilterComponent = ({
               : "w-48 flex justify-center sm:max-w-full h-8 rounded-full text-[12px] focus:active:bg-teal-700 sm:text-[10px] lg:text-[12px] text-gray-600 border-gray-200 border-[1px] px-3 hover:bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]"
           }
         >
-          {category.slice(0,22)} ({categoryCounts[category]})
+          {category.slice(0, 22)} ({categoryCounts[category]})
         </p>
       ))}
     </div>

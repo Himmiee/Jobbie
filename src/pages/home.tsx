@@ -5,23 +5,53 @@ import NavbarComponent from "../components/navbar";
 import FooterComponent from "../components/footer";
 import { QuestionsMenu, Questions } from "../helpers/dumps";
 import { FAQ } from "../helpers/dumps";
+import { useAppSelector } from "../store/hooks";
 import { motion } from "framer-motion";
+import { PopupModal } from "../components/modals";
 import { CategoriesComponent } from "../components/catergories";
 import ButtonComponent from "../components/button";
 
 import AccordionComponent from "../components/accordion";
+import { json } from "node:stream/consumers";
 
 const HomeComponent = () => {
   const [data, setData] = useState(FAQs);
   const [acc, setAcc] = useState(Questions);
   const [value, setValue] = useState<string>("");
+  const [popupState, setPopupState] = useState<boolean>(false);
+  const [loadState, setLoadState] = useState<boolean>(true);
+  const popupMessage = useAppSelector((state) => state.login.popupMessage);
+  const isAuthenticated = useAppSelector(
+    (state) => state.login.isAuthenticated
+  );
+
+  // useEffect(() => {
+  //   if (isAuthenticated && loadState) {
+  //     setLoadState(false);
+  //     setPopupState(true);
+  //     localStorage.setItem("is_authenticated", JSON.stringify(true));
+  //     setTimeout(() => {
+  //       setPopupState(false);
+  //     }, 3000);
+  //   }
+  // }, []);
 
   return (
     <section className="">
       <div>
         <NavbarComponent />
       </div>
+
       <div className="wrap mx-6 sm:mx-24 mt-14 flex justify-center">
+        {popupState ? (
+          <PopupModal
+            closeState={popupState}
+            setCloseState={setPopupState}
+            info={popupMessage}
+          />
+        ) : (
+          ""
+        )}
         <div className="upper">
           <div className="clip  justify-center flex mt-10 mb-2">
             <p className="bg-gray-300 w-36  text-center rounded-full  text-[10px] text-gray-500">

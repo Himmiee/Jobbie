@@ -11,7 +11,7 @@ import {
   registrationSuccess,
 } from "../../store/registerslice";
 import { auth } from "../../firebase";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const RegisterComponent = () => {
@@ -19,6 +19,8 @@ const RegisterComponent = () => {
   const inputRef = useRef<any>(null);
   const [eyeActive, setEyeActive] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const isLoading = useAppSelector((state) => state.register.loading);
   const { name, email, password } = useAppSelector((state) => state.register);
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setName(e.target.value));
@@ -29,7 +31,11 @@ const RegisterComponent = () => {
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setEmail(e.target.value));
   };
-  const handleRegister = async () => {
+  const handleRegister = async (
+    name: string,
+    email: string,
+    password: string
+  ) => {
     dispatch(registrationStart());
     try {
       const userInfo = await createUserWithEmailAndPassword(
@@ -38,11 +44,18 @@ const RegisterComponent = () => {
         password
       );
       const user = userInfo.user;
-      dispatch(registrationSuccess(user));
+      dispatch(registrationSuccess(user.providerData));
+      dispatch(setEmail(""));
+      dispatch(setPassword(""));
+      dispatch(setName(""));
+      navigate("/login");
+
+      // console.log(auth.currentUser?.uid);
     } catch (error: any) {
       dispatch(registrationFailure(error.message));
     }
   };
+
   useEffect(() => {
     setNav(false);
   }, []);
@@ -61,7 +74,7 @@ const RegisterComponent = () => {
               User Registration.
             </h3>
           </div>
-          <div className="w-full mt-3">
+          <form className="w-full mt-3">
             <div className="flex justify-center">
               <label htmlFor="" className="text-white">
                 <p className="text-[12px] my-1">Username:</p>
@@ -110,7 +123,7 @@ const RegisterComponent = () => {
                 </div>
               </label>
             </div>
-          </div>
+          </form>
           <div className="flex mx-[18px] my-1 items-center justify-between  gap-2">
             <div className="flex gap-2">
               {" "}
@@ -125,9 +138,9 @@ const RegisterComponent = () => {
           </div>
           <div>
             <ButtonComponent
-              onClick={handleRegister}
-              className="bg-teal-700 text-sm w-64 h-7 my-2 cursor-pointer hover:bg-teal-900 flex justify-center items-center text-white rounded-lg "
-              title="SignIn"
+              onClick={() => handleRegister(name, email, password)}
+              className="bg-teal-700 text-[12px] sm:text-sm w-64 h-7 my-2 cursor-pointer hover:bg-teal-900 flex justify-center items-center text-white rounded-lg "
+              title={isLoading ? "Signing Up..." : "Sign Up"}
               icon={null}
             />
           </div>

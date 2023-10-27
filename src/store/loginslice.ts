@@ -6,6 +6,7 @@ type LoginType = {
   user: any | null;
   email: string;
   password: string;
+  popupMessage: string;
   error: string | null;
 };
 
@@ -15,6 +16,7 @@ const initialState: LoginType = {
   user: null,
   email: "",
   password: "",
+  popupMessage: "",
   error: null,
 };
 
@@ -30,12 +32,14 @@ const loginSlice = createSlice({
       state.isAuthenticated = true;
       state.user = action.payload;
       state.loading = false;
+      state.popupMessage = "Login successful";
       state.error = null;
     },
     loginFailure: (state, action: PayloadAction<string>) => {
       state.isAuthenticated = false;
       state.user = null;
       state.loading = false;
+      state.popupMessage = action.payload;
       state.error = action.payload;
     },
     setEmail: (state, action: PayloadAction<string>) => {

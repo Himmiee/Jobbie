@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
-import { BsFilter } from "react-icons/bs";
+import { BsBookmarkFill, BsFilter } from "react-icons/bs";
 import { JobProto, JobType } from "../helpers/dumps";
 import { IoFlame } from "react-icons/io5";
 import FilterComponent from "./filter";
@@ -30,7 +30,7 @@ export const InputHeader = ({
             />
             <div className="w-8 h-8 hover:bg-teal-600 flex my-2 lg:my-0 cursor-pointer justify-center rounded-md text-white  item-center bg-teal-700">
               <div onClick={() => navigate("/bookmark")} className="mt-2">
-                <BsFilter />
+                <BsBookmarkFill size={16} />
               </div>
             </div>
           </div>

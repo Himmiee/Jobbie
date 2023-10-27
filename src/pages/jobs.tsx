@@ -20,19 +20,23 @@ const JobComponent = () => {
   const [search, setSearch] = useState<string>("");
   const [filter, setFilter] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [postPerPage, setPostPerPage] = useState<number>(16);
+  const [postPerPage, setPostPerPage] = useState<number>(40);
   const [dispatchState, setDispatchState] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
   const [result, setResult] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [bookmarkState, setBookmarkState] = useState<boolean>(false);
   const job = useAppSelector((state: any) => state.job.data);
   const filteredData = useAppSelector((state) => state.job.filteredData);
   const defaultData = useAppSelector((state) => state.initialData.data);
   const [data, setData] = useState<JobType[]>(job);
   const currentPost = job.slice(firstPostIndex, lastPostIndex);
   const dispatch = useAppDispatch();
+  const bookmarkMessage = useAppSelector(
+    (state) => state.bookmarks.popupMessage
+  );
 
   const setInitialJobData = (data: JobType) => {
     dispatch(setInitialData(data));
@@ -60,6 +64,11 @@ const JobComponent = () => {
 
   useEffect(() => {
     getJobs();
+    // if (bookmarkState === true) {
+    //   setTimeout(() => {
+    //     setBookmarkState(false);
+    //   }, 3000);
+    // }
   }, []);
 
   const updateContent = (info: any) => {
@@ -73,6 +82,7 @@ const JobComponent = () => {
       </div>
 
       <div className="mx-8 sm:mx-24 mt-24">
+        {/* {bookmarkState ? <PopupModal info={bookmarkMessage} closeState={bookmarkState} setCloseState={setBookmarkState} /> : " "} */}
         {popup && (
           <div>
             {content.map((info: any, index: number) => {
@@ -114,7 +124,7 @@ const JobComponent = () => {
           </div>
         </div>
 
-        <div className="h-[65vh] sm:h-full  overflow-y-auto tbl">
+        <div className="h-[65vh]   overflow-y-auto tbl">
           {search && !job.some((item: any) => item.name.includes(search)) ? (
             <div className="h-fit my-6 justify-center item-center w-full">
               <img
@@ -130,7 +140,7 @@ const JobComponent = () => {
             <div className="">
               {isLoading ? <LoadingComponent /> : ""}
               {search ? (
-                <div className="grid  sm:grid-cols-3  lg:grid-cols-4 gap-4">
+                <div className="grid xs:grid-cols-5  sm:grid-cols-3  lg:grid-cols-4 gap-4">
                   {job
                     ?.filter((item: any) => {
                       return search === " " ? item : item.name.includes(search);
@@ -147,14 +157,14 @@ const JobComponent = () => {
                             data={item}
                             setPopup={setPopup}
                             index={index}
-                            filterCompany={filterCompany}
+                            setBookmarkState={setBookmarkState}
                           />
                         </div>
                       );
                     })}
                 </div>
               ) : (
-                <div className="grid overflow-y-scroll tbl sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div className="grid overflow-y-scroll tbl xs:grid-cols-5  sm:grid-cols-3 lg:grid-cols-4 gap-4">
                   {currentPost?.map((item: any, index: number) => (
                     <div
                       key={index}
@@ -166,7 +176,8 @@ const JobComponent = () => {
                         data={item}
                         setPopup={setPopup}
                         index={index}
-                        filterCompany={filterCompany}
+                        setBookmarkState={setBookmarkState}
+                        // filterCompany={filterCompany}
                       />
                     </div>
                   ))}
@@ -177,7 +188,7 @@ const JobComponent = () => {
         </div>
       </div>
 
-      <div className="  sm:h-16 fixed bottom-0 w-full flex justify-center sm:mt-6 ">
+      <div className="   sm:mt-3 ">
         <PGComponent
           totalPosts={job?.length}
           postPerPage={postPerPage}
