@@ -57,6 +57,22 @@ export const BookmarkComponent = () => {
             </div>
           ))}
         </div>
+        <div>
+          {!bookmarkedData.length ? (
+            <div className="h-fit my-6 justify-center item-center w-full">
+              <img
+                src="nothing.png"
+                className="sm:w-[40%] w-[100%] justify-center m-auto"
+                alt=""
+              />
+              <div className="flex text-[14px] sm:text-sm justify-center text-teal-700 m-auto">
+                No Bookmark yet!
+              </div>
+            </div>
+          ) : (
+            " "
+          )}
+        </div>
       </div>
     </div>
   );

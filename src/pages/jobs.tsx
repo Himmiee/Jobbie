@@ -129,10 +129,10 @@ const JobComponent = () => {
             <div className="h-fit my-6 justify-center item-center w-full">
               <img
                 src="nothing.png"
-                className="w-[40%] justify-center m-auto"
+                className="sm:w-[40%] w-[100%] justify-center m-auto"
                 alt=""
               />
-              <div className="flex justify-center text-teal-700 m-auto">
+              <div className="flex text-[14px] sm:text-sm justify-center text-teal-700 m-auto">
                 Oops, No Results Found!
               </div>
             </div>

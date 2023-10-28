@@ -41,7 +41,7 @@ const FeatureComponent = () => {
           </motion.div>
         </div>
       </div>
-      <motion.section className="sm:my-12 relative rounded-[90px] bg-teal-50">
+      <motion.section className="sm:my-12 relative rounded-[90px] bg-teal-50 pb-4 sm:pb-0">
         <motion.h1
           initial={{ opacity: 0.5, scale: 0.5 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -71,7 +71,7 @@ const FeatureComponent = () => {
               initial={{ opacity: 0.5, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.2 }}
-              className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start justify-center flex-col items-center sm:items-start   "
+              className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start justify-center mb-4 sm:mb-0 flex-col items-center sm:items-start   "
             >
               <div className="w-12 flex justify-center items-center h-12 my-1 rounded-full bg-teal-700">
                 <BsCheckCircleFill size={20} className="text-white" />
@@ -88,7 +88,7 @@ const FeatureComponent = () => {
               initial={{ opacity: 0.5, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.2 }}
-              className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start justify-center flex-col items-center sm:items-start   "
+              className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start mb-4 sm:mb-0 justify-center flex-col items-center sm:items-start   "
             >
               <div className="w-12 flex justify-center items-center h-12 my-1 rounded-full bg-teal-700">
                 <BsCheckCircleFill size={20} className="text-white" />
@@ -104,7 +104,7 @@ const FeatureComponent = () => {
               initial={{ opacity: 0.5, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.2 }}
-              className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start justify-center flex-col items-center sm:items-start   "
+              className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start justify-center mb-4 sm:mb-0 flex-col items-center sm:items-start   "
             >
               <div className="w-12 flex justify-center items-center h-12 my-1 rounded-full bg-teal-700">
                 <BsCheckCircleFill size={20} className="text-white" />
@@ -120,7 +120,7 @@ const FeatureComponent = () => {
               initial={{ opacity: 0.5, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.2 }}
-              className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start justify-center flex-col items-center sm:items-start   "
+              className="lg:w-2/2 sm:w-1/2 mx-8 flex sm:justify-start justify-center mb-4 sm:mb-0 flex-col items-center sm:items-start   "
             >
               <div className="w-12 flex justify-center items-center h-12 my-1 rounded-full bg-teal-700">
                 <BsCheckCircleFill size={20} className="text-white" />

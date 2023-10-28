@@ -77,7 +77,7 @@ export const InfoModal = ({
       <div key={index} className="z-20">
         <div className="border-gray-100 border-[1px] bg-white cursor-pointer rounded-t-lg fixed w-full left-0  bottom-0 sm:relative sm:rounded-lg   sm:w-[570px]  lg:w-[640px] h-[400px] overflow-y-auto tbl sm:overflow-hidden sm:h-fit">
           <div>
-            <div className="w-full h-12 flex justify-between items-center border-gray-100 px-3 border-b-[1px]">
+            <div className="w-full fixed bg-white sm:relative h-12 flex justify-between items-center border-gray-100 px-3 border-b-[1px]">
               <div>
                 <div className="text-[12px] text-gray-400 italic font-medium">
                   Today / {currentDate.getDate()} /{currentDate.getFullYear()}
@@ -88,7 +88,7 @@ export const InfoModal = ({
               </div>
             </div>
           </div>
-          <div className="w-full max-h-full flex flex-col sm:flex-row">
+          <div className="w-full mt-12 sm:mt-0  max-h-full flex flex-col sm:flex-row">
             <div className="sm:w-2/3  p-3 max-h-full rounded-md">
               <div className="flex gap-2">
                 {" "}

@@ -69,7 +69,7 @@ const NavbarComponent = () => {
           {isAuthenticated ? (
             <>
               {" "}
-              <div className="bg-teal-700  text-teal-700 w-8 flex justify-center items-center h-8 rounded-full">
+              <div className="bg-teal-700 hidden text-teal-700 w-8 sm:flex justify-center items-center h-8 rounded-full">
                 <p className="w-6 h-6 flex justify-center bg-teal-50 rounded-full">
                   {name?.charAt(0)}
                 </p>
@@ -81,7 +81,7 @@ const NavbarComponent = () => {
                     signOut(auth);
                     navigate("/login");
                   }}
-                  className=" sm:bg-teal-700 hover:bg-teal-600 w-20 sm:flex justify-center sm:text-white h-8 p-1 text-[15px] sm:text-[13px] items-center text-gray-400 sm:rounded-full"
+                  className=" sm:bg-teal-700 bg-teal-600 z-10  hover:bg-teal-600 sm:w-20 flex justify-center text-white h-8 p-1 text-[13px] items-center w-full  sm:rounded-full"
                   title="Sign Out"
                   icon={null}
                 />
