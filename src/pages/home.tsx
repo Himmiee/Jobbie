@@ -121,7 +121,7 @@ const HomeComponent = () => {
         initial={{ opacity: 0.5, scale: 0.5 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.1 }}
-        className="wrap px-8 sm:px-[102px] py-5 mt-8 pb-14 sm:pb-0 bg-teal-50 sm:h-[600px]"
+        className="wrap px-10 sm:px-[102px] py-5 mt-8 pb-14 sm:pb-0 bg-teal-50 sm:h-[600px]"
       >
         {" "}
         <div className="sm:flex sm:justify-between my-4 items-center ">
@@ -191,9 +191,9 @@ const HomeComponent = () => {
         initial={{ opacity: 0.5, scale: 0.5 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.1 }}
-        className="mx-6 sm:mx-24 my-14  h-fit"
+        className="mx-10 sm:mx-24 my-14  h-fit"
       >
-        <h3 className="text-center font-1000 my-8   font-bold  bg-gradient-to-r from-teal-700 bg-clip-text text-transparent to-blue-950  sm:text-[32px]">
+        <h3 className="text-center font-1000 my-8  font-bold  bg-gradient-to-r from-teal-700 bg-clip-text text-transparent to-blue-950  sm:text-[32px]">
           What people say about us
         </h3>
 

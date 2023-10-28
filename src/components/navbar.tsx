@@ -81,7 +81,7 @@ const NavbarComponent = () => {
                     signOut(auth);
                     navigate("/login");
                   }}
-                  className="hidden sm:bg-teal-700 hover:bg-teal-600 w-20 sm:flex justify-center sm:text-white h-8 p-1 text-[15px] sm:text-[13px] items-center text-gray-400 sm:rounded-full"
+                  className=" sm:bg-teal-700 hover:bg-teal-600 w-20 sm:flex justify-center sm:text-white h-8 p-1 text-[15px] sm:text-[13px] items-center text-gray-400 sm:rounded-full"
                   title="Sign Out"
                   icon={null}
                 />
