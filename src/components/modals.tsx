@@ -123,7 +123,7 @@ export const InfoModal = ({
                     />
                   </a>
                 ) : (
-                  <a href="#" className="flex gap-3 item-center">
+                  <a className="flex gap-3 item-center">
                     <ButtonComponent
                       className="h-8 sm:h-6 w-80 text-[12px] font-bold flex justify-center items-center hover:bg-teal-600  rounded-md sm:bg-gray-100 sm:text-gray-600 border-gray-600 border-[1px]  p-4"
                       title="Apply"
