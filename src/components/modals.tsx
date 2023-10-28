@@ -8,7 +8,7 @@ import {
   BsInfoCircle,
 } from "react-icons/bs";
 import ButtonComponent from "./button";
-import { auth } from "../firebase";
+import { auth } from "../firebase.config";
 import ReadMore from "./readmore";
 
 import { useAppSelector } from "../store/hooks";

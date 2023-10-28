@@ -10,7 +10,7 @@ import {
   registrationFailure,
   registrationSuccess,
 } from "../../store/registerslice";
-import { auth } from "../../firebase";
+import { auth } from "../../firebase.config";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
@@ -49,9 +49,9 @@ const RegisterComponent = () => {
       dispatch(setPassword(""));
       dispatch(setName(""));
       navigate("/login");
-
       // console.log(auth.currentUser?.uid);
     } catch (error: any) {
+      console.log(error);
       dispatch(registrationFailure(error.message));
     }
   };
@@ -131,7 +131,14 @@ const RegisterComponent = () => {
               <p className="text-[12px] text-white font-thin ">Remember Me</p>
             </div>
             <div>
-              <Link to={"/"}>
+              <Link
+                onClick={() => {
+                  dispatch(setName(""));
+                  dispatch(setEmail(""));
+                  dispatch(setPassword(""));
+                }}
+                to={"/login"}
+              >
                 <p className=" italic text-[10px]">SignIn?</p>
               </Link>
             </div>

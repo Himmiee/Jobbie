@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { NavLink, Link ,useNavigate} from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { BsX } from "react-icons/bs";
 
 import { IoReorderThreeSharp } from "react-icons/io5";
 import ButtonComponent from "./button";
-import { auth } from "../firebase";
+import { auth } from "../firebase.config";
 import { signOut } from "firebase/auth";
 import { useAppSelector } from "../store/hooks";
 
 const NavbarComponent = () => {
   const [open, setOpen] = useState<boolean>(false);
   const name = auth.currentUser?.email;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const authState = localStorage.getItem("is_authenticated");
   const isAuthenticated = authState ? JSON.parse(authState) : false;
   const actLink =
@@ -79,7 +79,7 @@ const NavbarComponent = () => {
                   onClick={() => {
                     localStorage.clear();
                     signOut(auth);
-                    navigate("/login")
+                    navigate("/login");
                   }}
                   className="hidden sm:bg-teal-700 hover:bg-teal-600 w-20 sm:flex justify-center sm:text-white h-8 p-1 text-[15px] sm:text-[13px] items-center text-gray-400 sm:rounded-full"
                   title="Sign Out"

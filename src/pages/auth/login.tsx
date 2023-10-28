@@ -10,7 +10,7 @@ import {
   loginSuccess,
 } from "../../store/loginslice";
 import { PopupModal } from "../../components/modals";
-import { auth } from "../../firebase";
+import { auth } from "../../firebase.config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -130,7 +130,13 @@ const LoginComponent = () => {
             </div>
             <div>
               {" "}
-              <Link to={"/register"}>
+              <Link
+                onClick={() => {
+                  dispatch(setEmail(""));
+                  dispatch(setPassword(""));
+                }}
+                to={"/register"}
+              >
                 <p className=" italic text-[10px]">SignUp?</p>
               </Link>
             </div>
