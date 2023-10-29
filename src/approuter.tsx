@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import HomeComponent from "./pages/home";
 import JobComponent from "./pages/jobs";
@@ -10,6 +10,9 @@ import BkMark from "./pages/bookmark";
 
 const AppRouter = () => {
   const location = useLocation();
+  useEffect(() => {
+    document.documentElement.scrollTop = 0;
+  }, [location.pathname]);
 
   let name = "Jobber";
 
