@@ -28,9 +28,9 @@ export const InputHeader = ({
               placeholder="search jobs here..."
               className="outline-none w-full lg:w-[650px] my-2 lg:my-0 h-8 text-gray-500 rounded-md font-light text-[13px] px-2 italic bg-gray-100 "
             />
-            <div className="w-8 h-8 hover:bg-teal-600 flex my-2 lg:my-0 cursor-pointer justify-center rounded-md text-white  item-center bg-teal-700">
+            <div className="w-10 sm:w-8 h-8 hover:bg-teal-600 flex my-2 lg:my-0 cursor-pointer justify-center rounded-md text-white  item-center bg-teal-700">
               <div onClick={() => navigate("/bookmark")} className="mt-2">
-                <BsBookmarkFill size={16} />
+                <BsBookmarkFill size={15} />
               </div>
             </div>
           </div>

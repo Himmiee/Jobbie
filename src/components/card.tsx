@@ -74,21 +74,21 @@ CardType) => {
 
   return (
     <section>
-      <div className="border-gray-100 border-[1px] sm:h-[120px]  grid items-center lg:h-fit cursor-pointer rounded-lg  sm:my-0 p-4">
+      <div className="border-gray-100 border-[1px] sm:h-[120px]  grid items-center lg:max-h-full cursor-pointer rounded-lg  sm:my-0 p-4">
         <div className="flex  gap-3 justify-between px-1 sm:px-0 " key={index}>
           {" "}
           <div
             onClick={() => {
               setPopup(true);
             }}
-            className="flex gap-3  w-3/3"
+            className="flex gap-3   w-3/3"
           >
-            <div className="bg-teal-700  text-teal-700 w-8 flex justify-center items-center h-8 rounded-full">
+            <div className="bg-teal-700 mt-2  text-teal-700 w-8 flex justify-center items-center h-8 rounded-full">
               <p className="w-6 h-6 flex justify-center bg-teal-50 rounded-full">
                 {data.company.name.charAt(0)}
               </p>
             </div>
-            <div>
+            <div className="mt-2">
               <p className="text-sm lg:text- font-bold"> {data.company.name.slice(0,16)}</p>
               <p className="text-[10px] text-gray-400">
                 {" "}
@@ -105,7 +105,7 @@ CardType) => {
               </p>
             </div>
           </div>
-          <div>
+          <div className="mt-2">
             <div
               onClick={handleBookmarkToggle}
               className="flex ml-auto w-fit h-fit justify-end"
