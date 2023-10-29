@@ -47,7 +47,7 @@ export const PopupModal = ({
 export type CardType = {
   data: JobType;
   handleClick: any;
-  setData: any;
+  // setData: any;
   filterCompany: any;
   result: any;
   index: number;
@@ -56,7 +56,7 @@ export type CardType = {
 export const InfoModal = ({
   data,
   handleClick,
-  setData,
+  // setData,
   filterCompany,
   result,
   index,

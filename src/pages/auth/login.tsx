@@ -12,7 +12,8 @@ import {
 import { PopupModal } from "../../components/modals";
 import { auth } from "../../firebase.config";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { createFalse } from "typescript";
 
 const LoginComponent = () => {
   const [nav, setNav] = useState<boolean>(false);
@@ -27,7 +28,11 @@ const LoginComponent = () => {
   const popupMessage = useAppSelector((state) => state.register.popupMessage);
   const isLoading = useAppSelector((state) => state.login.loading);
   const { email, password } = useAppSelector((state) => state.login);
+  const [err, setErr] = useState<string>("");
   const [loadOnce, setLoadOnce] = useState<boolean>(true);
+  const location = useLocation();
+  const registrationSuccess = location.state?.registrationSuccess || false;
+
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setEmail(e.target.value));
   };
@@ -35,16 +40,39 @@ const LoginComponent = () => {
     dispatch(setPassword(e.target.value));
   };
   const handleLogin = async (email: string, password: string) => {
-    dispatch(loginStart());
     try {
-      const userInfo = await signInWithEmailAndPassword(auth, email, password);
-      const user = userInfo.user;
-      dispatch(loginSuccess(user.providerData));
-      console.log(auth.currentUser?.email);
-      dispatch(setEmail(""));
-      dispatch(setPassword(""));
-      localStorage.setItem("is_authenticated", JSON.stringify(true));
-      navigate("/");
+      const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+      if (!email || !password) {
+        setErr("Please fill in all fields");
+        setTimeout(() => {
+          setErr("");
+        }, 3000);
+        return;
+      } else if (!emailRegex.test(email)) {
+        setErr("Invalid Email");
+        setTimeout(() => {
+          setErr("");
+        }, 3000);
+      } else if (password.length < 6) {
+        setErr("Password is too short");
+        setTimeout(() => {
+          setErr("");
+        }, 3000);
+      } else {
+        dispatch(loginStart());
+        const userInfo = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        const user = userInfo.user;
+        dispatch(loginSuccess(user.providerData));
+        console.log(auth.currentUser?.email);
+        dispatch(setEmail(""));
+        dispatch(setPassword(""));
+        localStorage.setItem("is_authenticated", JSON.stringify(true));
+        navigate("/", { state: { loginSuccess: true } });
+      }
     } catch (error: any) {
       dispatch(loginFailure(error.message));
     }
@@ -52,14 +80,14 @@ const LoginComponent = () => {
 
   useEffect(() => {
     setNav(false);
-    // if (isAuthenticated && loadOnce) {
-    //   setLoadOnce(false);
-    //   setPopupState(true);
-    //   setTimeout(() => {
-    //     setPopupState(false);
-    //   }, 3000);
-    // }
-  }, []);
+    if (registrationSuccess) {
+      setPopupState(true);
+      setTimeout(() => {
+        setPopupState(false);
+      }, 3000);
+    }
+  }, [registrationSuccess]);
+
   return (
     <section className="bg-gradient-to-t bg-opacity-70 from-teal-700 flex items-center justify-center flex-col to-blue-950 w-full h-[100vh]">
       {popupState ? (
@@ -75,7 +103,7 @@ const LoginComponent = () => {
         Jobber.
       </h3>
       <div className="">
-        <div className="w-72  rounded-2xl h-72 sm:bg-gray-800 bg-opacity-60 ">
+        <div className="w-72  rounded-2xl h-[296px] sm:bg-gray-800 bg-opacity-60 ">
           <div>
             <p className="text-teal-700 italic font-sans flex justify-center font-bold pt-3">
               Jobber
@@ -85,9 +113,16 @@ const LoginComponent = () => {
             </h3>
           </div>
           <form className="w-full mt-3">
+          {err ? (
+              <p className="text-[10px] text-teal-700 flex justify-center  italic">
+                {err}
+              </p>
+            ) : (
+              ""
+            )}
             <div className="flex justify-center">
               <label htmlFor="" className="text-white">
-                <p className="text-[12px] my-1">Username:</p>
+                <p className="text-[12px] my-1">Email:</p>
                 <input
                   type="text"
                   value={email}

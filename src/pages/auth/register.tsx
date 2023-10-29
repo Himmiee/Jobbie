@@ -16,6 +16,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const RegisterComponent = () => {
   const [nav, setNav] = useState<boolean>(false);
+  const [err, setErr] = useState<string>("");
   const inputRef = useRef<any>(null);
   const [eyeActive, setEyeActive] = useState<boolean>(false);
   const dispatch = useAppDispatch();
@@ -36,20 +37,39 @@ const RegisterComponent = () => {
     email: string,
     password: string
   ) => {
-    dispatch(registrationStart());
     try {
-      const userInfo = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userInfo.user;
-      dispatch(registrationSuccess(user.providerData));
-      dispatch(setEmail(""));
-      dispatch(setPassword(""));
-      dispatch(setName(""));
-      navigate("/login");
-      // console.log(auth.currentUser?.uid);
+      const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+      if (!name || !email || !password) {
+        setErr("Please fill in all fields");
+        setTimeout(() => {
+          setErr("");
+        }, 3000);
+        return;
+      } else if (!emailRegex.test(email)) {
+        setErr("Invalid Email");
+        setTimeout(() => {
+          setErr("");
+        }, 3000);
+      } else if (password.length < 6) {
+        setErr("Password is too short");
+        setTimeout(() => {
+          setErr("");
+        }, 3000);
+      } else {
+        dispatch(registrationStart());
+        const userInfo = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        const user = userInfo.user;
+        dispatch(registrationSuccess(user.providerData));
+        dispatch(setEmail(""));
+        dispatch(setPassword(""));
+        dispatch(setName(""));
+        navigate("/login", { state: { registrationSuccess: true } });
+        // console.log(auth.currentUser?.uid);}
+      }
     } catch (error: any) {
       console.log(error);
       dispatch(registrationFailure(error.message));
@@ -74,7 +94,15 @@ const RegisterComponent = () => {
               User Registration.
             </h3>
           </div>
+
           <form className="w-full mt-3">
+            {err ? (
+              <p className="text-[10px] text-teal-700 flex justify-center  italic">
+                {err}
+              </p>
+            ) : (
+              ""
+            )}
             <div className="flex justify-center">
               <label htmlFor="" className="text-white">
                 <p className="text-[12px] my-1">Username:</p>

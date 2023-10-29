@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BsArrowLeftCircle } from "react-icons/bs";
 import { JobType } from "../helpers/dumps";
 import { CardComponent } from "./card";
+import { InfoModal } from "./modals";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { selectBookmarks } from "../store/bookmarkSlice";
 
@@ -14,15 +15,17 @@ export const BookmarkComponent = () => {
   const job = useAppSelector((state) => state.job.data);
   const [bookmarkState, setBookmarkState] = useState<boolean>(false);
   const bookmarkedData = useAppSelector((state) => state.bookmarks.bookmarks);
-  // const filterCompany = (companyName: string) => {
-  //   const newItems = job.filter(
-  //     (item: JobType) => item.company.name === companyName
-  //   );
-  //   setResult(newItems);
-  // };
+
 
   const updateContent = (info: any) => {
     setContent([info]);
+  };
+
+  const filterCompany = (companyName: string) => {
+    const newItems = job.filter(
+      (item: JobType) => item.company.name === companyName
+    );
+    setResult(newItems);
   };
 
   return (
@@ -37,6 +40,28 @@ export const BookmarkComponent = () => {
         <h2 className="font-bold text-[17px] flex items-center h-full text-gray-600">
           Bookmarked Jobs
         </h2>
+      </div>
+      <div>
+        {" "}
+        {popup && (
+          <div>
+            {content.map((info: any, index: number) => {
+              return (
+                <InfoModal
+                  data={info}
+                  // setData={setData}
+                  key={index}
+                  index={index}
+                  handleClick={() => {
+                    setPopup(false);
+                  }}
+                  filterCompany={filterCompany}
+                  result={result}
+                />
+              );
+            })}
+          </div>
+        )}
       </div>
       <div className="my-8 mx-10">
         <div className="grid  sm:grid-cols-3  lg:grid-cols-4 gap-4">

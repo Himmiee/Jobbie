@@ -142,9 +142,14 @@ const FeatureComponent = () => {
         transition={{ duration: 0.1 }}
         className="sm:h-96 px-8 sm:px-28 "
       >
-        <h1 className="flex justify-center text-teal-700  text-lg font-bold my-6">
+        <h1 className="flex justify-center text-teal-700  text-lg font-bold mt-12 sm:mt-6">
           More on the products
         </h1>
+        <p className="text-[12px] text-center mt-1 mb-6">
+          {" "}
+          Lorem ipsum dolblanditiis similique assumenda maioretemporibus
+          dolblanditiis similique sit officia, esse aliquid?
+        </p>
         <div className="sm:flex justify-between gap-3 ">
           <div className="border-gray-100 border-[1px] my-2 p-2 sm:my-0 sm:w-56 w-full h-56 flex flex-col items-center justify-center">
             <div className="w-12 h-12 bg-gray-100 rounded-full flex justify-center items-center">

@@ -89,7 +89,7 @@ const JobComponent = () => {
               return (
                 <InfoModal
                   data={info}
-                  setData={setData}
+                  // setData={setData}
                   key={index}
                   index={index}
                   handleClick={() => {

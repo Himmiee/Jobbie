@@ -10,9 +10,8 @@ import { motion } from "framer-motion";
 import { PopupModal } from "../components/modals";
 import { CategoriesComponent } from "../components/catergories";
 import ButtonComponent from "../components/button";
-
+import { useLocation } from "react-router-dom";
 import AccordionComponent from "../components/accordion";
-import { json } from "node:stream/consumers";
 
 const HomeComponent = () => {
   const [data, setData] = useState(FAQs);
@@ -20,21 +19,21 @@ const HomeComponent = () => {
   const [value, setValue] = useState<string>("");
   const [popupState, setPopupState] = useState<boolean>(false);
   const [loadState, setLoadState] = useState<boolean>(true);
+  const location = useLocation();
+  const loginSuccess = location.state?.loginSuccess || false;
   const popupMessage = useAppSelector((state) => state.login.popupMessage);
   const isAuthenticated = useAppSelector(
     (state) => state.login.isAuthenticated
   );
 
-  // useEffect(() => {
-  //   if (isAuthenticated && loadState) {
-  //     setLoadState(false);
-  //     setPopupState(true);
-  //     localStorage.setItem("is_authenticated", JSON.stringify(true));
-  //     setTimeout(() => {
-  //       setPopupState(false);
-  //     }, 3000);
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (loginSuccess) {
+      setPopupState(true);
+      setTimeout(() => {
+        setPopupState(false);
+      }, 3000);
+    }
+  }, [loginSuccess]);
 
   return (
     <section className="">
