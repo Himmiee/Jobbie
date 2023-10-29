@@ -121,7 +121,7 @@ const JobComponent = () => {
           </div>
         </div>
 
-        <div className="h-[65vh] sm:h-full lg:h-[65vh] relative overflow-y-auto tbl">
+        <div className="h-[65vh] relative overflow-y-auto tbl">
           {search && !job.some((item: any) => item.name.includes(search)) ? (
             <div className="h-fit my-6 justify-center item-center w-full">
               <img
