@@ -13,23 +13,23 @@ export type QuestionsMenu = {
 
 export const Questions = [
   {
-    question: "Do giveaway oga mi sir",
+    question: "What do we do here?",
     info: " Lorem ipsum Illo saepe, earum culpa eligendi at alias soluta iusto Voluptas quaerat quisquam laudantium magnam incidunt ab voluptates odio blanditiis numquam.",
   },
   {
-    question: "Do giveaway oga mi sir",
+    question: "What are our goals?",
     info: " Lorem ipsum Illo saepe, earum culpa eligendi at alias soluta iusto Voluptas quaerat quisquam laudantium magnam incidunt ab voluptates odio blanditiis numquam.",
   },
   {
-    question: "Do giveaway oga mi sir",
+    question: "How trusted is out platform?",
     info: " Lorem ipsum Illo saepe, earum culpa eligendi at alias soluta iusto Voluptas quaerat quisquam laudantium magnam incidunt ab voluptates odio blanditiis numquam.",
   },
   {
-    question: "Do giveaway oga mi sir",
+    question: "What is jobber?",
     info: " Lorem ipsum Illo saepe, earum culpa eligendi at alias soluta iusto Voluptas quaerat quisquam laudantium magnam incidunt ab voluptates odio blanditiis numquam.",
   },
   {
-    question: "Do giveaway oga mi sir",
+    question: "Top tier, is it?",
     info: " Lorem ipsum Illo saepe, earum culpa eligendi at alias soluta iusto Voluptas quaerat quisquam laudantium magnam incidunt ab voluptates odio blanditiis numquam.",
   },
 ];
