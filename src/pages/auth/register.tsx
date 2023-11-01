@@ -173,7 +173,9 @@ const RegisterComponent = () => {
           </div>
           <div>
             <ButtonComponent
-              onClick={() => handleRegister(name, email, password)}
+              onClick={() => {
+                handleRegister(name, email, password);
+              }}
               className="bg-teal-700 text-[12px] sm:text-sm w-64 h-7 my-2 cursor-pointer hover:bg-teal-900 flex justify-center items-center text-white rounded-lg "
               title={isLoading ? "Signing Up..." : "Sign Up"}
               icon={null}

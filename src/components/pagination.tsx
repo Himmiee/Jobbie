@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-
+type PGType = {
+  totalPosts: number
+  postPerPage: number
+  setCurrentPage : (value:number) => void
+  currentPage: number
+}
 const PGComponent = ({
   totalPosts,
   postPerPage,
   setCurrentPage,
   currentPage,
-  onPageChange,
-}: any) => {
+  // onPageChange,
+}: PGType) => {
 
   const [active, setActive] = useState<number>(0);
   const Pages = [1, 2, 3, 4, 5, 6, 7, 8];

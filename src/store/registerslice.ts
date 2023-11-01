@@ -1,9 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+type UserRegData = {
+  displayName: string | null;
+  email: string | null;
+  phoneNumber: string | null;
+  photoURL: string | null;
+  providerId: string;
+  uid: string;
+};
 
 type RegisterType = {
   isAuthenticated: boolean;
   loading: boolean;
-  user: any | null;
+  user: UserRegData[] | null;
   name: string;
   email: string;
   popupMessage: string;
@@ -30,7 +38,7 @@ const registerSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    registrationSuccess: (state, action: PayloadAction<any>) => {
+    registrationSuccess: (state, action: PayloadAction<UserRegData[]>) => {
       state.isAuthenticated = true;
       state.user = action.payload
       state.loading = false;

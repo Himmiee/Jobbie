@@ -4,15 +4,12 @@ import { JobProto, JobType } from "../helpers/dumps";
 import { IoFlame } from "react-icons/io5";
 import FilterComponent from "./filter";
 import { useNavigate } from "react-router-dom";
+type Input ={
+  handleChange : (e: ChangeEvent<HTMLInputElement>) => void
+}
 export const InputHeader = ({
   handleChange,
-  filterItems,
-  setFilter,
-  data,
-  handleJob,
-  selectedCategory,
-  setSelectedCategory,
-}: any) => {
+}: Input) => {
   const [search, setSearch] = useState<string>("");
   const navigate = useNavigate()
 

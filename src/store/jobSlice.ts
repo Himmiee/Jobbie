@@ -8,7 +8,7 @@ type initialType = {
   data: JobType[];
   filteredData: JobType[];
   error: string;
-  pages: any
+  pages: Record<number, JobType[]>;
 };
 
 const initialState: initialType = {
@@ -18,15 +18,6 @@ const initialState: initialType = {
   error: "",
   pages: {},
 };
-
-// export const fetchData = createAsyncThunk("job/fetchData", async () => {
-//   const res = await axios.get(
-//     "https://www.themuse.com/api/public/jobs?page=1&descending=true"
-//   );
-//   // .then((response) => response.data.map((item: JobType) => item));
-
-//   return res.data.results;
-// });
 
 export const fetchData = createAsyncThunk(
   "job/fetchData",
@@ -48,9 +39,9 @@ export const JobSlice = createSlice({
     getFilteredData: (state, action: PayloadAction<JobType[]>) => {
       state.filteredData = action.payload;
     },
-    setDataForPage: (state, action: PayloadAction<{ page: number; data: JobType[] }>) => {
-      state.pages[action.payload.page] = action.payload.data;
-    },
+    // setDataForPage: (state, action: PayloadAction<{ page: number; data: JobType[] }>) => {
+    //   state.pages[action.payload.page] = action.payload.data;
+    // },
   },
   extraReducers: (builder: any) => {
     builder.addCase(fetchData.pending, (state: initialType) => {
@@ -65,15 +56,18 @@ export const JobSlice = createSlice({
         state.error = " ";
       }
     );
-    builder.addCase(fetchData.rejected, (state: initialType, action: any) => {
-      state.loading = false;
-      state.data = [];
-      state.filteredData = [];
-      state.error = action.error.message || "Something went wrong";
-    });
+    builder.addCase(
+      fetchData.rejected,
+      (state: initialType, action: PayloadAction<string>) => {
+        state.loading = false;
+        state.data = [];
+        state.filteredData = [];
+        state.error = action.payload;
+      }
+    );
   },
 });
 
-export const { getData, getFilteredData,setDataForPage } = JobSlice.actions;
+export const { getData, getFilteredData } = JobSlice.actions;
 
 export default JobSlice.reducer;

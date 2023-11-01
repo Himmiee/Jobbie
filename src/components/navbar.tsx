@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { BsX } from "react-icons/bs";
-
 import { IoReorderThreeSharp } from "react-icons/io5";
 import ButtonComponent from "./button";
 import { auth } from "../firebase.config";
 import { signOut } from "firebase/auth";
-import { useAppSelector } from "../store/hooks";
+import { useAppSelector, useAppDispatch } from "../store/hooks";
+import { logOut } from "../store/loginslice";
 
 const NavbarComponent = () => {
   const [open, setOpen] = useState<boolean>(false);
   const name = auth.currentUser?.email;
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const authState = localStorage.getItem("is_authenticated");
   const isAuthenticated = authState ? JSON.parse(authState) : false;
   const actLink =
@@ -79,7 +80,8 @@ const NavbarComponent = () => {
                   onClick={() => {
                     localStorage.clear();
                     signOut(auth);
-                    navigate("/login");
+                    dispatch(logOut());
+                    navigate("/login", { state: { logOutSuccess: true } });
                   }}
                   className=" sm:bg-teal-700 bg-teal-600 z-10  hover:bg-teal-600 sm:w-20 flex justify-center text-white h-8 p-1 text-[13px] items-center w-full  sm:rounded-full"
                   title="Sign Out"
@@ -92,7 +94,7 @@ const NavbarComponent = () => {
               {" "}
               <Link to={"/login"}>
                 <ButtonComponent
-                  onClick={null}
+                  onClick={() => {}}
                   className="bg-teal-600 z-10 sm:z-0 sm:bg-white py-2 sm:py-0 text-white border-gray-300 sm:border-[1px] sm:h-8   sm:hover:bg-teal-700 sm:hover:text-white w-full sm:w-20 flex justify-center items-center sm:text-gray-400 p-1 text-[13px] sm:text-[13px] sm:rounded-full"
                   title="SignIn"
                   icon={null}
@@ -100,7 +102,7 @@ const NavbarComponent = () => {
               </Link>
               <Link to={"/register"}>
                 <ButtonComponent
-                  onClick={null}
+                  onClick={() => {}}
                   className="hidden sm:bg-teal-700 hover:bg-teal-600 w-20 sm:flex justify-center sm:text-white h-8 p-1 text-[15px] sm:text-[13px] items-center text-gray-400 sm:rounded-full"
                   title="Sign Up"
                   icon={null}

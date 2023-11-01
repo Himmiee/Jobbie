@@ -1,6 +1,9 @@
-import React, { useState } from "react";
-
-export const HoverTool = ({ text, children }: any) => {
+import React, { useState , ReactNode} from "react";
+type HoverTool = {
+  text: string;
+  children: ReactNode;
+};
+export const HoverTool = ({ text, children }: HoverTool) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (

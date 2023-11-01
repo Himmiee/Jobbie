@@ -1,9 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+type UserData = {
+  displayName: string | null;
+  email: string | null;
+  phoneNumber: string | null;
+  photoURL: string | null;
+  providerId: string;
+  uid: string;
+};
 type LoginType = {
   isAuthenticated: boolean;
   loading: boolean;
-  user: any | null;
+  user: UserData[] | null;
   email: string;
   password: string;
   popupMessage: string;
@@ -28,7 +36,7 @@ const loginSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    loginSuccess: (state, action: PayloadAction<any>) => {
+    loginSuccess: (state, action: PayloadAction<UserData[]>) => {
       state.isAuthenticated = true;
       state.user = action.payload;
       state.loading = false;
@@ -42,6 +50,12 @@ const loginSlice = createSlice({
       state.popupMessage = action.payload;
       state.error = action.payload;
     },
+    logOut: (state) => {
+      state.loading = false;
+      state.isAuthenticated = false;
+      state.popupMessage = "Logout successful";
+      state.user = null;
+    },
     setEmail: (state, action: PayloadAction<string>) => {
       state.email = action.payload;
     },
@@ -51,6 +65,12 @@ const loginSlice = createSlice({
   },
 });
 
-export const { loginFailure, loginSuccess, loginStart, setEmail, setPassword } =
-  loginSlice.actions;
+export const {
+  loginFailure,
+  loginSuccess,
+  loginStart,
+  setEmail,
+  setPassword,
+  logOut,
+} = loginSlice.actions;
 export default loginSlice.reducer;

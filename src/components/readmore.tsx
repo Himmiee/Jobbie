@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 
-const ReadMore = ({ text }: any) => {
+type ReadMoreType = {
+  text: string;
+};
+const ReadMore = ({ text }: ReadMoreType) => {
   const [isReadMore, setIsReadMore] = useState<boolean>(true);
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);

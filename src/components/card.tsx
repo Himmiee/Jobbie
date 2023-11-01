@@ -20,17 +20,15 @@ import {
 export type CardType = {
   data: JobType;
   index: number;
-  setPopup: any;
-  setBookmarkState: any;
-  // filterCompany: any;
+  setPopup: (value: boolean) => void;
+  setBookmarkState: (value: boolean) => void;
 };
 export const CardComponent = ({
   data,
   index,
   setPopup,
   setBookmarkState,
-}: // filterCompany,
-CardType) => {
+}: CardType) => {
   const bookmarks = useAppSelector(selectBookmarks);
   const dispatch = useAppDispatch();
   const [bkmPopup, setBkmPopup] = useState<boolean>(false);
@@ -38,7 +36,6 @@ CardType) => {
   const isBookmarked = bookmarks.some(
     (bookmark: any) => bookmark.id === data.id
   );
-  // const [bookmarkState, setBookmarkState] = useState<boolean>(false);
 
   const handleRemoveClick = (index: number) => {
     try {
@@ -89,11 +86,13 @@ CardType) => {
               </p>
             </div>
             <div className="mt-2">
-              <p className="text-sm lg:text- font-bold"> {data.company.name.slice(0,16)}</p>
+              <p className="text-sm lg:text- font-bold">
+                {" "}
+                {data.company.name.slice(0, 16)}
+              </p>
               <p className="text-[10px] text-gray-400">
                 {" "}
                 {data.name.slice(0, 18)}
-                {/* {data.type} */}
               </p>
               <p className="text-[8px] font-bold text-teal-700">
                 {" "}

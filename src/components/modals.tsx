@@ -17,8 +17,8 @@ import DateDifference from "./date";
 import { HoverTool } from "./hoverTool";
 type MessageType = {
   info: string;
-  setCloseState: any;
-  closeState: any;
+  setCloseState: (value:boolean) => void;
+  closeState: boolean;
 };
 export const PopupModal = ({
   info,
@@ -26,7 +26,7 @@ export const PopupModal = ({
   closeState,
 }: MessageType) => {
   useEffect(() => {
-    if (closeState) {
+    if (closeState === true) {
       setTimeout(() => {
         setCloseState(false);
       }, 3000);
@@ -46,17 +46,15 @@ export const PopupModal = ({
 
 export type CardType = {
   data: JobType;
-  handleClick: any;
-  // setData: any;
-  filterCompany: any;
-  result: any;
+  handleClick: () => void;
+  filterCompany: (category: string) => void ;
+  result: string[];
   index: number;
 };
 
 export const InfoModal = ({
   data,
   handleClick,
-  // setData,
   filterCompany,
   result,
   index,
@@ -119,7 +117,7 @@ export const InfoModal = ({
                    text-teal-50  bg-teal-700 p-4"
                       title="Apply"
                       icon={null}
-                      onClick={null}
+                      onClick={() => {}}
                     />
                   </a>
                 ) : (
@@ -128,7 +126,7 @@ export const InfoModal = ({
                       className="h-8 sm:h-6 w-80 text-[12px] font-bold flex justify-center items-center hover:bg-teal-600  rounded-md sm:bg-gray-100 sm:text-gray-600 border-gray-600 border-[1px]  p-4"
                       title="Apply"
                       icon={null}
-                      onClick={null}
+                      onClick={() => {}}
                     />
                     <HoverTool text="Login to apply">
                       <BsInfoCircle size={18} className="mt-2" />
@@ -158,7 +156,7 @@ export const InfoModal = ({
                               {" "}
                               <a href={data.refs.landing_page} target="_blank">
                                 <ButtonComponent
-                                  onClick={isAuthenticated ? null : null}
+                                  onClick={() => {}}
                                   className="h-6 w-16 text-[10px] font-bold  flex justify-center items-center hover:bg-gray-700 hover:text-white rounded-md text-white bg-black p-2"
                                   title="Apply"
                                   icon={null}
@@ -166,7 +164,7 @@ export const InfoModal = ({
                               </a>
                               <a>
                                 <ButtonComponent
-                                  onClick={null}
+                                  onClick={() => {}}
                                   className="h-6 w-16 text-[10px] font-bold flex   justify-center items-center rounded-md border-[1px] border-gray-300 text-gray-500 p-2"
                                   title="Visit"
                                   icon={null}

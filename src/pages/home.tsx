@@ -27,7 +27,7 @@ const HomeComponent = () => {
   );
 
   useEffect(() => {
-    if (loginSuccess) {
+    if (loginSuccess ) {
       setPopupState(true);
       setTimeout(() => {
         setPopupState(false);
@@ -42,7 +42,7 @@ const HomeComponent = () => {
       </div>
 
       <div className="wrap mx-6 sm:mx-24 mt-14 flex justify-center">
-        {popupState ? (
+        {popupState && popupMessage ? (
           <PopupModal
             closeState={popupState}
             setCloseState={setPopupState}
@@ -101,7 +101,7 @@ const HomeComponent = () => {
             </div>
             <div className="flex justify-center">
               <ButtonComponent
-                onClick={null}
+                onClick={() => {}}
                 className="cursor-pointer bg-teal-700 flex items-center justify-center gap-2 hover:bg-teal-600 w-32  text-white h-8 p-1 text-[13px] rounded-full"
                 title="Get Started"
                 icon={<BsArrowRight />}
@@ -140,7 +140,7 @@ const HomeComponent = () => {
 
           <div className="flex justify-center my-2">
             <ButtonComponent
-              onClick={null}
+              onClick={() => {}}
               className="bg-teal-700 cursor-pointer flex items-center justify-center gap-2 hover:bg-teal-600 w-24  text-white h-8 p-1 text-[13px] rounded-full"
               title="Discover"
               icon={<BsArrowRight />}

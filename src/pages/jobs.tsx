@@ -19,13 +19,14 @@ const JobComponent = () => {
   const [popup, setPopup] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
   const [filter, setFilter] = useState<boolean>(false);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [postPerPage, setPostPerPage] = useState<number>(20);
+  const [currentPage, setCurrentPage] = useState<number>(2);
+  const [postPerPage, setPostPerPage] = useState<number>(40);
   const [dispatchState, setDispatchState] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
   const [result, setResult] = useState<any>([]);
+  const [page, setPage] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [bookmarkState, setBookmarkState] = useState<boolean>(false);
   const job = useAppSelector((state: any) => state.job.data);
@@ -38,7 +39,7 @@ const JobComponent = () => {
     (state) => state.bookmarks.popupMessage
   );
 
-  const setInitialJobData = (data: JobType) => {
+  const setInitialJobData = (data: any) => {
     dispatch(setInitialData(data));
   };
   const handlePageChange = (pageNumber: number) => {
@@ -64,11 +65,35 @@ const JobComponent = () => {
       });
   };
 
+  // const getJobs = async (clickedPage: number, pagesToFetch: number) => {
+  //   setIsLoading(true);
+  //   const allData = [];
+  
+  
+  //   const startPage = clickedPage;
+  //   const endPage = Math.min(clickedPage + 2, pagesToFetch);
+  
+  //   for (let page = startPage; page <= endPage; page++) {
+  //     try {
+  //       const response = await dispatch(fetchData(page));
+  //       allData.push(...response.payload);
+  //     } catch (error) {
+  //       console.error("Error fetching data for page", page, ":", error);
+  //     }
+  //   }
+  
+  //   setInitialJobData(allData);
+  //   dispatch(getData(allData));
+  //   setIsLoading(false);
+  // };
+  
+  
+
   useEffect(() => {
     getJobs(currentPage);
   }, [currentPage]);
 
-  const updateContent = (info: any) => {
+  const updateContent = (info: JobType) => {
     setContent([info]);
   };
 
@@ -82,11 +107,10 @@ const JobComponent = () => {
         {/* {bookmarkState ? <PopupModal info={bookmarkMessage} closeState={bookmarkState} setCloseState={setBookmarkState} /> : " "} */}
         {popup && (
           <div>
-            {content.map((info: any, index: number) => {
+            {content.map((info: JobType, index: number) => {
               return (
                 <InfoModal
                   data={info}
-                  // setData={setData}
                   key={index}
                   index={index}
                   handleClick={() => {
@@ -101,8 +125,6 @@ const JobComponent = () => {
         )}
 
         <InputHeader
-          data={job}
-          setFilter={setFilter}
           handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             e.preventDefault();
             setSearch(e.target.value);
@@ -122,7 +144,8 @@ const JobComponent = () => {
         </div>
 
         <div className="h-[65vh] relative overflow-y-auto tbl">
-          {search && !job.some((item: any) => item.name.includes(search)) ? (
+          {search &&
+          !job.some((item: JobType) => item.name.includes(search)) ? (
             <div className="h-fit my-6 justify-center item-center w-full">
               <img
                 src="nothing.png"
@@ -139,10 +162,10 @@ const JobComponent = () => {
               {search ? (
                 <div className="grid xs:grid-cols-5  sm:grid-cols-3  lg:grid-cols-4 gap-4">
                   {job
-                    ?.filter((item: any) => {
+                    ?.filter((item: JobType) => {
                       return search === " " ? item : item.name.includes(search);
                     })
-                    ?.map((item: any, index: number) => {
+                    ?.map((item: JobType, index: number) => {
                       return (
                         <div
                           key={index}
@@ -162,7 +185,7 @@ const JobComponent = () => {
                 </div>
               ) : (
                 <div className="grid overflow-y-scroll tbl xs:grid-cols-5  sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {job?.map((item: any, index: number) => (
+                  {job?.map((item: JobType, index: number) => (
                     <div
                       key={index}
                       onClick={() => {

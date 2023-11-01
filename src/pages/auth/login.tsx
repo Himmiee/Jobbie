@@ -13,7 +13,6 @@ import { PopupModal } from "../../components/modals";
 import { auth } from "../../firebase.config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { createFalse } from "typescript";
 
 const LoginComponent = () => {
   const [nav, setNav] = useState<boolean>(false);
@@ -32,7 +31,7 @@ const LoginComponent = () => {
   const [loadOnce, setLoadOnce] = useState<boolean>(true);
   const location = useLocation();
   const registrationSuccess = location.state?.registrationSuccess || false;
-
+  const logOutSuccess = location.state?.logOutSuccess || false;
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setEmail(e.target.value));
   };
@@ -65,9 +64,9 @@ const LoginComponent = () => {
           email,
           password
         );
-        const user = userInfo.user;
+        const user  = userInfo.user;
         dispatch(loginSuccess(user.providerData));
-        console.log(auth.currentUser?.email);
+        console.log(user.providerData);
         dispatch(setEmail(""));
         dispatch(setPassword(""));
         localStorage.setItem("is_authenticated", JSON.stringify(true));
@@ -90,7 +89,7 @@ const LoginComponent = () => {
 
   return (
     <section className="bg-gradient-to-t bg-opacity-70 from-teal-700 flex items-center justify-center flex-col to-blue-950 w-full h-[100vh]">
-      {popupState ? (
+      {popupState && popupMessage ? (
         <PopupModal
           setCloseState={setPopupState}
           closeState={popupState}
@@ -113,7 +112,7 @@ const LoginComponent = () => {
             </h3>
           </div>
           <form className="w-full mt-3">
-          {err ? (
+            {err ? (
               <p className="text-[10px] text-teal-700 flex justify-center  italic">
                 {err}
               </p>

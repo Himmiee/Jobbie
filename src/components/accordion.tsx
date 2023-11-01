@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { QuestionsMenu, Questions } from "../helpers/dumps";
-import { act } from "@testing-library/react";
 
 const AccordionComponent = () => {
   const [active, setActive] = useState<any>(false);

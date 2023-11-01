@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BsArrowLeftCircle } from "react-icons/bs";
@@ -5,7 +6,7 @@ import { JobType } from "../helpers/dumps";
 import { CardComponent } from "./card";
 import { InfoModal } from "./modals";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { selectBookmarks } from "../store/bookmarkSlice";
+
 
 export const BookmarkComponent = () => {
   const [content, setContent] = useState<any>([]);

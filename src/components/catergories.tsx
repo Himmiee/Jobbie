@@ -9,9 +9,7 @@ import ButtonComponent from "./button";
 
 export const CategoriesComponent = () => {
   const [data, setData] = useState(FAQs);
-  const [dispatchState, setDispatchState] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
-  const [active, setActive] = useState<string | null>("");
   const dispatch = useAppDispatch();
   const job = useAppSelector((state) => state.job.data);
 
@@ -111,7 +109,7 @@ export const CategoriesComponent = () => {
         className="flex justify-center my-2"
       >
         <ButtonComponent
-          onClick={null}
+          onClick={() => {}}
           className="bg-teal-700 lg cursor-pointer flex items-center justify-center gap-2 hover:bg-teal-600 w-32  text-white h-8 p-1 text-[13px] rounded-full"
           title="Browse More"
           icon={<BsArrowRight />}

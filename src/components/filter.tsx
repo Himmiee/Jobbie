@@ -9,14 +9,7 @@ type FilterComponentType = {
   defaultData: string[];
 };
 
-const FilterComponent = ({
-  data,
-  // selectedCategory,
-  setSelectedCategory,
-  // setData,
-  defaultData,
-  
-}: any) => {
+const FilterComponent = ({ data, setSelectedCategory, defaultData }: any) => {
   const job = useAppSelector((state: any) => state.job.data);
   const [def, setDef] = useState(job);
   const [dispatchState, setDispatchState] = useState<boolean>(false);
@@ -65,10 +58,7 @@ const FilterComponent = ({
   };
 
   const handleGetData = () => {
-    // if (!dispatchState) {
     dispatch(getData(defaultData));
-    // setDispatchState(true);
-    // }
     setActive("all");
   };
 
