@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { BsSearch, BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getData } from "../store/jobSlice";
 import { FAQs, FAQ, JobType } from "../helpers/dumps";
 import { motion } from "framer-motion";
@@ -12,7 +12,7 @@ export const CategoriesComponent = () => {
   const [value, setValue] = useState<string>("");
   const dispatch = useAppDispatch();
   const job = useAppSelector((state) => state.job.data);
-
+  const navigate = useNavigate();
   const filterContents = (category: string) => {
     const filteredData = job.filter((item: JobType) =>
       item.categories.some((cat) => cat.name === category)
@@ -86,15 +86,16 @@ export const CategoriesComponent = () => {
                   </div>
                   <div className="flex items-center gap-2 cursor-pointer">
                     <h1 className="font-medium text-sm my-2">{item.title}</h1>
-                    <Link to={"/job"}>
-                      <div
-                        onClick={() => {
-                          filterContents(item.title);
-                        }}
-                      >
-                        <BsArrowRight />
-                      </div>
-                    </Link>
+                    {/* <Link to={"/job"}> */}
+                    <div
+                      onClick={() => {
+                        filterContents(item.title);
+                        navigate("/job");
+                      }}
+                    >
+                      <BsArrowRight />
+                    </div>
+                    {/* </Link> */}
                   </div>
                   <p className="text-[11px] text-gray-200">{item.info}</p>
                 </div>
