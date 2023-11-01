@@ -14,7 +14,7 @@ export const HoverTool = ({ text, children }: HoverTool) => {
     >
       {children}
       {isHovered && (
-        <div className="absolute text-[7px] text-center w-24 flex justify-center bg-black text-white text-sm py-2 px-4 rounded-lg -left-1/2 transform -translate-x-1/2 bottom-full">
+        <div className="absolute text-[7px] text-center w-36  flex justify-center bg-black text-white text-sm py-2 px-4 rounded-lg -left-1/2 transform -translate-x-1/2 bottom-full">
           {text}
         </div>
       )}

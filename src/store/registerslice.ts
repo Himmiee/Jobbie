@@ -40,7 +40,7 @@ const registerSlice = createSlice({
     },
     registrationSuccess: (state, action: PayloadAction<UserRegData[]>) => {
       state.isAuthenticated = true;
-      state.user = action.payload
+      state.user = action.payload;
       state.loading = false;
       state.popupMessage = "Registration Successful";
       state.error = null;

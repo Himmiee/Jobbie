@@ -15,7 +15,7 @@ const AccordionComponent = () => {
     <>
       {acc.map((data, index) => {
         return (
-          <section className="flex justify-center ">
+          <section key={index} className="flex justify-center ">
             <div
               onClick={() => {
                 toggle(index);

@@ -68,11 +68,10 @@ const JobComponent = () => {
   // const getJobs = async (clickedPage: number, pagesToFetch: number) => {
   //   setIsLoading(true);
   //   const allData = [];
-  
-  
+
   //   const startPage = clickedPage;
   //   const endPage = Math.min(clickedPage + 2, pagesToFetch);
-  
+
   //   for (let page = startPage; page <= endPage; page++) {
   //     try {
   //       const response = await dispatch(fetchData(page));
@@ -81,13 +80,11 @@ const JobComponent = () => {
   //       console.error("Error fetching data for page", page, ":", error);
   //     }
   //   }
-  
+
   //   setInitialJobData(allData);
   //   dispatch(getData(allData));
   //   setIsLoading(false);
   // };
-  
-  
 
   useEffect(() => {
     getJobs(currentPage);
@@ -111,8 +108,8 @@ const JobComponent = () => {
               return (
                 <InfoModal
                   data={info}
-                  key={index}
-                  index={index}
+                  key={info.id}
+                  index={info.id}
                   handleClick={() => {
                     setPopup(false);
                   }}

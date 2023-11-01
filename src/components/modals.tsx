@@ -17,7 +17,7 @@ import DateDifference from "./date";
 import { HoverTool } from "./hoverTool";
 type MessageType = {
   info: string;
-  setCloseState: (value:boolean) => void;
+  setCloseState: (value: boolean) => void;
   closeState: boolean;
 };
 export const PopupModal = ({
@@ -47,7 +47,7 @@ export const PopupModal = ({
 export type CardType = {
   data: JobType;
   handleClick: () => void;
-  filterCompany: (category: string) => void ;
+  filterCompany: (category: string) => void;
   result: string[];
   index: number;
 };
@@ -86,7 +86,10 @@ export const InfoModal = ({
               </div>
             </div>
           </div>
-          <div className="w-full mt-12 sm:mt-0  max-h-full flex flex-col sm:flex-row">
+          <div
+            key={data.id}
+            className="w-full mt-12 sm:mt-0  max-h-full flex flex-col sm:flex-row"
+          >
             <div className="sm:w-2/3  p-3 max-h-full rounded-md">
               <div className="flex gap-2">
                 {" "}
@@ -123,7 +126,7 @@ export const InfoModal = ({
                 ) : (
                   <a className="flex gap-3 item-center">
                     <ButtonComponent
-                      className="h-8 sm:h-6 w-80 text-[12px] font-bold flex justify-center items-center hover:bg-teal-600  rounded-md sm:bg-gray-100 sm:text-gray-600 border-gray-600 border-[1px]  p-4"
+                      className="h-8 sm:h-6 w-80 text-[12px] font-bold flex justify-center items-center  rounded-md sm:bg-gray-100 sm:text-gray-600 border-gray-600 border-[1px]  p-4"
                       title="Apply"
                       icon={null}
                       onClick={() => {}}
@@ -143,7 +146,10 @@ export const InfoModal = ({
                 <div className="w-full h-48 sm:h-[300px]  overflow-y-auto tbl">
                   {result.map((data: any) => {
                     return (
-                      <div className="w-full lg:h-14 h-11 sm:h-fit text-[9.5px] sm:text-[10px] my-1 p-2 rounded-md item-center flex justify-between border-gray-200 border-[1px]">
+                      <div
+                        key={data.id}
+                        className="w-full lg:h-14 h-11 sm:h-fit text-[9.5px] sm:text-[10px] my-1 p-2 rounded-md item-center flex justify-between border-gray-200 border-[1px]"
+                      >
                         <div className="flex flex-col justify-center">
                           <p className="">{data.name}</p>
                           <p className="italic text-[8px] text-gray-300">
