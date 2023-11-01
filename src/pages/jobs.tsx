@@ -131,10 +131,7 @@ const JobComponent = () => {
           <div>
             {" "}
             <FilterComponent
-              setData={setData}
-              selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
-              data={filteredData}
               defaultData={defaultData}
             />
           </div>

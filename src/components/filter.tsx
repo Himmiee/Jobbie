@@ -4,15 +4,16 @@ import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { getData } from "../store/jobSlice";
 
 type FilterComponentType = {
-  data: JobType;
   setSelectedCategory: (category: string) => void;
-  defaultData: string[];
+  defaultData: JobType[];
 };
 
-const FilterComponent = ({ data, setSelectedCategory, defaultData }: any) => {
+const FilterComponent = ({
+  setSelectedCategory,
+  defaultData,
+}: FilterComponentType) => {
   const job = useAppSelector((state: any) => state.job.data);
   const [def, setDef] = useState(job);
-  const [dispatchState, setDispatchState] = useState<boolean>(false);
   const [active, setActive] = useState<string | null>("");
   const dispatch = useAppDispatch();
   const categories = job

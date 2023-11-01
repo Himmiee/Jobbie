@@ -88,9 +88,10 @@ export const CategoriesComponent = () => {
                     <h1 className="font-medium text-sm my-2">{item.title}</h1>
                     {/* <Link to={"/job"}> */}
                     <div
+                      key={item.title}
                       onClick={() => {
-                        filterContents(item.title);
                         navigate("/job");
+                        // filterContents(item.title);
                       }}
                     >
                       <BsArrowRight />
