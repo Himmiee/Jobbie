@@ -20,7 +20,7 @@ const JobComponent = () => {
   const [search, setSearch] = useState<string>("");
   const [filter, setFilter] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(2);
-  const [postPerPage, setPostPerPage] = useState<number>(40);
+  const [postPerPage, setPostPerPage] = useState<number>(20);
   const [dispatchState, setDispatchState] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const lastPostIndex = currentPage * postPerPage;
@@ -204,7 +204,7 @@ const JobComponent = () => {
 
       <div className="fixed bg-white  bottom-0  justify-center w-full  sm:mt-2 ">
         <PGComponent
-          totalPosts={job?.length}
+          totalPosts={300}
           postPerPage={postPerPage}
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}
