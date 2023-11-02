@@ -6,6 +6,7 @@ import {
   BsArrowLeft,
   BsArrowRight,
 } from "react-icons/bs";
+import FormatText from "./format";
 import ButtonComponent from "./button";
 import { frame, useMotionValue, useTransform, useAnimation } from "framer";
 import { JobProto, JobType, BookmarkTemp } from "../helpers/dumps";
@@ -96,7 +97,7 @@ export const CardComponent = ({
               </p>
               <p className="text-[8px] font-bold text-teal-700">
                 {" "}
-                {data.contents.slice(4, 24)}
+                <FormatText description={data.contents.slice(0,26)} />
               </p>
               <p className="flex gap-2 items-center text-[12px] sm:text-[11px] lg:text-[12px] my-1">
                 <BsMap />

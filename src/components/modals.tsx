@@ -7,10 +7,9 @@ import {
   BsBookmarkFill,
   BsInfoCircle,
 } from "react-icons/bs";
+import JobDescription from "./description";
 import ButtonComponent from "./button";
 import { auth } from "../firebase.config";
-import ReadMore from "./readmore";
-
 import { useAppSelector } from "../store/hooks";
 import { CategoryType, JobProto, JobType } from "../helpers/dumps";
 import DateDifference from "./date";
@@ -107,8 +106,7 @@ export const InfoModal = ({
               </div>
               <div className="my-2">
                 <div className="text-[9px] italic text-gray-900">
-                  {/* {data.contents.slice(112, 514)} */}
-                  <ReadMore text={data.contents} />
+                <JobDescription description={data.contents} />
                   <span className="text-gray-200 text-[6px]">...</span>
                 </div>
               </div>
