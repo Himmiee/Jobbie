@@ -69,7 +69,7 @@ export const CardComponent = ({
       console.error(err);
     }
   };
-
+  const categoryNames = data.categories.map((cat) => cat.name);
   return (
     <section>
       <div className="border-gray-100 border-[1px] sm:h-[120px]  grid items-center lg:max-h-full cursor-pointer rounded-lg  sm:my-0 p-4">
@@ -97,7 +97,12 @@ export const CardComponent = ({
               </p>
               <p className="text-[8px] font-bold text-teal-700">
                 {" "}
-                <FormatText description={data.contents.slice(0,26)} />
+                {/* <FormatText
+                  description={data.categories.map((cat) => cat.name)}
+                /> */}
+                {categoryNames.length > 0
+                  ? data.categories.map((cat) => cat.name)
+                  : "Unknown"}
               </p>
               <p className="flex gap-2 items-center text-[12px] sm:text-[11px] lg:text-[12px] my-1">
                 <BsMap />
