@@ -19,7 +19,7 @@ const JobComponent = () => {
   const [popup, setPopup] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
   const [filter, setFilter] = useState<boolean>(false);
-  const [currentPage, setCurrentPage] = useState<number>(2);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [postPerPage, setPostPerPage] = useState<number>(20);
   const [dispatchState, setDispatchState] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -101,7 +101,7 @@ const JobComponent = () => {
       </div>
 
       <div className="mx-8 sm:mx-24 mt-24">
-        {/* {bookmarkState ? <PopupModal info={bookmarkMessage} closeState={bookmarkState} setCloseState={setBookmarkState} /> : " "} */}
+
         {popup && (
           <div>
             {content.map((info: JobType, index: number) => {

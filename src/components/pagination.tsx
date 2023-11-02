@@ -21,7 +21,7 @@ PGType) => {
   );
   const handlePageNumbers = (start: number, end: number) => {
     const newVisiblePages = [];
-    for (let i = start; i <= end; i++) {
+    for (let i =  start; i <= end; i++) {
       newVisiblePages.push(i);
     }
     setVisiblePage(newVisiblePages);
@@ -47,8 +47,6 @@ PGType) => {
       handlePageNumbers(newStart, newEnd);
     }
   };
-
-
 
   return (
     <div className="gap-[4px] sm:gap-2 my-2 flex items-center justify-center">
