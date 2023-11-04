@@ -23,6 +23,7 @@ const JobComponent = () => {
   const [postPerPage, setPostPerPage] = useState<number>(20);
   const [dispatchState, setDispatchState] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [popupState, setPopupState] = useState<boolean>(false);
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
   const [result, setResult] = useState<any>([]);
@@ -38,6 +39,7 @@ const JobComponent = () => {
   const bookmarkMessage = useAppSelector(
     (state) => state.bookmarks.popupMessage
   );
+  const popupMessage = useAppSelector((state) => state.bookmarks.popupMessage);
 
   const setInitialJobData = (data: any) => {
     dispatch(setInitialData(data));
@@ -88,6 +90,11 @@ const JobComponent = () => {
 
   useEffect(() => {
     getJobs(currentPage);
+    if (popupState === true ) {
+        setTimeout(() => {
+        setPopupState(false);
+      }, 1500);
+    }
   }, [currentPage]);
 
   const updateContent = (info: JobType) => {
@@ -99,9 +106,17 @@ const JobComponent = () => {
       <div>
         <NavbarComponent />
       </div>
-
+      <div className="wrap mx-6 sm:mx-24 flex justify-center">
+        {popupState && popupMessage ? (
+          <PopupModal
+            closeState={popupState}
+            setCloseState={setPopupState}
+            info={popupMessage}
+          />
+        ) : (
+          ""
+        )}</div>
       <div className="mx-8 sm:mx-24 mt-24">
-
         {popup && (
           <div>
             {content.map((info: JobType, index: number) => {
@@ -171,6 +186,7 @@ const JobComponent = () => {
                             data={item}
                             setPopup={setPopup}
                             index={index}
+                            setPopupState={setPopupState}
                             setBookmarkState={setBookmarkState}
                           />
                         </div>
@@ -190,6 +206,7 @@ const JobComponent = () => {
                         data={item}
                         setPopup={setPopup}
                         index={index}
+                        setPopupState={setPopupState}
                         setBookmarkState={setBookmarkState}
                         // filterCompany={filterCompany}
                       />

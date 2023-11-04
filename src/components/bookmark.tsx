@@ -1,10 +1,10 @@
 
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BsArrowLeftCircle } from "react-icons/bs";
 import { JobType } from "../helpers/dumps";
 import { CardComponent } from "./card";
-import { InfoModal } from "./modals";
+import { InfoModal,PopupModal } from "./modals";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 
 
@@ -12,7 +12,9 @@ export const BookmarkComponent = () => {
   const [content, setContent] = useState<any>([]);
   const [popup, setPopup] = useState<boolean>(false);
   const [result, setResult] = useState<any>([]);
+  const [popupState, setPopupState] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+  const popupMessage = useAppSelector((state) => state.bookmarks.popupMessage);
   const job = useAppSelector((state) => state.job.data);
   const [bookmarkState, setBookmarkState] = useState<boolean>(false);
   const bookmarkedData = useAppSelector((state) => state.bookmarks.bookmarks);
@@ -29,6 +31,14 @@ export const BookmarkComponent = () => {
     setResult(newItems);
   };
 
+  useEffect(( )=> {
+        if (popupState === true ) {
+        setTimeout(() => {
+        setPopupState(false);
+      }, 1500);
+    }
+  },[])
+
   return (
     <div>
       <div className="flex px-3 h-16 sm:px-10 item-center justify-start gap-4 border-gray-200 border-b-[1px]">
@@ -42,6 +52,16 @@ export const BookmarkComponent = () => {
           Bookmarked Jobs
         </h2>
       </div>
+            <div className="wrap mx-6 sm:mx-24 flex justify-center">
+        {popupState && popupMessage ? (
+          <PopupModal
+            closeState={popupState}
+            setCloseState={setPopupState}
+            info={popupMessage}
+          />
+        ) : (
+          ""
+        )}</div>
       <div>
         {" "}
         {popup && (
@@ -77,6 +97,7 @@ export const BookmarkComponent = () => {
                 data={item}
                 setPopup={setPopup}
                 index={index}
+                setPopupState={setPopupState}
                 setBookmarkState={setBookmarkState}
                 // filterCompany={filterCompany}
               />

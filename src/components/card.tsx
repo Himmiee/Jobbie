@@ -22,12 +22,14 @@ export type CardType = {
   data: JobType;
   index: number;
   setPopup: (value: boolean) => void;
+  setPopupState: (value: boolean) => void;
   setBookmarkState: (value: boolean) => void;
 };
 export const CardComponent = ({
   data,
   index,
   setPopup,
+  setPopupState,
   setBookmarkState,
 }: CardType) => {
   const bookmarks = useAppSelector(selectBookmarks);
@@ -42,6 +44,7 @@ export const CardComponent = ({
     try {
       dispatch(removeBookmark(index));
       setBookmarkState(true);
+      setPopupState(true); 
     } catch (err) {
       console.log(err);
     }
@@ -51,6 +54,7 @@ export const CardComponent = ({
     try {
       dispatch(addBookmark(data));
       setBookmarkState(true);
+      setPopupState(true);
     } catch (err) {
       console.error(err);
     }
@@ -60,9 +64,11 @@ export const CardComponent = ({
     try {
       if (isBookmarked) {
         handleRemoveClick(index);
+        setPopupState(true);
         setBookmarkState(true);
       } else {
         handleAddBookmark();
+        
         setBookmarkState(true);
       }
     } catch (err) {
@@ -112,7 +118,7 @@ export const CardComponent = ({
           </div>
           <div className="mt-2">
             <div
-              onClick={handleBookmarkToggle}
+              onClick={handleBookmarkToggle}    
               className="flex ml-auto w-fit h-fit justify-end"
             >
               {isBookmarked ? (
