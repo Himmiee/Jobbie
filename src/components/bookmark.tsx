@@ -97,7 +97,7 @@ export const BookmarkComponent = () => {
                 data={item}
                 setPopup={setPopup}
                 index={index}
-                setPopupState={setPopupState}
+                // setPopupState={setPopupState}
                 setBookmarkState={setBookmarkState}
                 // filterCompany={filterCompany}
               />

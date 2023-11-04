@@ -90,8 +90,8 @@ const JobComponent = () => {
 
   useEffect(() => {
     getJobs(currentPage);
-    if (popupState === true ) {
-        setTimeout(() => {
+    if (popupState === true) {
+      setTimeout(() => {
         setPopupState(false);
       }, 1500);
     }
@@ -115,7 +115,8 @@ const JobComponent = () => {
           />
         ) : (
           ""
-        )}</div>
+        )}
+      </div>
       <div className="mx-8 sm:mx-24 mt-24">
         {popup && (
           <div>
@@ -186,7 +187,7 @@ const JobComponent = () => {
                             data={item}
                             setPopup={setPopup}
                             index={index}
-                            setPopupState={setPopupState}
+                            // setPopupState={setPopupState}
                             setBookmarkState={setBookmarkState}
                           />
                         </div>
@@ -206,7 +207,7 @@ const JobComponent = () => {
                         data={item}
                         setPopup={setPopup}
                         index={index}
-                        setPopupState={setPopupState}
+                        // setPopupState={setPopupState}
                         setBookmarkState={setBookmarkState}
                         // filterCompany={filterCompany}
                       />
