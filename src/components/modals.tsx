@@ -32,7 +32,7 @@ export const PopupModal = ({
     }
   }, []);
   return (
-    <section className="fixed z-10 inset-0 flex justify-end p-3 mx-6 sm:mx-20">
+    <section className="fixed z-10 inset-0 flex justify-end p-3 mx-4 sm:mx-20">
       <div className=" text-teal-700 border-teal-700 border-[1px] bg-teal-50 bg-opacity-50 px-3 max-w-full h-10   content-center flex justify-center text-sm rounded-md p-2 items-center gap-4">
         <div className=" text-[14px] font-bold">{info}</div>
         <div onClick={() => setCloseState(false)} className="cursor-pointer">

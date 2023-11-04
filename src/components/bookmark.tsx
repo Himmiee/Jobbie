@@ -52,7 +52,7 @@ export const BookmarkComponent = () => {
           Bookmarked Jobs
         </h2>
       </div>
-            <div className="wrap mx-6 sm:mx-24 flex justify-center">
+            <div className="wrap  flex justify-center">
         {popupState && popupMessage ? (
           <PopupModal
             closeState={popupState}
@@ -84,8 +84,8 @@ export const BookmarkComponent = () => {
           </div>
         )}
       </div>
-      <div className="my-8 mx-10">
-        <div className="grid  sm:grid-cols-3  lg:grid-cols-4 gap-4">
+      <div className="my-8 mx-10 h-[82vh] relative overflow-y-auto tbl">
+        <div className="grid  sm:grid-cols-3  lg:grid-cols-4 xs:grid-cols-5 gap-4">
           {bookmarkedData?.map((item: any, index: number) => (
             <div
               key={index}

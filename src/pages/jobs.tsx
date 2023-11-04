@@ -106,7 +106,7 @@ const JobComponent = () => {
       <div>
         <NavbarComponent />
       </div>
-      <div className="wrap mx-6 sm:mx-24 flex justify-center">
+      <div className="wrap mx-4 sm:mx-24 flex justify-center">
         {popupState && popupMessage ? (
           <PopupModal
             closeState={popupState}
