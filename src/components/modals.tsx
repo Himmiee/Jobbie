@@ -28,7 +28,7 @@ export const PopupModal = ({
     if (closeState === true) {
       setTimeout(() => {
         setCloseState(false);
-      }, 1500);
+      }, 1000);
     }
   }, []);
   return (
@@ -106,7 +106,7 @@ export const InfoModal = ({
               </div>
               <div className="my-2">
                 <div className="text-[9px] italic text-gray-900">
-                <JobDescription description={data.contents} />
+                  <JobDescription description={data.contents} />
                   <span className="text-gray-200 text-[6px]">...</span>
                 </div>
               </div>

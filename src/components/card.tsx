@@ -22,26 +22,28 @@ export type CardType = {
   data: JobType;
   index: number;
   setPopup: (value: boolean) => void;
+  setPopupState: (value: boolean) => void;
   setBookmarkState: (value: boolean) => void;
 };
 export const CardComponent = ({
   data,
   index,
   setPopup,
+  setPopupState,
   setBookmarkState,
 }: CardType) => {
   const bookmarks = useAppSelector(selectBookmarks);
   const dispatch = useAppDispatch();
   const [bkmPopup, setBkmPopup] = useState<boolean>(false);
 
-  const isBookmarked = bookmarks.some(
-    (bookmark: any) => bookmark.id === data.id
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(
+    bookmarks.some((bookmark: any) => bookmark.id === data.id)
   );
 
   const handleRemoveClick = (index: number) => {
     try {
       dispatch(removeBookmark(index));
-      setBookmarkState(true);
+      setIsBookmarked(false);
     } catch (err) {
       console.log(err);
     }
@@ -50,21 +52,23 @@ export const CardComponent = ({
   const handleAddBookmark = () => {
     try {
       dispatch(addBookmark(data));
-      setBookmarkState(true);
+      setIsBookmarked(true);
     } catch (err) {
       console.error(err);
     }
   };
 
-  const handleBookmarkToggle = () => {
+  const handleBookmarkToggle = (index: number) => {
     try {
       if (isBookmarked) {
-        handleRemoveClick(index);
-        setBookmarkState(true);
+        dispatch(removeBookmark(index));
+        setIsBookmarked(false);
       } else {
-        handleAddBookmark();
-        setBookmarkState(true);
+        dispatch(addBookmark(data));
+        setIsBookmarked(true);
       }
+
+      setPopupState(true);
     } catch (err) {
       console.error(err);
     }
@@ -112,18 +116,18 @@ export const CardComponent = ({
           </div>
           <div className="mt-2">
             <div
-              onClick={handleBookmarkToggle}
+              onClick={() => handleBookmarkToggle(index)}
               className="flex ml-auto w-fit h-fit justify-end"
             >
               {isBookmarked ? (
-                <div onClick={handleAddBookmark} className="text-teal-700">
-                  <BsBookmarkFill />
-                </div>
-              ) : (
                 <div
                   onClick={() => handleRemoveClick(index)}
                   className="text-teal-700"
                 >
+                  <BsBookmarkFill />
+                </div>
+              ) : (
+                <div onClick={handleAddBookmark} className="text-teal-700">
                   <BsBookmark />
                 </div>
               )}

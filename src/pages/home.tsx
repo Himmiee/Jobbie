@@ -27,7 +27,7 @@ const HomeComponent = () => {
   );
 
   useEffect(() => {
-    if (loginSuccess ) {
+    if (loginSuccess) {
       setPopupState(true);
       setTimeout(() => {
         setPopupState(false);
