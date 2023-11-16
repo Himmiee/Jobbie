@@ -4,11 +4,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap");
 
 body {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
   font-family: "Inter", sans-serif;
 }
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
   display: none;
 }
-.tbl::-webkit-scrollbar{
+.tbl::-webkit-scrollbar {
   display: none;
 }
