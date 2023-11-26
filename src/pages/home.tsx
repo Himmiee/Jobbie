@@ -66,7 +66,7 @@ const HomeComponent = () => {
               Come to learn , to seek , to know <br />
               Leave us to serve.
             </motion.h3>
-            <p className="text-center text-[11px] sm:text-sm">
+            <p className="text-center text-[10px] mt-2 sm:text-[12px]">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et
               doloruid dignissimos <br /> explicabo ducimus eius ratione ullam,
               placeat amet assumenda!
@@ -154,7 +154,7 @@ const HomeComponent = () => {
             </div>
             <div className=" bg-gradient-to-t from-white to-slate-50 w-full p-4 rounded-b-xl">
               <h1 className="text-base mt-2 mb-1">One Step.</h1>
-              <p className="text-[10px] text-gray-300 pb-3">
+              <p className="text-[10px] text-gray-400 pb-3">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Aliquam dolor voluptatem id magnam voluptatibus, voluptates
               </p>
@@ -166,7 +166,7 @@ const HomeComponent = () => {
             </div>
             <div className=" bg-gradient-to-t from-white to-slate-50 w-full p-4 rounded-b-xl">
               <h1 className="text-base mt-2 mb-1">Two Step.</h1>
-              <p className="text-[10px] text-gray-300 pb-3">
+              <p className="text-[10px] text-gray-400 pb-3">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Aliquam dolor voluptatem id magnam voluptatibus, voluptates
               </p>
@@ -178,7 +178,7 @@ const HomeComponent = () => {
             </div>
             <div className=" bg-gradient-to-t from-white to-slate-50 w-full p-4 rounded-b-xl">
               <h1 className="text-base mt-2 mb-1">Three Step.</h1>
-              <p className="text-[10px] text-gray-300 pb-3">
+              <p className="text-[10px] text-gray-400 pb-3">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Aliquam dolor voluptatem id magnam voluptatibus, voluptates
               </p>

@@ -98,7 +98,7 @@ export const CategoriesComponent = () => {
                     </div>
                     {/* </Link> */}
                   </div>
-                  <p className="text-[11px] text-gray-200">{item.info}</p>
+                  <p className="text-[10px] text-gray-400">{item.info}</p>
                 </div>
               ))}
           </motion.div>

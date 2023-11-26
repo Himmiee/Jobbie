@@ -41,7 +41,7 @@ const FeatureComponent = () => {
           </motion.div>
         </div>
       </div>
-      <motion.section className="sm:my-12 relative rounded-[90px] bg-teal-50 pb-4 sm:pb-0">
+      <motion.section className="sm:my-12 relative sm:rounded-[90px] bg-teal-50 pb-4 sm:pb-0">
         <motion.h1
           initial={{ opacity: 0.5, scale: 0.5 }}
           whileInView={{ opacity: 1, scale: 1 }}

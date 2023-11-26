@@ -110,7 +110,7 @@ export const CardComponent = ({
               </p>
               <p className="flex gap-2 items-center text-[12px] sm:text-[11px] lg:text-[12px] my-1">
                 <BsMap />
-                {data.locations[0].name.slice(0, 16)}
+                {data.locations[0].name.slice(0,16)}
               </p>
             </div>
           </div>

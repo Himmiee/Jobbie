@@ -67,8 +67,6 @@ const JobComponent = () => {
       });
   };
 
-
-
   useEffect(() => {
     getJobs(currentPage);
     if (popupState === true) {
@@ -98,7 +96,7 @@ const JobComponent = () => {
           ""
         )}
       </div>
-      <div className="mx-8 sm:mx-24 mt-24">
+      <div className="mx-8 sm:mx-24  mt-24">
         {popup && (
           <div>
             {content.map((info: JobType, index: number) => {

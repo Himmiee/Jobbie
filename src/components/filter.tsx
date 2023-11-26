@@ -18,7 +18,7 @@ const FilterComponent = ({
   const dispatch = useAppDispatch();
 
   const categories = defaultData
-    .map((item: any) => item.categories.map((cat: any) => cat.name))
+    ?.map((item: any) => item.categories.map((cat: any) => cat.name))
     .flat();
 
   const uniqueCategories = Array.from(new Set(categories));
@@ -37,7 +37,7 @@ const FilterComponent = ({
   ): { [key: string]: number } => {
     const categoryCounts: { [key: string]: number } = {};
 
-    data.forEach((item: any) => {
+    data?.forEach((item: any) => {
       item.categories.forEach((cat: any) => {
         const categoryName = cat.name;
         categoryCounts[categoryName] = (categoryCounts[categoryName] || 0) + 1;
@@ -50,7 +50,7 @@ const FilterComponent = ({
   const categoryCounts = getDistinctCategoryCounts(defaultData);
 
   const filterContents = (category: string) => {
-    const filteredData = defaultData.filter((item: any) =>
+    const filteredData = defaultData?.filter((item: any) =>
       item.categories.some((cat: any) => cat.name === category)
     );
 
