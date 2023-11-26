@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { JobProto, JobType } from "../helpers/dumps";
+import { JobType } from "../helpers/dumps";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { getData } from "../store/jobSlice";
 
@@ -13,27 +13,31 @@ const FilterComponent = ({
   defaultData,
 }: FilterComponentType) => {
   const job = useAppSelector((state: any) => state.job.data);
-  const [def, setDef] = useState(job);
+  const [filteredData, setFilteredData] = useState<JobType[]>(job);
   const [active, setActive] = useState<string | null>("");
   const dispatch = useAppDispatch();
-  const categories = job
+
+  const categories = defaultData
     .map((item: any) => item.categories.map((cat: any) => cat.name))
     .flat();
 
+  const uniqueCategories = Array.from(new Set(categories));
+
   const handleCategoryChange = (category: string) => {
-    setSelectedCategory(category);
+    // setSelectedCategory(category);
     filterContents(category);
   };
 
   useEffect(() => {
-    setDef(job);
-  }, []);
+    setFilteredData(job);
+  }, [job]);
+
   const getDistinctCategoryCounts = (
     data: JobType[]
   ): { [key: string]: number } => {
     const categoryCounts: { [key: string]: number } = {};
 
-    job.forEach((item: any) => {
+    data.forEach((item: any) => {
       item.categories.forEach((cat: any) => {
         const categoryName = cat.name;
         categoryCounts[categoryName] = (categoryCounts[categoryName] || 0) + 1;
@@ -42,34 +46,31 @@ const FilterComponent = ({
 
     return categoryCounts;
   };
-  const getUniqueCategories = (categories: string[]): string[] => {
-    return categories.filter(
-      (category, index) => categories.indexOf(category) === index
-    );
-  };
-  const uniqueCategories = getUniqueCategories(categories);
-  const categoryCounts = getDistinctCategoryCounts(job);
+
+  const categoryCounts = getDistinctCategoryCounts(defaultData);
 
   const filterContents = (category: string) => {
-    const filteredData = job.filter((item: any) =>
+    const filteredData = defaultData.filter((item: any) =>
       item.categories.some((cat: any) => cat.name === category)
     );
 
+    setFilteredData(filteredData);
     dispatch(getData(filteredData));
   };
 
   const handleGetData = () => {
+    setFilteredData(defaultData);
     dispatch(getData(defaultData));
     setActive("all");
   };
 
   return (
-    <div className="filter-component flex gap-2 w-full ">
+    <div className="filter-component flex gap-2 w-full">
       <p
         className="w-fit h-8 rounded-full text-[12px] sm:text-[10px] lg:text-[12px] focus:active:bg-blue-800 text-gray-600 border-gray-200 border-[1px] px-3 hover:bg-teal-700 cursor-pointer hover:text-white py-[6px] sm:py-[8px]  lg:py-[6px]"
         onClick={handleGetData}
       >
-        All({defaultData?.length | 0})
+        All({defaultData?.length || 0})
       </p>
       {uniqueCategories.map((category: any, index: number) => (
         <p
@@ -92,3 +93,4 @@ const FilterComponent = ({
 };
 
 export default FilterComponent;
+

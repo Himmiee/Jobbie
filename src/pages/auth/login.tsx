@@ -66,7 +66,7 @@ const LoginComponent = () => {
         );
         const user  = userInfo.user;
         dispatch(loginSuccess(user.providerData));
-        console.log(user.providerData);
+        // console.log(user.providerData);
         dispatch(setEmail(""));
         dispatch(setPassword(""));
         localStorage.setItem("is_authenticated", JSON.stringify(true));
