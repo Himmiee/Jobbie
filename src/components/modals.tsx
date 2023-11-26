@@ -211,11 +211,11 @@ export const InfoModal = ({
                   </div>
                 </div>
               </div>
-              <div className=" w-full p-2 px-3 h-[75px] text-[14px] border-gray-200 border-b-[1px]">
+              <div className=" w-full p-2  px-3 h-[80px] text-[14px] border-gray-200 border-b-[1px]">
                 <div>
                   <p className="text-[12px] my-2 font-bold">Location :-</p>
                   <div className="flex gap-2">
-                    <p className="text-[10px] italic text-gray-400">
+                    <p className="text-[9px]  italic text-gray-400">
                       {data.locations.map((loc) => loc.name)}
                     </p>
                   </div>
