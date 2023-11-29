@@ -6,9 +6,6 @@ import {
   BsArrowLeft,
   BsArrowRight,
 } from "react-icons/bs";
-import FormatText from "./format";
-import ButtonComponent from "./button";
-import { frame, useMotionValue, useTransform, useAnimation } from "framer";
 import { JobProto, JobType, BookmarkTemp } from "../helpers/dumps";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 
@@ -34,16 +31,20 @@ export const CardComponent = ({
 }: CardType) => {
   const bookmarks = useAppSelector(selectBookmarks);
   const dispatch = useAppDispatch();
-  const [bkmPopup, setBkmPopup] = useState<boolean>(false);
+  const [bkm, setBkm] = useState<boolean>(false);
 
   const [isBookmarked, setIsBookmarked] = useState<boolean>(
     bookmarks.some((bookmark: any) => bookmark.id === data.id)
   );
+  
+  useEffect(() => {
+    setIsBookmarked(bookmarks.some((bookmark: any) => bookmark.id === data.id));
+  }, [bookmarks, data.id]);
 
-  const handleRemoveClick = (index: number) => {
+
+  const handleRemoveClick = () => {
     try {
-      dispatch(removeBookmark(index));
-      setIsBookmarked(false);
+      dispatch(removeBookmark(data.id));
     } catch (err) {
       console.log(err);
     }
@@ -52,21 +53,18 @@ export const CardComponent = ({
   const handleAddBookmark = () => {
     try {
       dispatch(addBookmark(data));
-      setIsBookmarked(true);
     } catch (err) {
       console.error(err);
     }
   };
 
-  const handleBookmarkToggle = (index: number) => {
+  const handleBookmarkToggle = () => {
     try {
       if (isBookmarked) {
-        dispatch(removeBookmark(index));
-        setIsBookmarked(false);
-      } else {
+        dispatch(removeBookmark(data.id));
+       } else {
         dispatch(addBookmark(data));
-        setIsBookmarked(true);
-      }
+       }
 
       setPopupState(true);
     } catch (err) {
@@ -116,12 +114,12 @@ export const CardComponent = ({
           </div>
           <div className="mt-2">
             <div
-              onClick={() => handleBookmarkToggle(index)}
+              onClick={handleBookmarkToggle}
               className="flex ml-auto w-fit h-fit justify-end"
             >
               {isBookmarked ? (
                 <div
-                  onClick={() => handleRemoveClick(index)}
+                  onClick={handleRemoveClick}
                   className="text-teal-700"
                 >
                   <BsBookmarkFill />

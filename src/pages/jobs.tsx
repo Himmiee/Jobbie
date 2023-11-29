@@ -165,7 +165,7 @@ const JobComponent = () => {
                           <CardComponent
                             data={item}
                             setPopup={setPopup}
-                            index={index}
+                            index={item.id}
                             setPopupState={setPopupState}
                             setBookmarkState={setBookmarkState}
                           />
@@ -185,7 +185,7 @@ const JobComponent = () => {
                       <CardComponent
                         data={item}
                         setPopup={setPopup}
-                        index={index}
+                        index={item.id}
                         setPopupState={setPopupState}
                         setBookmarkState={setBookmarkState}
                         // filterCompany={filterCompany}

@@ -11,7 +11,7 @@ type BookmarkState = {
 const initialState: BookmarkState = {
   bookmarks: [],
   bookmarkStatus: false,
-  popupMessage: ""
+  popupMessage: "",
 };
 
 const bookmarkSlice = createSlice({
@@ -21,16 +21,18 @@ const bookmarkSlice = createSlice({
     addBookmark: (state, action: PayloadAction<JobType>) => {
       if (!state.bookmarks.find((item) => item.id === action.payload.id)) {
         state.bookmarks.push(action.payload);
-        state.bookmarkStatus = true
+        state.bookmarkStatus = true;
         state.popupMessage = "Bookmark Added!";
       }
     },
 
     removeBookmark: (state, action: PayloadAction<number>) => {
-      const index = action.payload;
-      state.bookmarks.splice(index, 1);
-      state.bookmarkStatus = false
-      state.popupMessage = "Bookmark Removed!"
+      const bookmarkIdToRemove = action.payload;
+      state.bookmarks = state.bookmarks.filter(
+        (bookmark) => bookmark.id !== bookmarkIdToRemove
+      );
+      state.bookmarkStatus = false;
+      state.popupMessage = "Bookmark Removed!";
     },
   },
 });
